@@ -1,0 +1,5 @@
+.idea
+password.txt
+venv/
+django_2.2/
+django_3.1/

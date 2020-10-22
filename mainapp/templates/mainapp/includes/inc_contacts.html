@@ -1,0 +1,30 @@
+{% load static %}
+<div class="contact">
+    <div class="contact">
+        <h3 class="contact-header" >Contact Us</h3>
+        <div class="contact-content">
+            <div class="contact-info">
+                <h4 class="contact-subheader">Get in touch with us</h4>
+                <p class="contact-text">{{ contact_data.description }}<br><br>
+                    {{ contact_data.address }}<br><br>
+                    Telephone: {{ contact_data.phone }}<br><br>
+                    FAX: {{ contact_data.fax }}<br><br>
+                    Email: <a href="#">{{ contact_data.email }}</a>
+                </p>
+            </div>
+            <div class="contact-box">
+                <form action="#">
+                    <input class="contact-name" type="text" placeholder="Name">
+                    <input class="contact-email" type="email" placeholder="Email">
+                    <textarea class="contact-message" placeholder="Massege"></textarea>
+                    <input class="contact-bottom" type="submit" value="SUBMIT">
+                </form>
+            </div>
+            {% if request.resolver_match.namespace == 'gallery' or request.resolver_match.url_name == 'products' %}
+                <div class="arrow">
+				    <a href="#"><img src="{% static 'img/arrow.png' %}" alt="arrow"></a>
+			    </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
