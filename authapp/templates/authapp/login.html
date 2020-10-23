@@ -1,5 +1,9 @@
 {% extends 'authapp/base.html' %}
 {% block content %}
+    {% if from_register %}
+        Сообщение подтверждения отправлено.
+        Код подтверждения: {{ confirmation }}
+    {% endif %}
     <form class="form-horizontal" action="{% url 'auth:login' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {% if next %}

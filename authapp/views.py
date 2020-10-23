@@ -49,11 +49,19 @@ def login(request):
                 return HttpResponseRedirect(request.POST['next'])
             else:
                 return HttpResponseRedirect(reverse('main'))
+    from_register = request.session.get('register', None)
+    conf_code = ShopUser.activation_key_expires
+    print('hello')
+    print(from_register)
+    if from_register:
+        del request.session['register']
 
     content = {
         'title': title,
         'login_form': login_form,
-        'next': next_url
+        'next': next_url,
+        'from_register': from_register,
+        'confirmation': conf_code
     }
     return render(request, 'authapp/login.html', content)
 
@@ -74,13 +82,15 @@ def register(request):
             user = register_form.save()
             if send_verify_email(user):
                 print('сообщение подтверждения отправлено')
-                message = 'сообщение подтверждения отправлено'
-                conf_code = f'Код подтверждения: {ShopUser.activation_key_expires}'
-                content = {
-                    'message': message,
-                    'conf_code': conf_code
-                }
-                return render(request, 'authapp/register.html', content)
+
+
+                # message = 'сообщение подтверждения отправлено'
+                # conf_code = f'Код подтверждения: {ShopUser.activation_key_expires}'
+                # content = {
+                #     'message': message,
+                #     'conf_code': conf_code
+                # }
+                # return render(request, 'authapp/success.html', content)
 
             else:
                 print('ошибка отправки сообщения')
