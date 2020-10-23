@@ -55,8 +55,6 @@ def login(request):
     if from_register:
         del request.session['register']
 
-
-
     content = {
         'title': title,
         'login_form': login_form,
