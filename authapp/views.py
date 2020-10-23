@@ -50,18 +50,21 @@ def login(request):
             else:
                 return HttpResponseRedirect(reverse('main'))
     from_register = request.session.get('register', None)
-    conf_code = ShopUser.activation_key_expires
-    print('hello')
-    print(from_register)
+    conf_code = request.session.get('conf_code', None)
+    email = request.session.get('email', None)
     if from_register:
         del request.session['register']
+
+
 
     content = {
         'title': title,
         'login_form': login_form,
         'next': next_url,
         'from_register': from_register,
-        'confirmation': conf_code
+        'confirmation': conf_code,
+        'pth': f'{settings.DOMAIN_NAME}{request.get_full_path()}{email}{conf_code}',
+        'email': email
     }
     return render(request, 'authapp/login.html', content)
 
@@ -82,15 +85,11 @@ def register(request):
             user = register_form.save()
             if send_verify_email(user):
                 print('сообщение подтверждения отправлено')
-
-
-                # message = 'сообщение подтверждения отправлено'
-                # conf_code = f'Код подтверждения: {ShopUser.activation_key_expires}'
-                # content = {
-                #     'message': message,
-                #     'conf_code': conf_code
-                # }
-                # return render(request, 'authapp/success.html', content)
+                request.session['register'] =True
+                user_name = request.POST['username']
+                conf_code, email = [ShopUser.objects.get(username=user_name).activation_key, ShopUser.objects.get(username=user_name).email]
+                request.session['conf_code'] = conf_code
+                request.session['email'] = email
 
             else:
                 print('ошибка отправки сообщения')
