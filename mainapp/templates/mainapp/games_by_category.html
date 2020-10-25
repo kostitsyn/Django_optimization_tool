@@ -1,5 +1,8 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
+
+
+
 {% block menu %}
 	<div class="header">
 		{% include 'mainapp/includes/inc_headerline.html' %}
@@ -14,12 +17,12 @@
         <div class="gallery clearfix">
         {% include 'mainapp/includes/inc_hot_offer.html' %}
         <div class="paginator">
-          {% if games.has_previous %}
-            <a href="{% url 'gallery:category' category.pk games.previous_page_number %}"><</a>
+          {% if page_obj.has_previous %}
+            <a href="{% url 'gallery:category' category.pk page_obj.previous_page_number %}"><</a>
           {% endif %}
-          <span class="current"> страница {{ games.number }} из {{ games.paginator.num_pages }}</span>
-          {% if games.has_next %}
-            <a href="{% url 'gallery:category' category.pk games.next_page_number %}">></a>
+          <span class="current"> страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+          {% if page_obj.has_next %}
+            <a href="{% url 'gallery:category' category.pk page_obj.next_page_number %}">></a>
           {% endif %}
         </div>
 

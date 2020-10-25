@@ -6,7 +6,7 @@
         <span class = 'product_quantity'>Количество</span>
         <span class = 'product_cost'>Общая стоимость</span>
     </div>
-    {% for item in basket_items %}
+    {% for item in object_list %}
         <div class = 'basket_record'>
             <img src = '/media/{{ item.product.image }}' alt="{{ item.product.name }}">
             <span class = 'game_name'>{{ item.product.name }}</span>
@@ -17,9 +17,9 @@
             <a href = '{% url "basket:remove" item.pk %}' class = 'btn btn-round btn-dark'>Delete</a>
         </div>
     {% endfor %}
-    {% if basket_items %}
+    {% if object_list %}
         <div class = "basket_summary">
-            В корзине {{ basket_items.0.total_quantity }} товаров общей стоимостью {{ basket_items.0.total_cost }}&#36;
+            В корзине {{ object_list.0.total_quantity }} товаров общей стоимостью {{ object_list.0.total_cost }}&#36;
         </div>
     {% else %}
         <div class = "basket_summary">

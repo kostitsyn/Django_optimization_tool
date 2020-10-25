@@ -4,34 +4,47 @@ from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
-from django.views.generic import ListView, CreateView, UpdateView
+from django.views.generic import ListView, CreateView, UpdateView, TemplateView, DeleteView
 
 import basketapp
 from basketapp.models import Basket
 from mainapp.models import Games
 
 
-# class BasketListView(ListView):
-#     model = Basket
-#     template_name = 'basketapp/basket.html'
+class BasketListView(ListView):
+    model = Basket
+    template_name = 'basketapp/basket.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get_queryset(self):
+        basket_items = Basket.objects.filter(user=self.request.user)
+        return basket_items
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'корзина'
+        return context_data
+
+
+# @login_required
+# def basket(request):
 #
-#     @method_decorator(user_passes_test(login_required))
-#     def dispatch(self, *args, **kwargs):
-#         return super().dispatch(*args, **kwargs)
-
-@login_required
-def basket(request):
-
-    title = 'корзина'
-
-    basket_items = Basket.objects.filter(user=request.user)
-
-    content = {
-        'title': title,
-        'basket_items': basket_items,
-    }
-
-    return render(request, 'basketapp/basket.html', content)
+#     title = 'корзина'
+#
+#     basket_items = Basket.objects.filter(user=request.user)
+#
+#     print('hello')
+#     print(basket_items)
+#
+#     content = {
+#         'title': title,
+#         'basket_items': basket_items,
+#     }
+#
+#     return render(request, 'basketapp/basket.html', content)
 
 
 # class BasketUpdateView(UpdateView):
@@ -59,12 +72,41 @@ def basket_add(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
+# class BasketRemoveDeleteView(DeleteView):
+#     model = Basket
+#     template_name = 'basketapp/basket.html'
+#     success_url = reverse_lazy('basket:basket')
+
+    # @method_decorator(login_required)
+    # def dispatch(self, *args, **kwargs):
+    #     print('world')
+    #     print(args)
+    #     print(kwargs)
+    #     return super().dispatch(*args, **kwargs)
+
+    # def delete(self, request, *args, **kwargs):
+    #     self.object = self.get_object(**kwargs)
+    #     print('hello')
+    #     print(self.object)
+    #     self.object.delete()
+    #     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+    # def get_success_url(self):
+    #     product_pk = self.kwargs.get('pk', None)
+    #     print('hello')
+    #     print(product_pk)
+    #     return reverse_lazy('admin:products', args=[product_pk])
+
+
+
 @login_required
 def basket_remove(request, pk):
     basket_record = get_object_or_404(Basket, pk=pk)
     basket_record.delete()
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
 
 @login_required
 def edit(request, pk, quantity):

@@ -1,9 +1,12 @@
 from django.conf import settings
 from django.contrib import auth
+from django.contrib.auth.decorators import user_passes_test
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse
+from django.utils.decorators import method_decorator
+from django.views.generic import UpdateView
 
 from authapp.forms import ShopUserLoginForm, ShopUserRegisterForm, ShopUserEditForm
 from authapp.models import ShopUser
@@ -31,6 +34,7 @@ def send_verify_email(user):
     message = f'для подтверждения перейдите по ссылке: {settings.DOMAIN_NAME}{verify_link}'
     return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
 
+
 def login(request):
 
     title = "вход"
@@ -54,6 +58,8 @@ def login(request):
     email = request.session.get('email', None)
     if from_register:
         del request.session['register']
+        del request.session['conf_code']
+        del request.session['email']
 
     content = {
         'title': title,
@@ -101,6 +107,16 @@ def register(request):
     }
     return render(request, 'authapp/register.html', content)
 
+
+# class UserEditUpdateView(UpdateView):
+#     model = ShopUser
+#     template_name = 'authapp/edit.html'
+#     form_class = ShopUserEditForm
+#
+#     def get_context_data(self, **kwargs):
+#         context_data = super().get_context_data(**kwargs)
+#         context_data['title'] = 'редактирование'
+#         return context_data
 
 def edit(request):
 

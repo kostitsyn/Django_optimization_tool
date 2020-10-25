@@ -1,0 +1,44 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+
+
+{% block menu %}
+	<div class="header">
+		{% include 'mainapp/includes/inc_headerline.html' %}
+		{% include 'mainapp/includes/inc_main_menu.html' %}
+		<p class="slider-line"></p>
+	</div>
+{% endblock %}
+{% block content %}
+   {% include 'mainapp/includes/inc_categories_game.html' %}
+	<div class="gallery clearfix">
+		<h3 class="gallery-header">Our Gallery</h3>
+        {% include 'mainapp/includes/inc_hot_offer.html' %}
+        <div class="paginator">
+          {% if page_obj.has_previous %}
+            <a href="{% url 'gallery:gallery_main' page_obj.previous_page_number %}"><</a>
+          {% endif %}
+          <span class="current"> страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
+          {% if page_obj.has_next %}
+            <a href="{% url 'gallery:gallery_main' page_obj.next_page_number %}">></a>
+          {% endif %}
+        </div>
+
+		{% include 'mainapp/includes/inc_name_game.html' %}
+		<a href="#"><p class="button-more"><span>Show more games</span></p></a>
+		<div class="clearfix"></div>
+        {% for game_disc in games_discount %}
+		    <div {% if game_disc.name == "CALL OF DUTY: Modern Warfare 3" %}class="poster-1"{% endif %}
+                 {% if game_disc.name == 'MEDAL OF HONOR' %}class="poster-2"{% endif %}>
+                <div class="discount-content">
+                    <p class="discount">Discount</p>
+                    <p class="discount-name">{{ game_disc.name }}</p>
+                    <p class="price">${{ game_disc.price }} / <span class="old-price">${{ game_disc.old_price }}</span></p>
+                    <input class="buy-discount" type="button" value="Buy">
+                </div>
+		    </div>
+        {% endfor %}
+    </div>
+    {% include 'mainapp/includes/inc_contacts.html' %}
+{% endblock %}

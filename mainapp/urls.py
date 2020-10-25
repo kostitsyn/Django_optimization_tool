@@ -22,7 +22,12 @@ import mainapp.views as mainapp
 app_name = 'mainapp'
 
 urlpatterns = [
-    path('<page>/', mainapp.gallery, name='gallery_main'),
-    path('category/<int:pk>/<page>/', mainapp.by_category, name='category'),
-    path('product/<str:pk>', mainapp.product, name='game'),
+    # path('<page>/', mainapp.gallery, name='gallery_main'),
+    path('<page>/', mainapp.GalleryListView.as_view(), name='gallery_main'),
+
+    # path('category/<int:pk>/<page>/', mainapp.by_category, name='category'),
+    path('category/<int:pk>/<page>/', mainapp.ByCategoryListView.as_view(), name='category'),
+
+    # path('product/<str:pk>', mainapp.product, name='game'),
+    path('product/<pk>/', mainapp.ProductDetailView.as_view(), name='game'),
 ]

@@ -20,15 +20,31 @@ from django.urls import path, include
 import mainapp.views as mainapp
 
 urlpatterns = [
-    path('', mainapp.main, name='main'),
-    path('about/', mainapp.about, name='about'),
-    path('service/', mainapp.service, name='service'),
+    # path('', mainapp.main, name='main'),
+    path('', mainapp.MainListView.as_view(), name='main'),
+
+    # path('about/', mainapp.about, name='about'),
+    path('about/', mainapp.AboutTemplateView.as_view(), name='about'),
+
+    # path('service/', mainapp.service, name='service'),
+    path('service/', mainapp.ServiceTemplateView.as_view(), name='service'),
+
     path('gallery/', include('mainapp.urls', namespace='gallery')),
-    path('news/', mainapp.news, name='news'),
-    path('team/', mainapp.team, name='team'),
-    path('contacts/', mainapp.contacts, name='contacts'),
+
+    # path('news/', mainapp.news, name='news'),
+    path('news/', mainapp.NewsTemplateView.as_view(), name='news'),
+
+    # path('team/', mainapp.team, name='team'),
+    path('team/', mainapp.TeamTemplateView.as_view(), name='team'),
+
+    # path('contacts/', mainapp.contacts, name='contacts'),
+    path('contacts/', mainapp.ContactsListView.as_view(), name='contacts'),
+
     path('basket/', include('basketapp.urls', namespace='basket')),
     path('auth/', include('authapp.urls', namespace='auth')),
+
+    path('', include('social_django.urls', namespace='social')),
+
     path('admin/', include('adminapp.urls', namespace='admin')),
     # path('admin/', admin.site.urls),
 

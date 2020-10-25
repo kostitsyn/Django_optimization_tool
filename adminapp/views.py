@@ -1,5 +1,4 @@
 from django.contrib.auth.decorators import user_passes_test
-from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 
@@ -8,11 +7,10 @@ from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
-from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm, GameEditForm, GameReadForm
+from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm, GameEditForm
 from authapp.forms import ShopUserRegisterForm
 from authapp.models import ShopUser
 from mainapp.models import GameCategories, Games
-
 
 
 class UserCreateView(CreateView):
@@ -25,6 +23,10 @@ class UserCreateView(CreateView):
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'пользователи/создание'
+        return context_data
 
 
 # @user_passes_test(lambda u: u.is_superuser)
@@ -57,6 +59,11 @@ class UsersListView(ListView):
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'админка/пользователи'
+        return context_data
+
 
 # @user_passes_test(lambda u: u.is_superuser)
 # def users(request):
@@ -77,11 +84,14 @@ class UserUpdateView(UpdateView):
     success_url = reverse_lazy('admin:users', args=[1])
     form_class = ShopUserAdminEditForm
 
-
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, *args, **kwargs):
-
         return super().dispatch(*args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'пользователи/редактирование'
+        return context_data
 
 
 # @user_passes_test(lambda u: u.is_superuser)
@@ -125,7 +135,11 @@ class UserDeleteView(DeleteView):
                 self.object.is_active = True
                 self.object.save()
         return HttpResponseRedirect(self.get_success_url())
-        # return HttpResponseRedirect(reverse('admin:users', args=[1]))
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'пользователи/удаление'
+        return context_data
 
 
 # @user_passes_test(lambda u: u.is_superuser)
@@ -157,6 +171,10 @@ class ProductCategoryCreateView(CreateView):
     success_url = reverse_lazy('admin:categories', args=[1])
     form_class = ProductCategoryEditForm
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'категории/создание'
+        return context_data
 
 
 # @user_passes_test(lambda u: u.is_superuser)
@@ -177,6 +195,7 @@ class ProductCategoryCreateView(CreateView):
 #     }
 #     return render(request, 'adminapp/category_update.html', content)
 
+
 class ProductCategoriesListView(ListView):
     model = GameCategories
     template_name = 'adminapp/categories.html'
@@ -186,6 +205,10 @@ class ProductCategoriesListView(ListView):
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'админка/категории'
+        return context_data
 
 
 # @user_passes_test(lambda u: u.is_superuser)
@@ -210,18 +233,20 @@ class ProductCategoriesListView(ListView):
 #     return render(request, 'adminapp/categories.html', content)
 
 
-
 class ProductCategoryUpdateView(UpdateView):
     model = GameCategories
     template_name = 'adminapp/category_update.html'
     success_url = reverse_lazy('admin:categories', args=[1])
     form_class = ProductCategoryEditForm
 
-
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'категории/редактирование'
+        return context_data
 
 
 # @user_passes_test(lambda u: u.is_superuser)
@@ -255,7 +280,6 @@ class ProductCategoryDeleteView(DeleteView):
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
-
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
         products_of_category = Games.objects.filter(game_category=self.object.pk)
@@ -274,6 +298,11 @@ class ProductCategoryDeleteView(DeleteView):
                     item.is_active = True
                     item.save()
         return HttpResponseRedirect(self.get_success_url())
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'категории/удаление'
+        return context_data
 
 
 # @user_passes_test(lambda u: u.is_superuser)
@@ -300,13 +329,10 @@ class ProductCategoryDeleteView(DeleteView):
 #                 item.save()
 #             return HttpResponseRedirect(reverse('admin:categories'))
 #
-#
-#
 #     content = {'title': title,
 #                'category_to_delete': category_item
 #                }
 #     return render(request, 'adminapp/category_delete.html', content)
-
 
 
 class ProductCreateView(CreateView):
@@ -322,6 +348,7 @@ class ProductCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         category_pk = self.kwargs.get('pk', None)
+        context_data['title'] = 'продукты/создание'
         context_data['game_category'] = get_object_or_404(GameCategories, pk=category_pk)
         context_data['form']['game_category'].initial = get_object_or_404(GameCategories, pk=category_pk)
         return context_data
@@ -329,8 +356,6 @@ class ProductCreateView(CreateView):
     def get_success_url(self):
         category_pk = self.object.game_category.pk
         return reverse_lazy('admin:products', args=[category_pk, 1])
-
-
 
 
 # @user_passes_test(lambda u: u.is_superuser)
@@ -355,13 +380,6 @@ class ProductCreateView(CreateView):
 #     return render(request, 'adminapp/product_update.html', content)
 
 
-# class ProductsListView(ListView):
-#     model = Games
-#     template_name = 'adminapp/products.html'
-#     paginate_by = 2
-
-
-
 class ProductsListView(ListView):
     model = Games
     template_name = 'adminapp/products.html'
@@ -374,6 +392,7 @@ class ProductsListView(ListView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         category_pk = self.kwargs.get('pk', None)
+        context_data['title'] = 'категории/игры'
         context_data['game_category'] = get_object_or_404(GameCategories, pk=category_pk)
         return context_data
 
@@ -383,33 +402,29 @@ class ProductsListView(ListView):
         return games_by_category
 
 
-
-
-
-
-@user_passes_test(lambda u: u.is_superuser)
-def products(request, pk, page=1):
-
-    title = 'категории/игры'
-
-    category_item = get_object_or_404(GameCategories, pk=pk)
-    products_list = Games.objects.filter(game_category=category_item)
-
-    paginator = Paginator(products_list, 3)
-    try:
-        products_paginator = paginator.page(page)
-    except PageNotAnInteger:
-        products_paginator = paginator.page(1)
-    except EmptyPage:
-        products_paginator = paginator.page(paginator.num_pages)
-
-    content = {
-        'title': title,
-        'objects': products_paginator,
-        'category': category_item,
-    }
-
-    return render(request, 'adminapp/products.html', content)
+# @user_passes_test(lambda u: u.is_superuser)
+# def products(request, pk, page=1):
+#
+#     title = 'категории/игры'
+#
+#     category_item = get_object_or_404(GameCategories, pk=pk)
+#     products_list = Games.objects.filter(game_category=category_item)
+#
+#     paginator = Paginator(products_list, 3)
+#     try:
+#         products_paginator = paginator.page(page)
+#     except PageNotAnInteger:
+#         products_paginator = paginator.page(1)
+#     except EmptyPage:
+#         products_paginator = paginator.page(paginator.num_pages)
+#
+#     content = {
+#         'title': title,
+#         'objects': products_paginator,
+#         'category': category_item,
+#     }
+#
+#     return render(request, 'adminapp/products.html', content)
 
 
 class ProductDetailView(DetailView):
@@ -419,6 +434,8 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         self.object = self.get_object()
         context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'админка/игра'
+        context_data['css_file'] = 'style-admin.css'
         context_data['game_category'] = GameCategories.objects.get(name=self.object.game_category)
         return context_data
 
@@ -460,7 +477,7 @@ class ProductUpdateView(UpdateView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         product_pk = self.kwargs.get('pk', None)
-        print('a'*100)
+        context_data['title'] = 'игры/редактирование'
         category_pk = Games.objects.get(pk=product_pk).game_category.pk
         context_data['game_category'] = get_object_or_404(GameCategories, pk=category_pk)
         return context_data
@@ -468,8 +485,6 @@ class ProductUpdateView(UpdateView):
     def get_success_url(self):
         category_pk = self.object.game_category.pk
         return reverse_lazy('admin:products', args=[category_pk, 1])
-
-
 
 
 # @user_passes_test(lambda u: u.is_superuser)
@@ -495,9 +510,6 @@ class ProductUpdateView(UpdateView):
 #     return render(request, 'adminapp/product_update.html', content)
 
 
-
-
-
 class ProductDeleteView(DeleteView):
     model = Games
     template_name = 'adminapp/product_delete.html'
@@ -506,7 +518,6 @@ class ProductDeleteView(DeleteView):
     @method_decorator(user_passes_test(lambda u: u.is_superuser))
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
-
 
     def delete(self, request, *args, **kwargs):
         self.object = self.get_object()
@@ -524,9 +535,12 @@ class ProductDeleteView(DeleteView):
     def get_success_url(self):
         product_pk = self.kwargs.get('pk', None)
         category_pk = Games.objects.get(pk=product_pk).game_category.pk
-        print(category_pk)
         return reverse_lazy('admin:products', args=[category_pk, 1])
 
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'игры/удаление'
+        return context_data
 
 
 # @user_passes_test(lambda u: u.is_superuser)
@@ -547,9 +561,9 @@ class ProductDeleteView(DeleteView):
 #             product_item.save()
 #             return HttpResponseRedirect(reverse('admin:products', args=[category_item.pk]))
 #
-#
 #     content = {'title': title,
 #                'product_to_delete': product_item,
 #                'category': category_item,
 #                }
 #     return render(request, 'adminapp/product_delete.html', content)
+
