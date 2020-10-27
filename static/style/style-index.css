@@ -12,9 +12,19 @@ body {
 }
 
 .container {
-	max-width: 1920px;
-  min-width: 700px;
+    max-width: 1920px;
+    min-width: 700px;
 	margin: 0 auto;
+}
+
+.container_form {
+    width: 600px;
+    margin: 0 auto;
+}
+
+.container_form img {
+    width: 200px;
+    display: block;
 }
 
 .clearfix:after {

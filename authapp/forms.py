@@ -1,11 +1,11 @@
-#from django.contrib.auth import forms
+from django.contrib.auth import forms
 import hashlib
 from random import random
 
 from django import forms
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm, UserChangeForm
 
-from authapp.models import ShopUser
+from authapp.models import ShopUser, ShopUserProfile
 
 
 class ShopUserLoginForm(AuthenticationForm):
@@ -16,8 +16,8 @@ class ShopUserLoginForm(AuthenticationForm):
     def __init__(self, *args, **kwargs):
         super(ShopUserLoginForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
-            field.widget.attrs['class']="form-control"
-            #field.help_text = ''
+            field.widget.attrs['class'] = "form-control"
+            field.help_text = ''
 
 
 class ShopUserRegisterForm(UserCreationForm):
@@ -30,7 +30,7 @@ class ShopUserRegisterForm(UserCreationForm):
         super(ShopUserRegisterForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = "form-control"
-            #field.help_text = ''
+            field.help_text = ''
 
     def clean_age(self):
         data = self.cleaned_data['age']
@@ -68,9 +68,12 @@ class ShopUserEditForm(UserChangeForm):
         super(ShopUserEditForm, self).__init__(*args, **kwargs)
         for field_name, field in self.fields.items():
             field.widget.attrs['class'] = "form-control"
-            #field.help_text = ''
+            field.help_text = ''
             if field_name == 'password':
                 field.widget = forms.HiddenInput()
+
+    def __str__(self):
+        return self.fields['avatar']
 
 
     def clean_age(self):
@@ -89,3 +92,19 @@ class ShopUserEditForm(UserChangeForm):
                 raise forms.ValidationError('Имя должно содержать только буквы!!!')
             i += 1
         return data
+
+
+class ShopUserProfileEditForm(forms.ModelForm):
+    class Meta:
+        model = ShopUserProfile
+        fields = ('tagline', 'about_me', 'gender')
+
+    def __init__(self, *args, **kwargs):
+        super(ShopUserProfileEditForm, self).__init__(*args, **kwargs)
+        for field_name, field in self.fields.items():
+            field.widget.attrs['class'] = "form-control"
+            field.help_text = ''
+
+
+
+

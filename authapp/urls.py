@@ -14,5 +14,5 @@ urlpatterns = [
     path('edit/', authapp.edit, name='edit'),
     # path('edit/', authapp.UserEditUpdateView.as_view(), name='edit'),
 
-    path('verify/<email>/<activation_key>/', authapp.verify, name='verify')
+    path('verify/<email>/<activation_key>/', authapp.verify, name='verify'),
 ]

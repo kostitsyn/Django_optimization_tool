@@ -1,8 +1,12 @@
 {% extends 'authapp/base.html' %}
 {% block content %}
-    <form class="form-horizontal" action="{% url 'auth:login' %}" method="post">
+{% load my_tags %}
+
+    <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
     {% csrf_token %}
+        <img src="{{ avatar|media_folder_users }}" alt="avatar">
     {{ edit_form.as_table }}
+    {{ profile_form.as_table }}
     <br>
     <input class="form-control" type="submit" value="Сохранить">
     </form>
