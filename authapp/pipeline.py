@@ -41,14 +41,13 @@ def save_user_profile(backend, user, response, *args, **kwargs):
         bdate = datetime.strptime(data['bdate'], '%d.%m.%Y').date()
 
         age = timezone.now().date().year - bdate.year
-        if age < 18:
+        if age < 100:
             user.delete()
             raise AuthForbidden('social_core.backends.vk.VKOAuth2')
         user.age = age
 
     if data['photo_100']:
         avatar = requests.get(data['photo_100'])
-        print(avatar)
         with open(f'{BASE_DIR}{settings.MEDIA_URL}users_avatars/{user.id}.jpg', 'wb') as f:
             f.write(avatar.content)
         user.avatar = f'users_avatars/{user.id}.jpg'
