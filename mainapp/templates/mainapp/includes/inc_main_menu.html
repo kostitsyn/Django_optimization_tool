@@ -37,14 +37,28 @@
     </li>
     {% if user.is_authenticated %}
         <li class="menu-list">
-            <a href="{% url 'auth:edit' %}"
-               class="menu-link">
-                {% if user.first_name %}
-                    {{ user.first_name }}
-                {% else %}
-                    Пользователь
-                {% endif %}
-            </a>
+            <div class="dropdown">
+                <a class="dropdown-toggle menu-link" href="#" data-toggle="dropdown">
+                    {% if user.first_name %}
+                        {{ user.first_name }}
+                    {% else %}
+                        Пользователь
+                    {% endif %}
+                    <span class="caret"></span>
+                </a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a href="{% url 'auth:edit' %}">
+                           Профиль
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            Заказы
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </li>
             {% if user.is_superuser %}
                 <li class="menu-list">
