@@ -21,6 +21,7 @@ class OrderListView(ListView):
         return context_data
 
 
+
 class OrderItemsCreateView(CreateView):
     model = Order
     fields = []
@@ -29,7 +30,7 @@ class OrderItemsCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context_data = super(OrderItemsCreateView, self).get_context_data(**kwargs)
         context_data['title'] = 'создание заказа'
-        OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=1)
+        OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=2)
 
         if self.request.POST:
             formset = OrderFormSet(self.request.POST)
@@ -98,6 +99,7 @@ class OrderItemsUpdateView(UpdateView):
 
         return super(OrderItemsUpdateView, self).form_valid(form)
 
+
 class OrderItemsDeleteView(DeleteView):
     model = Order
     success_url = reverse_lazy('order:orders_list')
@@ -115,6 +117,7 @@ class OrderItemsReadView(DetailView):
         context_data = super(OrderItemsReadView, self).get_context_data(**kwargs)
         context_data['title'] = 'просмотр заказа'
         return context_data
+
 
 def order_forming_complete(request, pk):
     order = get_object_or_404(Order, pk=pk)

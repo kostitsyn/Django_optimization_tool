@@ -72,40 +72,41 @@ def basket_add(request, pk):
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-# class BasketRemoveDeleteView(DeleteView):
+class BasketDeleteView(DeleteView):
+    model = Basket
+    template_name = 'basketapp/basket.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        item_pk = self.kwargs.get('pk', None)
+        object = Basket.objects.get(pk=item_pk)
+        object.delete()
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+# @login_required
+# def basket_remove(request, pk):
+#     basket_record = get_object_or_404(Basket, pk=pk)
+#     basket_record.delete()
+#
+#     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+# class BasketUpdateView(UpdateView):
 #     model = Basket
 #     template_name = 'basketapp/basket.html'
-#     success_url = reverse_lazy('basket:basket')
-
-    # @method_decorator(login_required)
-    # def dispatch(self, *args, **kwargs):
-    #     print('world')
-    #     print(args)
-    #     print(kwargs)
-    #     return super().dispatch(*args, **kwargs)
-
-    # def delete(self, request, *args, **kwargs):
-    #     self.object = self.get_object(**kwargs)
-    #     print('hello')
-    #     print(self.object)
-    #     self.object.delete()
-    #     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-    # def get_success_url(self):
-    #     product_pk = self.kwargs.get('pk', None)
-    #     print('hello')
-    #     print(product_pk)
-    #     return reverse_lazy('admin:products', args=[product_pk])
-
-
-
-@login_required
-def basket_remove(request, pk):
-    basket_record = get_object_or_404(Basket, pk=pk)
-    basket_record.delete()
-
-    return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
+#
+#     @method_decorator(login_required)
+#     def dispatch(self, *args, **kwargs):
+#         return super().dispatch(*args, **kwargs)
+#
+#     def get(self, request, *args, **kwargs):
+#         item_pk = self.kwargs.get('pk', None)
+#         object = Basket.objects.get(pk=item_pk)
+#         object.delete()
 
 
 @login_required
@@ -114,16 +115,18 @@ def edit(request, pk, quantity):
         quantity = int(quantity)
         new_basket_item = Basket.objects.get(pk=pk)
         if quantity > 0:
+            print('lorem')
             new_basket_item.quantity = quantity
             new_basket_item.save()
         else:
+            print('ipsum')
             new_basket_item.delete()
 
         basket_items = Basket.objects.filter(user=request.user)
         content = {
-            'basket_items': basket_items
+            'object_list': basket_items
         }
 
-        result = render_to_string('basketapp/includes/inc_basket_list.html', content)
+        result = render_to_string('basketapp/basket.html', content)
 
         return JsonResponse({'result': result})

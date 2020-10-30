@@ -1,25 +1,25 @@
 {% extends 'adminapp/base.html' %}
 {% load static %}
-{% load my_tags %}
+
 
 {% block content %}
   <div class="users_list">
     <button class="new_user">
-      <a href={% url 'admin:user_create' %}>
-        новый пользователь
+      <a href={% url 'order:order_create' %}>
+        новый заказ
       </a>
     </button>
     <div class="paginator">
       {% if page_obj.has_previous %}
-        <a href="{% url 'admin:users' page_obj.previous_page_number %}"><</a>
+        <a href="{% url 'admin:orders' page_obj.previous_page_number %}"><</a>
       {% endif %}
       <span class="current"> страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
       {% if page_obj.has_next %}
-        <a href="{% url 'admin:users' page_obj.next_page_number %}">></a>
+        <a href="{% url 'admin:orders' page_obj.next_page_number %}">></a>
       {% endif %}
     </div>
 
-    {% for object in object_list %}
+    {% for item in object_list %}
       <div
        class="user_record {% if not object.is_active %}not_active{% endif %}">
         <img

@@ -11,6 +11,7 @@ from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm, GameE
 from authapp.forms import ShopUserRegisterForm
 from authapp.models import ShopUser
 from mainapp.models import GameCategories, Games
+from ordersapp.models import Order
 
 
 class UserCreateView(CreateView):
@@ -566,4 +567,10 @@ class ProductDeleteView(DeleteView):
 #                'category': category_item,
 #                }
 #     return render(request, 'adminapp/product_delete.html', content)
+
+
+class OrdersListView(ListView):
+    model = Order
+    template_name = 'admniapp/orders.html'
+    paginate_by = 4
 
