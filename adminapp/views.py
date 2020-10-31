@@ -1,8 +1,9 @@
 from django.contrib.auth.decorators import user_passes_test
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
+from django.template.loader import render_to_string
 from django.urls import reverse, reverse_lazy
 from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
@@ -10,6 +11,7 @@ from django.views.generic import ListView, CreateView, UpdateView, DeleteView, D
 from adminapp.forms import ShopUserAdminEditForm, ProductCategoryEditForm, GameEditForm
 from authapp.forms import ShopUserRegisterForm
 from authapp.models import ShopUser
+from basketapp.models import Basket
 from mainapp.models import GameCategories, Games
 from ordersapp.models import Order
 
@@ -571,6 +573,56 @@ class ProductDeleteView(DeleteView):
 
 class OrdersListView(ListView):
     model = Order
-    template_name = 'admniapp/orders.html'
+    template_name = 'adminapp/orders.html'
     paginate_by = 4
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        statuses_tuple = Order.ORDER_STATUSES
+        all_statuses = []
+        for status in statuses_tuple:
+            all_statuses.append(status[1])
+
+        context_data['statuses'] = all_statuses
+
+        context_data['title'] = 'админка/заказы'
+        return context_data
+
+
+class OrderEditStatusView(UpdateView):
+    model = Order
+    template_name = 'adminapp/orders.html'
+
+    @method_decorator(user_passes_test(lambda u: u.is_superuser))
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        new_item_pk = self.kwargs.get('pk', None)
+        new_status = self.kwargs.get('status', None)
+        object = Order.objects.get(pk=new_item_pk)
+        object.status = new_status
+        object.save()
+
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+# @user_passes_test(lambda u: u.is_superuser)
+# def order_edit(request, pk, status):
+#     if request.is_ajax():
+#
+#         new_order_item = Order.objects.get(pk=pk)
+#         orders = Order.objects.all()
+#         new_order_item.status = status
+#         new_order_item.save()
+#         content = {
+#             'object_list': orders
+#         }
+#
+#         result = render_to_string('adminapp/orders.html', content)
+#
+#         return JsonResponse({'result': result})
+#     else:
+#         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
 

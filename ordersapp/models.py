@@ -60,6 +60,12 @@ class Order(models.Model):
         self.is_active = False
         self.save()
 
+    # def get_statuses_list(self):
+    #     statuses = []
+    #     for status in self.ORDER_STATUSES:
+    #         self.statuses.append(status[1])
+    #     return statuses
+
 
 class OrderItem(models.Model):
 

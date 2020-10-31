@@ -34,7 +34,7 @@ urlpatterns = [
     path('products/create/category/<int:pk>/', adminapp.ProductCreateView.as_view(), name='product_create'),
 
     # path('products/read/category/<int:pk>/<page>', adminapp.products, name='products'),
-    path('products/read/category/<int:pk>/<page>', adminapp.ProductsListView.as_view(), name='products'),
+    path('products/read/category/<int:pk>/<page>/', adminapp.ProductsListView.as_view(), name='products'),
 
     # path('products/read/<int:pk>/', adminapp.product_read, name='product_read'),
     path('products/read/<int:pk>/', adminapp.ProductDetailView.as_view(), name='product_read'),
@@ -45,5 +45,8 @@ urlpatterns = [
     # path('products/delete/<int:pk>/', adminapp.product_delete, name='product_delete'),
     path('products/delete/<int:pk>/', adminapp.ProductDeleteView.as_view(), name='product_delete'),
 
-    path('products/delete/<int:pk>/', adminapp.OrdersListView.as_view(), name='orders'),
+    path('orders/read/<page>/', adminapp.OrdersListView.as_view(), name='orders'),
+
+    # path('orders/read/<pk>/<status>/', adminapp.order_edit, name='order_edit'),
+    path('orders/read/<pk>/<status>/', adminapp.OrderEditStatusView.as_view(), name='order_edit'),
 ]
