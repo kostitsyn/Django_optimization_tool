@@ -1,0 +1,101 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+
+
+
+{% block menu %}
+	<div class="slider">
+		<div class="header">
+			{% include 'mainapp/includes/inc_headerline.html' %}
+			{% include 'mainapp/includes/inc_main_menu.html' %}
+		</div>
+		<p class="slider-line"></p>
+		<div class="slider-text">
+			<p class="slider-text-first">Nunc eget nibh</p>
+			<p class="slider-text-line"></p>
+			<h1 class="slider-text-second">Morbi in nisl auctor</h1>
+			<div class="slider-links">
+				<a href="#" class="circle"><img src="{% static 'img/first_screen/facebook.png' %}" alt="facebook"></a>
+				<a href="#" class="circle"><img src="{% static 'img/first_screen/twitter.png' %}" alt="twitter"></a>
+				<a href="#" class="circle"><img src="{% static 'img/first_screen/rss.png' %}" alt="rss"></a>
+				<a href="#" class="circle"><img src="{% static 'img/first_screen/vk.png' %}" alt="vk"></a>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+{% block content %}
+	{% include 'mainapp/includes/inc_about.html' %}
+	{% include 'mainapp/includes/inc_services.html' %}
+	<div class="gallery">
+		<h3 class="gallery-header">Our Gallery</h3>
+		{% include 'mainapp/includes/inc_name_game.html' %}
+	</div>
+	<div class="testimonial">
+		<h2 class="testimonial-header">Testimonial</h2>
+		<img class="quote" src="/static/img/block_6/quote.png" alt="quote">
+		<div class="testimonial-content">
+			<a class="previous" href="#"><p>&lt;</p></a>
+			<p class="testimonial-text">Donec feugiat tellus sem, laoreet iaculis orci lobortis vel. Sed sed luctus orci, at&nbsp;lacinia risus. Ut&nbsp;porttitor ante ac&nbsp;tincidunt elementum. Curabitur ex&nbsp;dolor, condimentum vitae nunc vel, pulvinar semper justo. Vestibulum et&nbsp;aliquet magna, maximus dapibus enim. Vestibulum ex&nbsp;lectus, posuere eu&nbsp;viverra at, mattis et&nbsp;enim. Nam efficitur sem et&nbsp;lectus fringilla, at&nbsp;pharetra nulla luctus. Nunc cursus, augue ac&nbsp;ultricies volutpat, neque erat congue justo, ac&nbsp;pretium tellus eros a&nbsp;neque. Integer ipsum sem,
+				consectetur a&nbsp;mollis ac, cursus eu&nbsp;ipsum.<br><br>
+			<b>JOHN SMITH</b>&nbsp;&mdash; FOUNDER</p>
+			<a class="next" href="#"><p>&gt;</p></a>
+		</div>
+	</div>
+	{% include 'mainapp/includes/inc_news.html' %}
+	<div class="team">
+		<h3 class="team-header">Our team</h3>
+		<ul class="team-people">
+			<li>
+				<div class="person"><img src="/static/img/Our_team/4.jpg" alt="person"><p class="name-person">Mary Jane</p><p class="position-person">Vestibulum</p>
+					<div class="person-links">
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/facebook.png' %}" alt="facebook"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/twitter.png' %}" alt="twitter"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/rss.png' %}" alt="rss"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/vk.png' %}" alt="vk"></a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="person"><img src="/static/img/Our_team/3.jpg" alt="person"><p class="name-person">Peter Parker</p><p class="position-person">Vestibulum</p>
+					<div class="person-links">
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/facebook.png' %}" alt="facebook"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/twitter.png' %}" alt="twitter"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/rss.png' %}" alt="rss"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/vk.png' %}" alt="vk"></a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="person"><img src="/static/img/Our_team/2.jpg" alt="person"><p class="name-person">John Watson</p><p class="position-person">Ves tibulum</p>
+					<div class="person-links">
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/facebook.png' %}" alt="facebook"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/twitter.png' %}" alt="twitter"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/rss.png' %}" alt="rss"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/vk.png' %}" alt="vk"></a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="person"><img src="/static/img/Our_team/1.jpg" alt="person"><p class="name-person">Steven Wilson</p><p class="position-person">Ves tibulum</p>
+					<div class="person-links">
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/facebook.png' %}" alt="facebook"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/twitter.png' %}" alt="twitter"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/rss.png' %}" alt="rss"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/vk.png' %}" alt="vk"></a>
+					</div>
+				</div>
+			</li>
+		</ul>
+		<div class="arrow">
+			<a href="#"><img src="{% static 'img/arrow.png' %}" alt="arrow"></a>
+		</div>
+	</div>
+	<div class="subscribe">
+		<h2 class="subscribe-header">Subscribe with Us</h2>
+		<form action="#">
+			<input class="email-input" type="email" placeholder="Email">
+			<input class="subscribe-bottom" type="submit" value="Subscribe">
+		</form>
+	</div>
+    {% include 'mainapp/includes/inc_contacts.html' %}
+{% endblock %}

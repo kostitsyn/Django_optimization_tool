@@ -1,0 +1,19 @@
+{% extends 'adminapp/base.html' %}
+{% load static %}
+{% load my_tags %}
+
+{% block content %}
+<div class="media">
+  <img src="{{ object.image|media_folder_products }}" class="align-self-end mr-3" alt="{{ objects.name }}">
+  <div class="media-body">
+    <h5 class="mt-0">{{ object.game_category|upper }}</h5>
+    <div><span class="section_header">Название:</span> {{ object.name }}</div>
+    <div><span class="section_header">Описание:</span> {{ object.description }}</div>
+    <div><span class="section_header">Цена:</span> {{ object.price }}&#36;</div>
+    <div><span class="section_header">Количество:</span> {{ object.quantity }}</div>
+  </div>
+</div>
+<button type="button" class="btn btn-secondary btn-lg btn-block"><a href="{% url 'admin:products' game_category.pk 1 %}">
+      к списку игр категории
+    </a></button>
+{% endblock %}

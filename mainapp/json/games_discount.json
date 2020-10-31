@@ -1,0 +1,18 @@
+[
+  {
+    "game_category": "shooter",
+    "name": "MEDAL OF HONOR",
+    "image": "game_images/2.jpg",
+    "description": "Medal of Honor's multiplayer was developed by EA DICE. Multiplayer is class based, with three classes available – Rifleman, Special Ops, and Sniper. The player earns experience during gameplay to level up and unlock additional weapons and weapon accessories. For example, at the start of the game the sniper class does not have a proper sniper scope available, and the player must reach level 3 to unlock a combat scope. If a player earns a certain number of points before dying, called a score chain, he or she earns a choice of an offensive support action such as a mortar strike or missile attack or a defensive support action such as intel or ammo. The player is not limited to one support action per life and can earn them continuously.",
+    "price": "15.96",
+    "old_price": "29.99"
+  },
+  {
+    "game_category": "shooter",
+    "name": "CALL OF DUTY: Modern Warfare 3",
+    "image": "game_images/1.jpg",
+    "description": "The player assumes the role of various characters during the single player campaign, changing perspectives throughout the progression of the story, which, like its predecessors, is divided into three sets of missions called \"Acts\". Each mission in an act featuring a series of objectives that are displayed on the heads up display, which marks the direction and distance between such objectives and the player. Damage to the player is shown by the visualization of blood-spatter or red-outs on the screen. The player's health regenerates over time as long as the player character avoids taking damage for a limited time. Mission objectives vary in their requirements, ranging from having the player arrive at a particular checkpoint, to eliminating enemies in a specified location, to standing their ground against enemy squadrons, directing remote-operated weapons, and planting explosive charges on enemy installations. The player is also accompanied by fellow soldiers who cannot be issued orders. Like its predecessor, the game includes an interactive scene of a terror attack against civilians, which the player is given the option of skipping due to the portrayal of graphic and potentially upsetting content, including harm to children.",
+    "price": "14.44",
+    "old_price": "28.90"
+  }
+]
