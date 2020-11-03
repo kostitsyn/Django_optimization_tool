@@ -1,4 +1,6 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.db.models.signals import pre_save, pre_delete
+from django.dispatch import receiver
 from django.http import HttpResponseRedirect, JsonResponse, request
 from django.shortcuts import render, get_object_or_404
 from django.template.loader import render_to_string
@@ -9,6 +11,7 @@ from django.views.generic import ListView, CreateView, UpdateView, TemplateView,
 import basketapp
 from basketapp.models import Basket
 from mainapp.models import Games
+from ordersapp.models import OrderItem
 
 
 class BasketListView(ListView):
@@ -122,9 +125,13 @@ def edit(request, pk, quantity):
 
         basket_items = Basket.objects.filter(user=request.user)
         content = {
-            'object_list': basket_items
+            'object_list': basket_items,
+            'user': request.user.first_name,
         }
 
         result = render_to_string('basketapp/basket.html', content)
 
         return JsonResponse({'result': result})
+
+
+

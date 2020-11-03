@@ -603,7 +603,6 @@ class OrderEditStatusView(UpdateView):
         object = Order.objects.get(pk=new_item_pk)
         object.status = new_status
         object.save()
-
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 

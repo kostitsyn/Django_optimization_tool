@@ -1,6 +1,8 @@
+import urllib
 from collections import OrderedDict
 from datetime import datetime
 from urllib.parse import urlunparse, urlencode
+import urllib.request
 
 import requests
 from django.utils import timezone
@@ -47,9 +49,10 @@ def save_user_profile(backend, user, response, *args, **kwargs):
         user.age = age
 
     if data['photo_100']:
-        avatar = requests.get(data['photo_100'])
-        with open(f'{BASE_DIR}{settings.MEDIA_URL}users_avatars/{user.id}.jpg', 'wb') as f:
-            f.write(avatar.content)
-        user.avatar = f'users_avatars/{user.id}.jpg'
+        # avatar = requests.get(data['photo_100'])
+        # with open(f'{BASE_DIR}{settings.MEDIA_URL}users_avatars/{user.pk}.jpg', 'wb') as f:
+        #     f.write(avatar.content)
+        urllib.request.urlretrieve(data['photo_100'], f'{settings.MEDIA_ROOT}/users_avatars/{user.pk}.jpg')
+        user.avatar = f'users_avatars/{user.pk}.jpg'
 
     user.save()
