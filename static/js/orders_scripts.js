@@ -70,7 +70,8 @@ window.onload = function() {
     $('.order_form select').change(function(event) {
         let target = event.target;
         let orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-product', ''));
-        let orderitem_product_pk = target.options[target.selectedIndex].value;
+        // let orderitem_product_pk = target.options[target.selectedIndex].value;
+        let orderitem_product_pk = target.selectedIndex.toString();
 
         if (orderitem_product_pk) {
             $.ajax({
@@ -129,6 +130,7 @@ window.onload = function() {
         let target_name = row[0].querySelector('input[type="number"]').name;
         let orderitem_num = parseInt(target_name.replace('orderitems-', '').replace('-quantity', ''));
         let delta_quantity = -quantity_arr[orderitem_num];
+        quantity_arr[orderitem_num] = 0;
         orderSummaryUpdate(price_arr[orderitem_num], delta_quantity);
     }
 }
