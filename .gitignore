@@ -1,0 +1,14 @@
+.idea
+venv/
+django_2.2/
+django_3.1/
+requirements_django_3.1.txt
+
+*.pyc
+__pycache__
+db.sqlite3
+media/
+project/settings.py
+.DS_Store
+env
+./.env
