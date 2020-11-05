@@ -20,14 +20,14 @@ class BasketListView(ListView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
+        return super(BasketListView, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
         basket_items = Basket.objects.filter(user=self.request.user)
         return basket_items
 
     def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(**kwargs)
+        context_data = super(BasketListView, self).get_context_data(**kwargs)
         context_data['title'] = 'корзина'
         return context_data
 
@@ -81,7 +81,7 @@ class BasketDeleteView(DeleteView):
 
     @method_decorator(login_required)
     def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
+        return super(BasketDeleteView, self).dispatch(*args, **kwargs)
 
     def get(self, request, *args, **kwargs):
         item_pk = self.kwargs.get('pk', None)
@@ -98,40 +98,64 @@ class BasketDeleteView(DeleteView):
 #     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 
-# class BasketUpdateView(UpdateView):
-#     model = Basket
-#     template_name = 'basketapp/basket.html'
+class BasketUpdateView(UpdateView):
+    model = Basket
+    template_name = 'basketapp/basket.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(BasketUpdateView, self).dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        if request.is_ajax():
+            print('hello')
+            quantity = int(self.kwargs.get('quantity', None))
+            basket_pk = self.kwargs.get('pk', None)
+            new_basket_item = Basket.get_item(basket_pk)
+            print(basket_pk)
+            print(new_basket_item.product.quantity)
+            if quantity <= new_basket_item.product.quantity:
+                if quantity > 0:
+                    new_basket_item.quantity = quantity
+                    new_basket_item.save()
+                else:
+                    new_basket_item.delete()
+
+                basket_items = Basket.objects.filter(user=request.user)
+                content = {
+                    'object_list': basket_items,
+                    'user': request.user.first_name,
+                }
+
+                result = render_to_string('basketapp/basket.html', content)
+
+                return JsonResponse({'result': result})
+            else:
+                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+
+
+# @login_required
+# def edit(request, pk, quantity):
+#     if request.is_ajax():
+#         quantity = int(quantity)
+#         new_basket_item = Basket.objects.get(pk=pk)
+#         if quantity > 0:
+#             new_basket_item.quantity = quantity
+#             new_basket_item.save()
+#         else:
+#             new_basket_item.delete()
 #
-#     @method_decorator(login_required)
-#     def dispatch(self, *args, **kwargs):
-#         return super().dispatch(*args, **kwargs)
+#         basket_items = Basket.objects.filter(user=request.user)
+#         content = {
+#             'object_list': basket_items,
+#             'user': request.user.first_name,
+#         }
 #
-#     def get(self, request, *args, **kwargs):
-#         item_pk = self.kwargs.get('pk', None)
-#         object = Basket.objects.get(pk=item_pk)
-#         object.delete()
-
-
-@login_required
-def edit(request, pk, quantity):
-    if request.is_ajax():
-        quantity = int(quantity)
-        new_basket_item = Basket.objects.get(pk=pk)
-        if quantity > 0:
-            new_basket_item.quantity = quantity
-            new_basket_item.save()
-        else:
-            new_basket_item.delete()
-
-        basket_items = Basket.objects.filter(user=request.user)
-        content = {
-            'object_list': basket_items,
-            'user': request.user.first_name,
-        }
-
-        result = render_to_string('basketapp/basket.html', content)
-
-        return JsonResponse({'result': result})
+#         result = render_to_string('basketapp/basket.html', content)
+#
+#         return JsonResponse({'result': result})
 
 
 
