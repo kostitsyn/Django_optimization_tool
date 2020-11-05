@@ -575,6 +575,7 @@ class OrdersListView(ListView):
     model = Order
     template_name = 'adminapp/orders.html'
     paginate_by = 4
+    queryset = Order.objects.all().exclude(status='отменен')
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
