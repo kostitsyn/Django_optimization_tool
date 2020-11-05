@@ -1,0 +1,417 @@
+    1  exit()
+    2  exit
+    3  ssh-keygen
+    4  cat /root/.ssh/id_rsa.pub
+    5  peyhon3
+    6  python3
+    7  apt update
+    8  exit()
+    9  eixtxxx
+   10  x
+   11  to
+   12  exit
+   13  apt install git-core
+   14  apt install nginx
+   15  apt install mc
+   16  mc
+   17  cd /var/www/html
+   18  git clone git@github.com:kostitsyn/Django_optimization_tool.git
+   19  ls
+   20  cd ./Django_optimization_tool/
+   21  ls
+   22  git status
+   23  git checkout home_work_5
+   24  ls
+   25  cd /var/www/html
+   26  ls
+   27  cd ./Django_optimization_tool/
+   28  ls
+   29  rm -rf ./media
+   30  ls
+   31  rm -rf __pycache__
+   32  ls
+   33  rm db.sqlite3 
+   34  ls
+   35  rm requirements_django_3.1.txt 
+   36  ls
+   37  ьс
+   38  mc
+   39  cd ..
+   40  ls
+   41  nano index.nginx-debian.html 
+   42  cd ./Django_optimization_tool/
+   43  git status
+   44  git -ma "Delete excess files"
+   45  git -am "Delete excess files"
+   46  git -a -m "Delete excess files"
+   47  git add .
+   48  git commit -m "Delete excess files"
+   49  git status
+   50  apt install postgresql postgresql-contrib
+   51  sudo -u postgres psql
+   52  ls
+   53  cat requirements.txt 
+   54  ls
+   55  cat ./geekshop/settiings.py
+   56  nano ./geekshop/settings.py
+   57  git status
+   58  python3 pip --version
+   59  pip --version
+   60  pip3 install virtualenv
+   61  sudo apt install python3-pip
+   62  pip3 install virtualenv
+   63  sudo apt install virtualenv
+   64  source django_2.2/bin/activate
+   65  ls
+   66  virtualenv django_2.2
+   67  ls
+   68  django_2.2\scripts\activate
+   69  source django_2.2/bin/activate
+   70  python --version
+   71  source django_2.2/bin/deactivate
+   72  django_2.2/bin/deactivate
+   73  pip freeze
+   74  pip3 freeze
+   75  pip install -r requirements.txt
+   76  pip freeze
+   77  ls
+   78  run.bat
+   79  python manage.py runserver
+   80  python3 manage.py runserver
+   81  ды
+   82  ls
+   83  nano geekshop/settings.py
+   84  systemctl status postgresql
+   85  mc
+   86  systemctl restart postgresql
+   87  systemctl status postgresql
+   88  mc
+   89  python manage.py migrate
+   90  python3 manage.py migrate
+   91  pip install psycorg2
+   92  pip3 install psycorg2
+   93  pip3 install psycorg2-binary
+   94  pip install psycopg2-binary
+   95  pip freeze
+   96  python manage.py migrate
+   97  pip install psycopg2
+   98  python manage.py runserver
+   99  y
+  100  python manage.py migrate
+  101  pip uninstal psycopg2-binary
+  102  pip uninstall psycopg2-binary
+  103  pip uninstal psycopg2
+  104  pip install psycopg2
+  105  pip install psycopg2-binary
+  106  python manage.py migrate
+  107  python manage.py makemigrations
+  108  python manage.py migrate
+  109  mc
+  110  python manage.py makemigrations
+  111  python manage.py migrate
+  112  mc
+  113  pip install psycopg2
+  114  apt install postgresql-server-dev-X.Y
+  115  pip install psycopg2
+  116  systemctl postgresql status
+  117  systemctl status postgresql
+  118  systemctl status postgresql-server-dev-X.Y
+  119  mc
+  120  python manage.py migrate
+  121  mc
+  122  python manage.py runserver
+  123  pip install gunicorn
+  124  ls /etc/systemd/system/
+  125  ls la /etc/systemd/system/
+  126  ls -la /etc/systemd/system/
+  127  nano /etc/systemd/system/gunicorn.service
+  128  systemctl enable gunicorn
+  129  systemctl status gunicorn
+  130  systemctl start gunicorn
+  131  systemctl status gunicorn
+  132  nano /etc/systemd/system/gunicorn.service
+  133  systemctl start gunicorn
+  134  systemctl daemon-reload
+  135  systemctl start gunicorn
+  136  systemctl status gunicorn
+  137  ls
+  138  pwd
+  139  nano /etc/systemd/system/gunicorn.service
+  140  systemctl daemon-reload
+  141  systemctl status gunicorn
+  142  systemctl start gunicorn
+  143  systemctl status gunicorn
+  144  pwd
+  145  ls
+  146  cd ./geekshop/
+  147  pwd
+  148  ls
+  149  cd ..
+  150  ls
+  151  cd ./django_2.2/
+  152  ls
+  153  nano /etc/systemd/system/gunicorn.service
+  154  systemctl daemon-reload
+  155  systemctl start gunicorn
+  156  systemctl status gunicorn
+  157  systemctl stop gunicorn
+  158  systemctl disable gunicorn
+  159  systemctl enable gunicorn
+  160  systemctl start gunicorn
+  161  systemctl status gunicorn
+  162  nano /etc/systemd/system/gunicorn.service
+  163  sudo systemctl enable gunicorn
+  164  sudo systemctl start gunicorn
+  165  sudo systemctl status gunicorn
+  166  systemctl daemon-reload
+  167  sudo systemctl start gunicorn
+  168  sudo systemctl status gunicorn
+  169  nano /etc/systemd/system/gunicorn.service
+  170  systemctl daemon-reload
+  171  sudo systemctl start gunicorn
+  172  sudo systemctl status gunicorn
+  173  source django_2.2/bin/activate
+  174  cd /var/www/html
+  175  ls
+  176  cd ./Django_optimization_tool/
+  177  ls
+  178  source django_2.2/bin/activate
+  179  sudo nano /etc/systemd/system/gunicorn.service
+  180  mc
+  181  python manage.py fill_db
+  182  python manage.py update_db
+  183  sudo mcedit /etc/nginx/sites-available/geekshop
+  184  sudo nano /etc/nginx/sites-available/geekshop
+  185  ls
+  186  ls ./geekshop/
+  187  sudo ln -s /etc/nginx/sites-available/geekshop /etc/nginx/sites-enabled
+  188  sudo nginx -t
+  189  systemctl restart nginx
+  190  systemctl status nginx
+  191  ls /var/log/nginx
+  192  cat /var/log/nginx/access.log 
+  193  cat /var/log/nginx/error.log 
+  194  tail -f /var/log/nginx/error.log
+  195  mc
+  196  ls -al
+  197  chmod -R 755 geekshop/
+  198  ls -al
+  199  nano /etc/systemd/system/gunicorn.service
+  200  systemctl daemon-reload
+  201  systemctl restart gunicorn
+  202  python manage.py runserver
+  203  mc
+  204  ls
+  205  cd ..
+  206  ls
+  207  mv ./Django_optimization_tool/ ./geekshop/
+  208  ls
+  209  cd ./geekshop/
+  210  mc
+  211  systemctl daemon-reload
+  212  systemctl restart gunicorn
+  213  systemctl restart nginx
+  214  mc
+  215  ls
+  216  sudo nginx -t
+  217  python manage.py runserver
+  218  ls
+  219  python3 manage.py runserver
+  220  pip freeze
+  221  pip3 freeze
+  222  source django_2.2/bin/deactivate
+  223  django_2.2\scripts\deactivate
+  224  ls
+  225  ls ./django_2.2/
+  226  ./django_2.2/bin/deactivate
+  227  source /django_2.2/bin/deactivate
+  228  source ./django_2.2/bin/deactivate
+  229  cd ./django_2.2/
+  230  ls
+  231  cd ./bin/
+  232  ls
+  233  deactivate
+  234  cd ..
+  235  ls
+  236  pip freeze
+  237  pip3 freeze
+  238  virtualenv --relocate django_2.2
+  239  virtualenv --relocatable django_2.2
+  240  virtualenv --version
+  241  virtualenv --relocatable django_2.2
+  242  mc
+  243  virtualenv --relocatable ENV
+  244  source django_2.2/bin/activate
+  245  virtualenv --relocatable ENV
+  246  pip freeze
+  247  pip3 freeze
+  248  pip3 install -r requirements.txt 
+  249  pip freeze
+  250  pip3 freeze
+  251  pip install psycopg2
+  252  pip3 install psycopg2
+  253  sudo apt-get install python3-dev
+  254  systemctl restart gunicorn
+  255  systemctl restart nginx
+  256  mc
+  257  systemctl daemon-reload
+  258  systemctl restart gunicorn
+  259  systemctl restart nginx
+  260  systemctl status gunicorn
+  261  ls
+  262  ls ./django_2.2/
+  263  pip3 freeze
+  264  apt install postgresql postgresql-contrib
+  265  systemctl status nginx
+  266  pip3 install gunicorn\
+  267  pip3 install gunicorn
+  268  ls /djnago_2.2/bin
+  269  ls
+  270  ls ./django_2.2
+  271  ls ./django_2.2/bin
+  272  systemctl daemon-reload
+  273  systemctl restart gunicorn
+  274  systemctl status gunicorn
+  275  systemctl start gunicorn
+  276  systemctl status gunicorn
+  277  mc
+  278  sudo systemctl enable gunicorn
+  279  sudo systemctl start gunicorn
+  280  sudo systemctl status gunicorn
+  281  mc
+  282  cd ./django_2.2/bin
+  283  pwd
+  284  mc
+  285  systemctl daemon-reload
+  286  systemctl restart gunicorn
+  287  sudo systemctl status gunicorn
+  288  python manage.py runserver
+  289  python3 manage.py runserver
+  290  cd ..
+  291  python3 manage.py runserver
+  292  python3 manage.py migrate
+  293  sudo apt install python3-dev libpq-dev
+  294  pip3 install psycopg2
+  295  python3 manage.py migrate
+  296  python3 manage.py makemigrations
+  297  python3 manage.py migrate
+  298  sudo systemctl status gunicorn
+  299  sudo systemctl restart gunicorn
+  300  sudo systemctl status gunicorn
+  301  systemctl daemon-reload
+  302  sudo systemctl restart gunicorn
+  303  sudo systemctl status gunicorn
+  304  pip3 freeze
+  305  source django_2.2/bin/activate
+  306  cd /var/html/geekshop/
+  307  cd /var/www/html/geekshop/
+  308  source django_2.2/bin/activate
+  309  systemctl status gunicorn
+  310  systemctl restart gunicorn
+  311  systemctl status gunicorn
+  312  mc
+  313  pip3 freeze
+  314  deactivate
+  315  ls
+  316  rm -r ./django_2.2/
+  317  ls
+  318  pip freeze
+  319  pip3 freeze
+  320  virtualenv django_2.2
+  321  source django_2.2/bin/activate
+  322  pip3 virtualenv django_2.2
+  323  ls
+  324  pip3 freeze
+  325  python3 virtualenv django_2.2
+  326  virtualenv django_2.2
+  327  sudo apt install python3-pip
+  328  pip3 install virtualenv
+  329  sudo apt install virtualenv
+  330  source django_2.2/bin/activate
+  331  virtualenv django_2.2
+  332  virtualenv --version
+  333  virtualenv
+  334  virtualenv django_2.0
+  335  ls
+  336  python manage.py runserver
+  337  python3 manage.py runserver
+  338  virtualenv django_2.2
+  339  pip3 unistall virtualenv
+  340  pip3 uninstall virtualenv
+  341  pip3 install virtualenv
+  342  pip3 uninstall virtualenv
+  343  mc
+  344  pip3 uninstall virtualenv
+  345  pip3 install virtualenv
+  346  virtualenv django_2.2
+  347  ls
+  348  source django_2.2/bin/activate
+  349  pip freeze
+  350  pip3 freeze
+  351  pip install -r requirements.txt 
+  352  pip install psycopg2-binary
+  353  python manage.py migrate
+  354  python manage.py makemigrations
+  355  python manage.py migrate
+  356  ls /etc/systemd/system
+  357  pip freeze
+  358  pip uninstall gunicorn
+  359  rm /etc/systemd/system/gunicorn.service
+  360  ls /etc/systemd/system
+  361  systemctl status nginx
+  362  pip freeze
+  363  pip install gunicorn
+  364  pip freeze
+  365  sudo nano /etc/systemd/system/gunicorn.service
+  366  mc
+  367  sudo nano /etc/systemd/system/gunicorn.service
+  368  ьс
+  369  mc
+  370  systemctl enable gunicorn
+  371  systemctl start gunicorn
+  372  systemctl status gunicorn
+  373  systemctl restart gunicorn
+  374  systemctl status gunicorn
+  375  mc
+  376  sudo nano /etc/nginx/sites-available/geekshop
+  377  ls /etc/nginx/sites-enabled/
+  378  nano /etc/nginx/sites-enabled/geekshop
+  379  nginx -t
+  380  systemctl restart nginx
+  381  cat /var/log/nginx/error.log 
+  382  clear
+  383  mc
+  384  ls -al
+  385  cd ./geekshop/
+  386  ls -al
+  387  cd ..
+  388  mc
+  389  systemctl restart gunicorn
+  390  systemctl daemon-reload
+  391  systemctl restart gunicorn
+  392  systemctl status gunicorn
+  393  mc
+  394  ды
+  395  ls
+  396  cd ..
+  397  chmod -R 755 geekshop/
+  398  systemctl restart gunicorn
+  399  systemctl status gunicorn
+  400  ls
+  401  cd ./geekshop/
+  402  ls
+  403  cd ./media
+  404  ls
+  405  cd ..
+  406  chmod -R 755 geekshop/
+  407  cd ./geekshop/
+  408  systemctl restart gunicorn
+  409  systemctl status gunicorn
+  410  git pull origin home_work_5
+  411  git commit -am "Пятое домашнее задание"
+  412  git pull origin home_work_5
+  413  git status
+  414  git add .
+  415  git commit -m "Пятое домашнее задание"
+  416  history
+  417  history > commands.txt
