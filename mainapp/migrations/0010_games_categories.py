@@ -13,6 +13,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='games',
             name='categories',
-            field=models.CharField(choices=[(None, 'Выберите категорию'), ('a', 'action'), ('s', 'shooter'), ('f', 'fighting')], default='Some category', max_length=1),
+            field=models.CharField(choices=[(None, 'Выберите категорию'), ('a', 'action'), ('s', 'shooter'), ('f', 'fighting')], default='Some category', max_length=100),
         ),
     ]
