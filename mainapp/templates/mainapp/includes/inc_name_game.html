@@ -1,0 +1,16 @@
+{% load static %}
+{% load my_tags %}
+
+
+<ul class="gallery-menu">
+    {% for game in object_list %}
+        <li>
+            <div class="name-game"><a href="{% url 'gallery:game' game.pk %}">
+                <img class="game_image" src="{{ game.image|media_folder_products }}"  alt='{{ game.name }}'></a>
+                <div class="gallery-name-buy"><p>{{ game.name }}</p>
+                    <a href="{% url 'basket:add' game.pk %}"><input class="gallery-buy" type="button" value="Buy"></a>
+                </div>
+            </div>
+        </li>
+    {% endfor %}
+</ul>
