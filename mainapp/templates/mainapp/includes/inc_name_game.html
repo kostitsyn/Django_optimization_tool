@@ -7,9 +7,11 @@
         <li>
             <div class="name-game"><a href="{% url 'gallery:game' game.pk %}">
                 <img class="game_image" src="{{ game.image|media_folder_products }}"  alt='{{ game.name }}'></a>
-                <div class="gallery-name-buy"><p>{{ game.name }}</p>
+                <div class="gallery-name-buy"><p>{{ game.name }}</p></div>
+                <div class="gallery-name-quantity"><p>Количество: {{ game.quantity }}</p></div>
+                {% if game.quantity %}
                     <a href="{% url 'basket:add' game.pk %}"><input class="gallery-buy" type="button" value="Buy"></a>
-                </div>
+                {% endif %}
             </div>
         </li>
     {% endfor %}

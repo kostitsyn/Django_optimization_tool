@@ -11,6 +11,7 @@
         <span class = 'game_name'>Название игры</span>
         <span class = 'category_name'>Жанр</span>
         <span class = 'product_price'>Цена</span>
+        <span class = 'product_price'>Количество на складе</span>
         <span class = 'product_quantity'>Количество</span>
         <span class = 'product_cost'>Общая стоимость</span>
     </div>
@@ -21,7 +22,13 @@
             <span class = 'game_name'>{{ item.product.name }}</span>
             <span class = 'category_name'>{{ item.product.game_category.name }}</span>
             <span class = 'product_price'>{{ item.product.price}}</span>
-            <input name = '{{ item.pk }}' value = '{{ item.quantity }}' min = '0' type="number"/>
+            <span class = 'product_price'>{{ item.product.quantity }}</span>
+            {% if item.product.quantity %}
+                <input name = '{{ item.pk }}' value = '{{ item.quantity }}' min = '0' type="number"/>
+            {% else %}
+                <div class="attention-text">Больше товара на складе нет!</div>
+                <input name = '{{ item.pk }}' value = '{{ item.quantity }}' min = '0' max = '{{ item.quantity }}' type="number"/>
+            {% endif %}
             <span class = 'product_cost'>{{ item.get_product_cost }}</span>
             <a href = '{% url "basket:remove" item.pk %}' class = 'btn btn-round btn-dark'>Delete</a>
         </div>

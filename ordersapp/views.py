@@ -74,18 +74,6 @@ class OrderItemsCreateView(CreateView):
 
         return super(OrderItemsCreateView, self).form_valid(form)
 
-#
-# class OrderUpdate(UpdateView):
-#     model = OrderItem
-#     template_name = 'ordersapp/order_form.html'
-#
-#     def get(self, request, *args, **kwargs):
-#         order_pk = self.kwargs.get('pk', None)
-#         print(f'this{order_pk}')
-#         print(request)
-#         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
-
 
 class OrderItemsUpdateView(UpdateView):
     model = Order

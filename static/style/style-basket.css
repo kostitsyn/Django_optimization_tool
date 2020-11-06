@@ -1,6 +1,6 @@
 .basket_container {
     margin: 25px auto;
-    width: 900px;
+    width: 1200px;
 }
 
 .basket_container .head {
@@ -20,8 +20,17 @@
     position: relative;
     display: block;
     float: left;
+    margin-left: 3em;
 }
 
+.attention-text {
+    color: red;
+    display: inline-block;
+    position: absolute;
+    top: 85px;
+    right: 230px;
+    font-size: x-large;
+}
 
 .basket_list input[type="number"] {
     width: 3em;
@@ -29,6 +38,7 @@
     display: block;
     float: left;
     margin-right: 35px;
+    margin-left: 3em;
 }
 
 .basket_list span.category_name,

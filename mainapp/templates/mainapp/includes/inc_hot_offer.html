@@ -4,11 +4,11 @@
 <span class="hot_offer">Горячее предложение!</span>
 <ul class="hot_product">
     <li>
-        <div class="name-game">
-            <a href="{% url 'gallery:game' hot_product.pk %}"><img class="hot_image" src="{{ hot_product.image|media_folder_products }}"  alt='{{ hot_product.name }}'></a>
-            <div class="gallery-name-buy"><p>{{ hot_product.name }}</p>
-                <a href="{% url 'basket:add' hot_product.pk %}"><input class="gallery-buy" type="button" value="Buy"></a>
-            </div>
+        <div class="name-game"><a href="{% url 'gallery:game' hot_product.pk %}">
+            <img class="game_image" src="{{ hot_product.image|media_folder_products }}"  alt='{{ hot_product.name }}'></a>
+            <div class="gallery-name-buy"><p>{{ hot_product.name }}</p></div>
+            <div class="gallery-name-quantity"><p>Количество: {{ hot_product.quantity }}</p></div>
+            <a href="{% url 'basket:add' hot_product.pk %}"><input class="gallery-buy" type="button" value="Buy"></a>
         </div>
     </li>
 </ul>

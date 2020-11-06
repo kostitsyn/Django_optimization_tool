@@ -108,32 +108,24 @@ class BasketUpdateView(UpdateView):
 
     def get(self, request, *args, **kwargs):
         if request.is_ajax():
-            print('hello')
             quantity = int(self.kwargs.get('quantity', None))
             basket_pk = self.kwargs.get('pk', None)
             new_basket_item = Basket.get_item(basket_pk)
-            print(basket_pk)
-            print(new_basket_item.product.quantity)
-            if quantity <= new_basket_item.product.quantity:
-                if quantity > 0:
-                    new_basket_item.quantity = quantity
-                    new_basket_item.save()
-                else:
-                    new_basket_item.delete()
-
-                basket_items = Basket.objects.filter(user=request.user)
-                content = {
-                    'object_list': basket_items,
-                    'user': request.user.first_name,
-                }
-
-                result = render_to_string('basketapp/basket.html', content)
-
-                return JsonResponse({'result': result})
+            if quantity > 0:
+                new_basket_item.quantity = quantity
+                new_basket_item.save()
             else:
-                return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+                new_basket_item.delete()
 
+            basket_items = Basket.objects.filter(user=request.user)
+            content = {
+                'object_list': basket_items,
+                'user': request.user.first_name,
+            }
 
+            result = render_to_string('basketapp/basket.html', content)
+
+            return JsonResponse({'result': result})
 
 
 # @login_required
