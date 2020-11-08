@@ -10,7 +10,7 @@ window.onload = function() {
 
     for (let i=0; i < TOTAL_FORMS; i++){
         let _quantity = parseInt($('input[name="orderitems-' + i + '-quantity"]').val());
-        let _price = parseFloat($('.orderitems-' + i + '-price').text().replace(',', '.'));
+        let _price = (parseFloat($('.orderitems-' + i + '-price').text().replace(',', '.'))).toFixed(2);
         quantity_arr[i] = _quantity;
         if (_price) {
             price_arr[i] = _price;
@@ -28,31 +28,31 @@ window.onload = function() {
         $('.order_total_cost').html(Number(order_total_cost.toFixed(2).toString()));
     }
 
-    $('.order_form').on('click', 'input[type="number"]', function(event) {
+    $('.order_form').on('click keyup', 'input[type="number"]', function (event) {
 
         let target = event.target;
         let orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-quantity', ''));
 
         if (price_arr[orderitem_num]) {
             let orderitem_quantity = parseInt(target.value);
-            let delta_quantity = orderitem_quantity - quantity_arr[orderitem_num];
-            quantity_arr[orderitem_num] = orderitem_quantity;
+
+            let current_tr = $('tr').eq(orderitem_num + 1);
+            let quantity_storage = parseInt(current_tr.find('td:eq(3)')[0].innerText);
+
+            $(target).attr('max', quantity_storage);
+
+            if (quantity_storage >= orderitem_quantity) {
+
+                var delta_quantity = orderitem_quantity - quantity_arr[orderitem_num];
+                quantity_arr[orderitem_num] = orderitem_quantity;
+            }else {
+                delta_quantity = 0;
+                quantity_arr[orderitem_num] = quantity_storage;
+            }
             orderSummaryUpdate(price_arr[orderitem_num], delta_quantity);
         }
     });
 
-    $('.order_form').on('keyup', 'input[type="number"]', function(event) {
-
-        let target = event.target;
-        let orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-quantity', ''));
-
-        if (price_arr[orderitem_num]) {
-            let orderitem_quantity = parseInt(target.value);
-            let delta_quantity = orderitem_quantity - quantity_arr[orderitem_num];
-            quantity_arr[orderitem_num] = orderitem_quantity;
-            orderSummaryUpdate(price_arr[orderitem_num], delta_quantity);
-        }
-    });
 
     $('.order_form').on('click', 'input[type="checkbox"]', function(event) {
 
@@ -67,11 +67,11 @@ window.onload = function() {
         orderSummaryUpdate(price_arr[orderitem_num], delta_quantity);
     });
 
-    $('.order_form select').change(function(event) {
+    // $('.order_form select').change(function(event) {
+    $('.order_form').on('change', 'select', function(event) {
         let target = event.target;
         let orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-product', ''));
-        // let orderitem_product_pk = target.options[target.selectedIndex].value;
-        let orderitem_product_pk = target.selectedIndex.toString();
+        let orderitem_product_pk = target.options[target.selectedIndex].value;
 
         if (orderitem_product_pk) {
             $.ajax({
@@ -83,11 +83,14 @@ window.onload = function() {
                             quantity_arr[orderitem_num] = 0;
                         }
                         let price_html = '<span>' + data.price.toString().replace('.', ',') + '</span>';
-                        let current_tr = $('.order_form table').find('tr:eq(' + (orderitem_num + 1) + ')');
-                        current_tr.find('td:eq(2)').html(price_html);
+                        let current_tr_price = $('.order_form table').find('tr:eq(' + (orderitem_num + 1) + ')');
+                        current_tr_price.find('td:eq(2)').html(price_html);
 
-                        if (isNaN(current_tr.find('input[type="number"]').val())) {
-                            current_tr.find('input[type="number"]').val(0);
+                        let quantity_storage = '<span>' + data.quantity_storage.toString() + '</span>';
+                        let current_tr_quantity = $('.order_form table').find('tr:eq(' + (orderitem_num + 1) + ')');
+                        current_tr_quantity.find('td:eq(3)').html(quantity_storage);
+                        if ((current_tr_price.find('input[type="number"]').val()) === '') {
+                            current_tr_price.find('input[type="number"]').val(0);
                         }
                         orderSummaryRecalc();
 

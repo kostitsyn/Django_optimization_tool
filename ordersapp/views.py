@@ -37,12 +37,13 @@ class OrderItemsCreateView(CreateView):
     def get_context_data(self, **kwargs):
         context_data = super(OrderItemsCreateView, self).get_context_data(**kwargs)
         context_data['title'] = 'создание заказа'
-        OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=2)
+        OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=1)
 
         if self.request.POST:
             formset = OrderFormSet(self.request.POST)
         else:
             basket_item = Basket.get_items(self.request.user)
+
             if len(basket_item):
                 OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=len(basket_item))
                 formset = OrderFormSet()
@@ -50,6 +51,7 @@ class OrderItemsCreateView(CreateView):
                     form.initial['product'] = basket_item[num].product
                     form.initial['quantity'] = basket_item[num].quantity
                     form.initial['price'] = basket_item[num].product.price
+                    form.initial['quantity_storage'] = basket_item[num].product.quantity
             else:
                 formset = OrderFormSet()
 
@@ -92,13 +94,13 @@ class OrderItemsUpdateView(UpdateView):
             for form in formset:
                 if form.instance.pk:
                     form.initial['price'] = form.instance.product.price
+                    form.initial['quantity_storage'] = form.instance.product.quantity
         context_data['orderitems'] = formset
         return context_data
 
     def form_valid(self, form):
         context = self.get_context_data()
         orderitems = context['orderitems']
-
         self.object = form.save()
         if orderitems.is_valid():
             orderitems.instance = self.object
@@ -154,12 +156,12 @@ def product_quantity_update_delete(sender, instance, **kwargs):
     instance.product.save()
 
 
-def get_product_price(request, pk):
+def get_product_price_quantity(request, pk):
     if request.is_ajax():
         product = Games.objects.filter(pk=int(pk)).first()
         if product:
-            return JsonResponse({'price': product.price})
+            return JsonResponse({'price': product.price, 'quantity_storage': product.quantity})
         else:
-            return JsonResponse({'price': 0})
+            return JsonResponse({'price': 0, 'quantity_storage': 0})
 
 
