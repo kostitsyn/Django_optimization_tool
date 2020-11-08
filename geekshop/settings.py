@@ -31,9 +31,9 @@ else:
     SECRET_KEY = '123'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
-DEBUG = False
+# DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
