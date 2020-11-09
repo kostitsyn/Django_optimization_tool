@@ -21,15 +21,15 @@
 {#        новый заказ#}
 {#      </a>#}
 {#    </button>#}
-    <div class="paginator">
-      {% if page_obj.has_previous %}
-        <a href="{% url 'admin:orders' page_obj.previous_page_number %}"><</a>
-      {% endif %}
-      <span class="current"> страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
-      {% if page_obj.has_next %}
-        <a href="{% url 'admin:orders' page_obj.next_page_number %}">></a>
-      {% endif %}
-    </div>
+{#    <div class="paginator">#}
+{#      {% if page_obj.has_previous %}#}
+{#        <a href="{% url 'admin:orders' page_obj.previous_page_number %}"><</a>#}
+{#      {% endif %}#}
+{#      <span class="current"> страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>#}
+{#      {% if page_obj.has_next %}#}
+{#        <a href="{% url 'admin:orders' page_obj.next_page_number %}">></a>#}
+{#      {% endif %}#}
+{#    </div>#}
 
     {% for item in object_list %}
                <tr>
