@@ -16,11 +16,11 @@
        </thead>
        <tbody>
   <div class="users_list">
-    <button class="new_user">
-      <a href={% url 'order:order_create' %}>
-        новый заказ
-      </a>
-    </button>
+{#    <button class="new_user">#}
+{#      <a href={% url 'order:order_create' %}>#}
+{#        новый заказ#}
+{#      </a>#}
+{#    </button>#}
     <div class="paginator">
       {% if page_obj.has_previous %}
         <a href="{% url 'admin:orders' page_obj.previous_page_number %}"><</a>
