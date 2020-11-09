@@ -68,6 +68,7 @@ window.onload = function() {
     });
 
     $('.order_form select').change(function(event) {
+    // $('.order_form').on('change', 'select',function(event) {
         let target = event.target;
         let orderitem_num = parseInt(target.name.replace('orderitems-', '').replace('-product', ''));
         // let orderitem_product_pk = target.options[target.selectedIndex].value;
