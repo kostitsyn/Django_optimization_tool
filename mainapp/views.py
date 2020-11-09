@@ -166,7 +166,7 @@ class ByCategoryListView(ListView):
 
     def get_queryset(self):
         category_pk = self.kwargs.get('pk', None)
-        games_by_category = Games.objects.filter(game_category=category_pk)
+        games_by_category = Games.objects.filter(game_category=category_pk).select_related('game_category')
         return games_by_category
 
     def get_context_data(self, **kwargs):
@@ -178,9 +178,9 @@ class ByCategoryListView(ListView):
             context_data['category'] = {'name': 'все', 'pk': category_pk}
         else:
             context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
-        context_data['links_menu'] = GameCategories.objects.all()
+        context_data['links_menu'] = GameCategories.objects.all().select_related()
         context_data['hot_product'] = get_hot_product()
-        context_data['games_discount'] = DiscountGames.objects.all()
+        context_data['games_discount'] = DiscountGames.objects.all().select_related()
         return context_data
 
 
@@ -293,7 +293,7 @@ class ProductDetailView(DetailView):
         category = Games.objects.get(pk=game_pk).game_category.pk
         # context_data['game'] = Games.objects.get(pk=game_pk)
         context_data['object_list'] = Games.objects.filter(game_category=category).exclude(pk=game_pk).order_by('?').\
-                                          select_related()[:4]
+                                          select_related('game_category')[:4]
 
         context_data['title'] = 'товары'
         context_data['css_file'] = 'style-product-page.css'
