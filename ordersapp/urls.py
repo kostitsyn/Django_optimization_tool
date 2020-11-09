@@ -30,5 +30,5 @@ urlpatterns = [
     path('delete/<pk>/', ordersapp.OrderItemsDeleteView.as_view(), name='order_delete'),
     path('forming/<pk>/', ordersapp.order_forming_complete, name='order_forming_complete'),
 
-    path('product/<pk>/price/', ordersapp.get_product_price),
+    path('product/<pk>/price/', ordersapp.get_product_price_quantity),
 ]

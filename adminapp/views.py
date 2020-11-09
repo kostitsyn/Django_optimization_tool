@@ -602,7 +602,9 @@ class OrderEditStatusView(UpdateView):
         new_item_pk = self.kwargs.get('pk', None)
         new_status = self.kwargs.get('status', None)
         object = Order.objects.get(pk=new_item_pk)
-        object.status = new_status
+        for i in Order.ORDER_STATUSES:
+            if new_status in i:
+                object.status = i[0]
         object.save()
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 

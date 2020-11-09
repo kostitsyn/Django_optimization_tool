@@ -17,7 +17,9 @@ class OrderForm(forms.ModelForm):
 
 
 class OrderItemForm(forms.ModelForm):
+
     price = forms.CharField(label='цена', required=False)
+    quantity_storage = forms.IntegerField(label='Количество на складе', required=False)
 
     class Meta:
         model = OrderItem

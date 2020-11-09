@@ -124,6 +124,7 @@ class GalleryListView(ListView):
         context_data['css_file'] = 'style-gallery.css'
         context_data['hot_product'] = hot_product
         context_data['links_menu'] = GameCategories.objects.all()
+        context_data['games_discount'] = DiscountGames.objects.all()
         return context_data
 
 
@@ -179,6 +180,7 @@ class ByCategoryListView(ListView):
             context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
         context_data['links_menu'] = GameCategories.objects.all()
         context_data['hot_product'] = get_hot_product()
+        context_data['games_discount'] = DiscountGames.objects.all()
         return context_data
 
 
