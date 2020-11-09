@@ -12,3 +12,6 @@ project/settings.py
 .DS_Store
 env
 ./.env
+
+static/admin/
+static/debug_toolbar/
