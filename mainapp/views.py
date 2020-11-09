@@ -290,10 +290,10 @@ class ProductDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         game_pk = self.kwargs.get('pk', None)
-        category = Games.objects.get(pk=game_pk).select_related('game_category').game_category.pk
+        category = Games.objects.get(pk=game_pk).game_category.pk
         # context_data['game'] = Games.objects.get(pk=game_pk)
         context_data['object_list'] = Games.objects.filter(game_category=category).exclude(pk=game_pk).order_by('?').\
-                                          select_related('game_category')[:4]
+                                          select_related()[:4]
 
         context_data['title'] = 'товары'
         context_data['css_file'] = 'style-product-page.css'
