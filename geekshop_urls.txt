@@ -1,9 +1,4 @@
 /	mainapp.views.MainListView	main
-/__debug__/render_panel/	debug_toolbar.views.render_panel	djdt:render_panel
-/__debug__/sql_explain/	debug_toolbar.panels.sql.views.sql_explain	djdt:sql_explain
-/__debug__/sql_profile/	debug_toolbar.panels.sql.views.sql_profile	djdt:sql_profile
-/__debug__/sql_select/	debug_toolbar.panels.sql.views.sql_select	djdt:sql_select
-/__debug__/template_source/	debug_toolbar.panels.templates.views.template_source	djdt:template_source
 /about/	mainapp.views.AboutTemplateView	about
 /admin/categories/create/	adminapp.views.ProductCategoryCreateView	admin:category_create
 /admin/categories/delete/<int:pk>/	adminapp.views.ProductCategoryDeleteView	admin:category_delete
