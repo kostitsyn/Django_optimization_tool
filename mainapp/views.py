@@ -14,8 +14,7 @@ from mainapp.models import Games, Contacts, DiscountGames, GameCategories
 
 
 def get_hot_product():
-    # games_list = Games.objects.all().exclude(quantity=0)
-    games_list = Games.objects.all().exclude(quantity=0).select_related()
+    games_list = Games.objects.all().exclude(quantity=0)
     return random.sample(list(games_list), 1)[0]
 
 
@@ -36,7 +35,7 @@ class MainListView(ListView):
     template_name = 'mainapp/index.html'
 
     def get_queryset(self):
-        game_list = list(Games.objects.all())
+        game_list = list(Games.objects.all().select_related())
         result_list = get_required_obj(game_list, 4)
         return result_list
 
@@ -298,7 +297,8 @@ class ProductDetailView(DetailView):
         # context_data['game'] = Games.objects.get(pk=game_pk)
         context_data['object_list'] = Games.objects.filter(game_category=category).exclude(pk=game_pk).order_by('?')[:4]
         # context_data['object_list'] = Games.objects.filter(game_category=category).exclude(pk=game_pk).order_by('?').select_related('game_category')[:4]
-
+        print('hello')
+        print(context_data['object_list'].query)
         context_data['title'] = 'товары'
         context_data['css_file'] = 'style-product-page.css'
         context_data['contact_data'] = Contacts.objects.get(pk=1)
