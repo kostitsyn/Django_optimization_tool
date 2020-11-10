@@ -435,7 +435,7 @@ class ProductDetailView(DetailView):
     template_name = 'adminapp/product.html'
 
     def get_context_data(self, **kwargs):
-        self.object = self.get_object()
+        self.object = self.get_object().select_related()
         context_data = super().get_context_data(**kwargs)
         context_data['title'] = 'админка/игра'
         context_data['css_file'] = 'style-admin.css'
