@@ -25,7 +25,6 @@ class OrderListView(ListView):
     def dispatch(self, *args, **kwargs):
         return super().dispatch(*args, **kwargs)
 
-
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user, is_active=True)
 
