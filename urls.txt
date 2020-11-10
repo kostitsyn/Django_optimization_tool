@@ -1,37 +1,37 @@
-http://185.20.227.181/	mainapp.views.MainListView	main
-http://185.20.227.181/about/	mainapp.views.AboutTemplateView	about
-http://185.20.227.181/admin/categories/create/	adminapp.views.ProductCategoryCreateView	admin:category_create
-http://185.20.227.181/admin/categories/delete/1/	adminapp.views.ProductCategoryDeleteView	admin:category_delete
-http://185.20.227.181/admin/categories/read/1/	adminapp.views.ProductCategoriesListView	admin:categories
-http://185.20.227.181/admin/categories/update/1/	adminapp.views.ProductCategoryUpdateView	admin:category_update
-http://185.20.227.181/admin/orders/read/1/	adminapp.views.OrdersListView	admin:orders
-http://185.20.227.181/admin/products/create/category/1/	adminapp.views.ProductCreateView	admin:product_create
-http://185.20.227.181/admin/products/delete/1/	adminapp.views.ProductDeleteView	admin:product_delete
-http://185.20.227.181/admin/products/read/1/	adminapp.views.ProductDetailView	admin:product_read
-http://185.20.227.181/admin/products/read/category/1/1/	adminapp.views.ProductsListView	admin:products
-http://185.20.227.181/admin/products/update/1/	adminapp.views.ProductUpdateView	admin:product_update
-http://185.20.227.181/admin/users/create/	adminapp.views.UserCreateView	admin:user_create
-http://185.20.227.181/admin/users/delete/1/	adminapp.views.UserDeleteView	admin:user_delete
-http://185.20.227.181/admin/users/read/1/	adminapp.views.UsersListView	admin:users
-http://185.20.227.181/admin/users/update/1/	adminapp.views.UserUpdateView	admin:user_update
-http://185.20.227.181/auth/edit/	authapp.views.edit	auth:edit
-http://185.20.227.181/auth/login/	authapp.views.login	auth:login
-http://185.20.227.181/auth/logout/	authapp.views.logout	auth:logout
-http://185.20.227.181/auth/register/	authapp.views.register	auth:register
-http://185.20.227.181/basket/	basketapp.views.BasketListView	basket:basket
-http://185.20.227.181/basket/add/1/	basketapp.views.basket_add	basket:add
-http://185.20.227.181/basket/edit/1/1/	basketapp.views.BasketUpdateView	basket:edit
-http://185.20.227.181/basket/remove/1/	basketapp.views.BasketDeleteView	basket:remove
-http://185.20.227.181/contacts/	mainapp.views.ContactsListView	contacts
-http://185.20.227.181/gallery/1/	mainapp.views.GalleryListView	gallery:gallery_main
-http://185.20.227.181/gallery/category/1/1/	mainapp.views.ByCategoryListView	gallery:category
-http://185.20.227.181/gallery/product/1/	mainapp.views.ProductDetailView	gallery:game
-http://185.20.227.181/news/	mainapp.views.NewsTemplateView	news
-http://185.20.227.181/order/	ordersapp.views.OrderListView	order:orders_list
-http://185.20.227.181/order/create/	ordersapp.views.OrderItemsCreateView	order:order_create
-http://185.20.227.181/order/delete/1/	ordersapp.views.OrderItemsDeleteView	order:order_delete
-http://185.20.227.181/order/forming/1/	ordersapp.views.order_forming_complete	order:order_forming_complete
-http://185.20.227.181/order/read/1/	ordersapp.views.OrderItemsReadView	order:order_read
-http://185.20.227.181/order/update/1/	ordersapp.views.OrderItemsUpdateView	order:order_update
-http://185.20.227.181/service/	mainapp.views.ServiceTemplateView	service
-http://185.20.227.181/team/	mainapp.views.TeamTemplateView	team
+http://185.20.227.181/
+http://185.20.227.181/about/
+http://185.20.227.181/admin/categories/create/
+http://185.20.227.181/admin/categories/delete/1/
+http://185.20.227.181/admin/categories/read/1/
+http://185.20.227.181/admin/categories/update/1/
+http://185.20.227.181/admin/orders/read/1/
+http://185.20.227.181/admin/products/create/category/1/
+http://185.20.227.181/admin/products/delete/1/
+http://185.20.227.181/admin/products/read/1/
+http://185.20.227.181/admin/products/read/category/1/1/
+http://185.20.227.181/admin/products/update/1/
+http://185.20.227.181/admin/users/create/
+http://185.20.227.181/admin/users/delete/1/
+http://185.20.227.181/admin/users/read/1/
+http://185.20.227.181/admin/users/update/1/
+http://185.20.227.181/auth/edit/
+http://185.20.227.181/auth/login/
+http://185.20.227.181/auth/logout/
+http://185.20.227.181/auth/register/
+http://185.20.227.181/basket/
+http://185.20.227.181/basket/add/1/
+http://185.20.227.181/basket/edit/1/1/
+http://185.20.227.181/basket/remove/1/
+http://185.20.227.181/contacts/
+http://185.20.227.181/gallery/1/
+http://185.20.227.181/gallery/category/1/1/
+http://185.20.227.181/gallery/product/1/
+http://185.20.227.181/news/
+http://185.20.227.181/order/
+http://185.20.227.181/order/create/
+http://185.20.227.181/order/delete/1/
+http://185.20.227.181/order/forming/1/
+http://185.20.227.181/order/read/1/
+http://185.20.227.181/order/update/1/
+http://185.20.227.181/service/
+http://185.20.227.181/team/
