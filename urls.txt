@@ -42,4 +42,4 @@ http://185.20.227.181/order/product/<pk>/price/	ordersapp.views.get_product_pric
 http://185.20.227.181/order/read/<pk>/	ordersapp.views.OrderItemsReadView	order:order_read
 http://185.20.227.181/order/update/<pk>/	ordersapp.views.OrderItemsUpdateView	order:order_update
 http://185.20.227.181/service/	mainapp.views.ServiceTemplateView	service
-http://185.20.227.181/team/	mainapp.views.TeamTemplateView	team
+http://185.20.227.181/team/	mainapp.views.TeamTemplateView	team1
