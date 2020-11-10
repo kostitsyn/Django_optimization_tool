@@ -14,7 +14,8 @@ from mainapp.models import Games, Contacts, DiscountGames, GameCategories
 
 
 def get_hot_product():
-    games_list = Games.objects.all().exclude(quantity=0)
+    # games_list = Games.objects.all().exclude(quantity=0)
+    games_list = Games.objects.all().exclude(quantity=0).select_related()
     return random.sample(list(games_list), 1)[0]
 
 
