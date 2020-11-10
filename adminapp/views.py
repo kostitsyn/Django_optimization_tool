@@ -401,7 +401,7 @@ class ProductsListView(ListView):
 
     def get_queryset(self):
         category_pk = self.kwargs.get('pk', None)
-        games_by_category = Games.objects.filter(game_category=category_pk)
+        games_by_category = Games.objects.filter(game_category=category_pk).select_related()
         return games_by_category
 
 
