@@ -401,7 +401,7 @@ class ProductsListView(ListView):
 
     def get_queryset(self):
         category_pk = self.kwargs.get('pk', None)
-        games_by_category = Games.objects.filter(game_category=category_pk).select_related()
+        games_by_category = Games.objects.filter(game_category=category_pk)
         return games_by_category
 
 
@@ -435,7 +435,7 @@ class ProductDetailView(DetailView):
     template_name = 'adminapp/product.html'
 
     def get_context_data(self, **kwargs):
-        self.object = self.get_object()
+        self.object = self.get_object().select_related()
         context_data = super().get_context_data(**kwargs)
         context_data['title'] = 'админка/игра'
         context_data['css_file'] = 'style-admin.css'
