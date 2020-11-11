@@ -136,6 +136,7 @@ class OrderItemsReadView(DetailView):
 
     def get_object(self, queryset=None):
         a = super().get_object(queryset=None)
+        print('hello')
         print(a)
         return a
 
