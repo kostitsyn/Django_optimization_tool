@@ -439,8 +439,8 @@ class ProductDetailView(DetailView):
         context_data = super().get_context_data(**kwargs)
         context_data['title'] = 'админка/игра'
         context_data['css_file'] = 'style-admin.css'
-        # context_data['game_category'] = GameCategories.objects.get(name=self.object.game_category)
-        context_data['game_category'] = GameCategories.objects.filter(name=self.object.game_category).select_related().first()
+        context_data['game_category'] = GameCategories.objects.get(name=self.object.game_category)
+        # context_data['game_category'] = GameCategories.objects.filter(name=self.object.game_category).select_related().first()
         return context_data
 
 
