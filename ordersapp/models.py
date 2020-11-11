@@ -85,7 +85,6 @@ class OrderItem(models.Model):
     @staticmethod
     def get_item(pk):
         return OrderItem.objects.get(pk=pk)
-        # return OrderItem.objects.filter(pk=pk).select_related().first()
 
     @property
     def get_product_cost(self):
