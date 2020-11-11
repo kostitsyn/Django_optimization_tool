@@ -23,7 +23,9 @@ class BasketListView(ListView):
         return super(BasketListView, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
-        basket_items = Basket.objects.filter(user=self.request.user).select_related('user', 'product')
+        basket_items = Basket.objects.filter(user=self.request.user)
+        # basket_items = Basket.objects.filter(user=self.request.user).select_related('user', 'product')
+        # basket_items = Basket.objects.filter(user=self.request.user).select_related('user', 'product')
         return basket_items
 
     def get_context_data(self, **kwargs):
