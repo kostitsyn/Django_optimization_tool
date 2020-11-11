@@ -33,7 +33,8 @@ class Games(models.Model):
 
     @staticmethod
     def get_items():
-        return Games.objects.filter(is_active=True).select_related().order_by('game_category', 'name')
+        return Games.objects.filter(is_active=True).order_by('game_category', 'name')
+        # return Games.objects.filter(is_active=True).select_related().order_by('game_category', 'name')
 
 
 class DiscountGames(models.Model):
