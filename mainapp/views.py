@@ -186,7 +186,7 @@ def gallery(request, page=1):
         'title': title,
         'css_file': 'style-gallery.css',
         'links_menu': links_menu,
-        'page_obj': products_paginator,
+        'object_list': products_paginator,
         'games_discount': result_list_discount,
         'hot_product': get_hot_product()
     }
@@ -261,7 +261,7 @@ def by_category(request, pk, page=1):
     content = {'title': title,
                'css_file': 'style-gallery.css',
                'links_menu': links_menu,
-               'games': products_paginator,
+               'object_list': products_paginator,
                'hot_product': get_hot_product(),
                'category': category,
                }

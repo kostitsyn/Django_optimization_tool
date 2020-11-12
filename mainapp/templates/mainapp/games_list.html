@@ -15,13 +15,22 @@
 	<div class="gallery clearfix">
 		<h3 class="gallery-header">Our Gallery</h3>
         {% include 'mainapp/includes/inc_hot_offer.html' %}
+<!--        <div class="paginator">-->
+<!--          {% if page_obj.has_previous %}-->
+<!--            <a href="{% url 'gallery:gallery_main' page_obj.previous_page_number %}"><</a>-->
+<!--          {% endif %}-->
+<!--          <span class="current"> страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>-->
+<!--          {% if page_obj.has_next %}-->
+<!--            <a href="{% url 'gallery:gallery_main' page_obj.next_page_number %}">></a>-->
+<!--          {% endif %}-->
+<!--        </div>-->
         <div class="paginator">
-          {% if page_obj.has_previous %}
+          {% if object_list.has_previous %}
             <a href="{% url 'gallery:gallery_main' page_obj.previous_page_number %}"><</a>
           {% endif %}
-          <span class="current"> страница {{ page_obj.number }} из {{ page_obj.paginator.num_pages }}</span>
-          {% if page_obj.has_next %}
-            <a href="{% url 'gallery:gallery_main' page_obj.next_page_number %}">></a>
+          <span class="current"> страница {{ object_list.number }} из {{ object_list.paginator.num_pages }}</span>
+          {% if object_list.has_next %}
+            <a href="{% url 'gallery:gallery_main' object_list.next_page_number %}">></a>
           {% endif %}
         </div>
 
