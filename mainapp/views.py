@@ -3,6 +3,7 @@ import time
 
 
 from django.contrib.auth.decorators import user_passes_test
+from django.core import cache
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
@@ -10,7 +11,18 @@ from django.views.generic import DetailView, ListView
 from django.views.generic.base import View, ContextMixin, TemplateView
 
 from basketapp.models import Basket
+from geekshop import settings
 from mainapp.models import Games, Contacts, DiscountGames, GameCategories
+
+def get_links_menu():
+    if settings.LOW_CACHE:
+        key = 'links_menu'
+        links_menu = cache.get(key)
+        if links_menu is None:
+            links_menu = GameCategories.objects.filter(is_active=True)
+        return links_menu
+    else:
+        return GameCategories.objects.filter(is_active=True)
 
 
 def get_hot_product():
@@ -123,7 +135,8 @@ class GalleryListView(ListView):
         context_data['title'] = 'галлерея'
         context_data['css_file'] = 'style-gallery.css'
         context_data['hot_product'] = hot_product
-        context_data['links_menu'] = GameCategories.objects.all()
+        # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        context_data['links_menu'] = get_links_menu()
         context_data['games_discount'] = DiscountGames.objects.all()
         return context_data
 
@@ -179,11 +192,10 @@ class ByCategoryListView(ListView):
             context_data['category'] = {'name': 'все', 'pk': category_pk}
         else:
             context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
-        context_data['links_menu'] = GameCategories.objects.all()
-        # context_data['links_menu'] = GameCategories.objects.all().select_related()
+        # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        context_data['links_menu'] = get_links_menu()
         context_data['hot_product'] = get_hot_product()
-        context_data['games_discount'] = DiscountGames.objects.all()
-        # context_data['games_discount'] = DiscountGames.objects.all().select_related()
+        context_data['games_discount'] = DiscountGames.objects.all(is_active=True)
         return context_data
 
 
