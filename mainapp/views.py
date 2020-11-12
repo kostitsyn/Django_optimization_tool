@@ -148,7 +148,14 @@ class GalleryListView(ListView):
         context_data['title'] = 'галлерея'
         context_data['css_file'] = 'style-gallery.css'
         context_data['hot_product'] = hot_product
-        context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        if settings.LOW_CACHE:
+            key = 'links_menu'
+            links_menu = cache.get(key)
+            if links_menu is None:
+                context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        else:
+            context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
         # context_data['links_menu'] = get_links_menu()
         context_data['games_discount'] = DiscountGames.objects.filter(is_active=True)
         return context_data
@@ -204,9 +211,24 @@ class ByCategoryListView(ListView):
         if category_pk == 0:
             context_data['category'] = {'name': 'все', 'pk': category_pk}
         else:
-            context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
+            # context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
             # context_data['category'] = get_category(category_pk)
-        context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+            if settings.LOW_CACHE:
+                key = f'category_{category_pk}'
+                category = cache.get(key)
+                if category is None:
+                    context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
+                    cache.set(key, category)
+            else:
+                context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
+        if settings.LOW_CACHE:
+            key = 'links_menu'
+            links_menu = cache.get(key)
+            if links_menu is None:
+                context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        else:
+            context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
         # context_data['links_menu'] = get_links_menu()
         context_data['hot_product'] = get_hot_product()
         context_data['games_discount'] = DiscountGames.objects.filter(is_active=True)
