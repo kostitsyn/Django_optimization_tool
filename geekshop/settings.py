@@ -197,7 +197,8 @@ LOGIN_ERROR_URL = '/'
 SOCIAL_AUTH_VK_OAUTH2_IGNORE_DEFAULT_SCOPE = True
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 
-DOMAIN_NAME = 'http:/localhost:8000'
+# DOMAIN_NAME = 'http:/localhost:8000'
+DOMAIN_NAME = 'http:/185.20.227.181'
 
 
 EMAIL_HOST = 'localhost'
