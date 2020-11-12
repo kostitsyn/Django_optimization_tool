@@ -257,12 +257,14 @@ def by_category(request, pk, page=1):
         products_paginator = paginator.page(1)
     except EmptyPage:
         products_paginator = paginator.page(paginator.num_pages)
-
+    game_discount = list(DiscountGames.objects.all())
+    result_list_discount = get_required_obj(game_discount, 2)
     content = {'title': title,
                'css_file': 'style-gallery.css',
                'links_menu': links_menu,
                'object_list': products_paginator,
                'hot_product': get_hot_product(),
+               'games_discount': result_list_discount,
                'category': category,
                }
 
