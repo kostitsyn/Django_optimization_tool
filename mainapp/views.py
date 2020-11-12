@@ -15,6 +15,7 @@ from basketapp.models import Basket
 from geekshop import settings
 from mainapp.models import Games, Contacts, DiscountGames, GameCategories
 
+
 def get_links_menu():
     if settings.LOW_CACHE:
         key = 'links_menu'
@@ -138,7 +139,7 @@ class GalleryListView(ListView):
         context_data['hot_product'] = hot_product
         # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
         context_data['links_menu'] = get_links_menu()
-        context_data['games_discount'] = DiscountGames.objects.all()
+        context_data['games_discount'] = DiscountGames.objects.filter(is_active=True)
         return context_data
 
 
@@ -196,7 +197,7 @@ class ByCategoryListView(ListView):
         # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
         context_data['links_menu'] = get_links_menu()
         context_data['hot_product'] = get_hot_product()
-        context_data['games_discount'] = DiscountGames.objects.all(is_active=True)
+        context_data['games_discount'] = DiscountGames.objects.filter(is_active=True)
         return context_data
 
 
