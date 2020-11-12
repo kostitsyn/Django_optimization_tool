@@ -26,6 +26,17 @@ def get_links_menu():
     else:
         return GameCategories.objects.filter(is_active=True)
 
+def get_category(pk):
+    if settings.LOW_CACHE:
+        key = f'category_{pk}'
+        category = cache.get(key)
+        if category is None:
+            category = get_object_or_404(GameCategories, pk=pk)
+            cache.set(key, category)
+        return category
+    else:
+        return get_object_or_404(GameCategories, pk=pk)
+
 
 def get_hot_product():
     games_list = Games.objects.all().exclude(quantity=0)
@@ -193,7 +204,8 @@ class ByCategoryListView(ListView):
         if category_pk == 0:
             context_data['category'] = {'name': 'все', 'pk': category_pk}
         else:
-            context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
+            # context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
+            context_data['category'] = get_category(category_pk)
         # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
         context_data['links_menu'] = get_links_menu()
         context_data['hot_product'] = get_hot_product()
@@ -308,7 +320,6 @@ class ProductDetailView(DetailView):
         context_data = super().get_context_data(**kwargs)
         game_pk = self.kwargs.get('pk', None)
         category = Games.objects.get(pk=game_pk).game_category
-        # category = Games.objects.filter(pk=game_pk).select_related('game_category').first().game_category
         context_data['object_list'] = Games.objects.filter(game_category=category.pk).exclude(pk=game_pk).order_by('?')[:4]
         context_data['title'] = 'товары'
         context_data['css_file'] = 'style-product-page.css'
