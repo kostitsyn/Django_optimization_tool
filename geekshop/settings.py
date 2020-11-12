@@ -197,8 +197,8 @@ LOGIN_ERROR_URL = '/'
 SOCIAL_AUTH_VK_OAUTH2_IGNORE_DEFAULT_SCOPE = True
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 
-# DOMAIN_NAME = 'http:/localhost:8000'
-DOMAIN_NAME = 'http:/185.20.227.181/'
+DOMAIN_NAME = 'http:/localhost:8000'
+
 
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = '25'
@@ -241,3 +241,15 @@ with open('geekshop/vk.json') as f:
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = VK['SOCIAL_AUTH_VK_OAUTH2_KEY']
 SOCIAL_AUTH_VK_OAUTH2_SECRET = VK['SOCIAL_AUTH_VK_OAUTH2_SECRET']
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 120
+CACHE_MIDDLEWARE_PREFIX = 'geekshop'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1.11211'
+    }
+}
+LOW_CACHE = True
