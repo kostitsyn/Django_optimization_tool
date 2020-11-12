@@ -21,8 +21,6 @@ def get_links_menu():
         key = 'links_menu'
         links_menu = cache.get(key)
         if links_menu is None:
-            print('Hello world!!!')
-            print(links_menu)
             links_menu = GameCategories.objects.filter(is_active=True)
             cache.set(key, links_menu)
         return links_menu
