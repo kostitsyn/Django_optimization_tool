@@ -3,7 +3,8 @@ import time
 
 
 from django.contrib.auth.decorators import user_passes_test
-from django.core import cache
+from django.core.cache import cache
+
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
