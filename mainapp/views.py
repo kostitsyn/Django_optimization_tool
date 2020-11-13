@@ -112,9 +112,9 @@ class MainListView(ListView):
     model = Games
     template_name = 'mainapp/index.html'
 
-    # @method_decorator(cache_page(3600))
-    # def dispatch(self, *args, **kwargs):
-    #     return super(MainListView, self).dispatch(*args, **kwargs)
+    @method_decorator(cache_page(3600))
+    def dispatch(self, *args, **kwargs):
+        return super(MainListView, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
         result_list = list(Games.objects.all().select_related())[:4]
