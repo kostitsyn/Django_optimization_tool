@@ -73,7 +73,7 @@ class Basket(models.Model):
     #     _total_cost = sum(list(map(lambda x: x.get_product_cost, _items)))
     #     return _total_cost
 
-    # def get_product_quantity(self, user):
+    # def get_products_quantity(self, user):
     #     basket_items = self.get_items_cached
     #     basket_items_dic = {}
     #     [basket_items_dic.update({item.product: item.quantity}) for item in basket_items]

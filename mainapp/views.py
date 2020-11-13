@@ -20,7 +20,9 @@ def get_links_menu():
     if settings.LOW_CACHE:
         key = 'links_menu'
         links_menu = cache.get(key)
+        print('Hello!!!!!!!')
         if links_menu is None:
+            print('Cache is None!!!!!!!!!!')
             links_menu = GameCategories.objects.filter(is_active=True)
             cache.set(key, links_menu)
         return links_menu
