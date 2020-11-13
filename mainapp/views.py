@@ -386,11 +386,11 @@ class ContactsListView(ListView):
 class ProductDetailView(DetailView):
     model = Games
 
-    def get_object(self, queryset=None):
-        self.object = super().get_object()
-        item_pk = self.object.pk
-        self.object = get_product(item_pk)
-        return self.object
+    # def get_object(self, queryset=None):
+    #     self.object = super().get_object()
+    #     item_pk = self.object.pk
+    #     self.object = get_product(item_pk)
+    #     return self.object
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
