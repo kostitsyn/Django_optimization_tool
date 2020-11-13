@@ -32,5 +32,5 @@ urlpatterns = [
 
     # path('product/<str:pk>', mainapp.product, name='game'),
     # path('product/<pk>/', mainapp.ProductDetailView.as_view(), name='game'),
-    path('product/<pk>/', cache_page(3600)(mainapp.ProductDetailView.as_view(), key_prefix='geekshop'), name='game'),
+    path('product/<pk>/', cache_page(3600, key_prefix='geekshop')(mainapp.ProductDetailView.as_view()), name='game'),
 ]
