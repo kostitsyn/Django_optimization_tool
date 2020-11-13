@@ -113,7 +113,7 @@ class MainListView(ListView):
     template_name = 'mainapp/index.html'
 
     @method_decorator(cache_page(3600))
-    def dispatch(self, request, *args, **kwargs):
+    def dispatch(self, *args, **kwargs):
         return super(MainListView, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
