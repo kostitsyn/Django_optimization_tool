@@ -34,10 +34,10 @@ class Basket(models.Model):
         # return self.user.basket.select_related()
         return Basket.objects.filter(user=self.user).select_related()
 
-    # @staticmethod
-    # def get_items(user):
-    #     # return Basket.objects.filter(user=user)
-    #     return Basket.objects.filter(user=user).select_related()
+    @staticmethod
+    def get_items(user):
+        # return Basket.objects.filter(user=user)
+        return Basket.objects.filter(user=user).select_related()
 
     @property
     def get_product_cost(self):
