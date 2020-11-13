@@ -133,143 +133,143 @@ class ServiceTemplateView(TemplateView):
 #     return render(request, 'mainapp/services.html', content)
 
 
-# class GalleryListView(ListView):
-#     model = Games
-#     template_name = 'adminapp/games_list.html'
-#     paginate_by = 4
+class GalleryListView(ListView):
+    model = Games
+    template_name = 'adminapp/games_list.html'
+    paginate_by = 4
+
+    def get_queryset(self):
+        global hot_product
+        hot_product = get_hot_product()
+        rest_games = Games.objects.all().exclude(pk=hot_product.pk)
+        return rest_games
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'галлерея'
+        context_data['css_file'] = 'style-gallery.css'
+        context_data['hot_product'] = hot_product
+        # if settings.LOW_CACHE:
+        #     key = 'links_menu'
+        #     links_menu = cache.get(key)
+        #     if links_menu is None:
+        #         context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        # else:
+        #     context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        context_data['links_menu'] = get_links_menu()
+        context_data['games_discount'] = DiscountGames.objects.filter(is_active=True)
+        return context_data
+
+
+# def gallery(request, page=1):
 #
-#     def get_queryset(self):
-#         global hot_product
-#         hot_product = get_hot_product()
-#         rest_games = Games.objects.all().exclude(pk=hot_product.pk)
-#         return rest_games
+#     title = 'галлерея'
 #
-#     def get_context_data(self, **kwargs):
-#         context_data = super().get_context_data(**kwargs)
-#         context_data['title'] = 'галлерея'
-#         context_data['css_file'] = 'style-gallery.css'
-#         context_data['hot_product'] = hot_product
-#         if settings.LOW_CACHE:
-#             key = 'links_menu'
-#             links_menu = cache.get(key)
-#             if links_menu is None:
-#                 context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
-#         else:
-#             context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
-#         # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
-#         # context_data['links_menu'] = get_links_menu()
-#         context_data['games_discount'] = DiscountGames.objects.filter(is_active=True)
-#         return context_data
-
-
-def gallery(request, page=1):
-
-    title = 'галлерея'
-
-    # links_menu = GameCategories.objects.all()
-    links_menu = get_links_menu()
-
-    hot_product = get_hot_product()
-    games_list = list(Games.objects.all().exclude(pk=hot_product.pk))
-
-    game_discount = list(DiscountGames.objects.all())
-    result_list_discount = get_required_obj(game_discount, 2)
-
-    paginator = Paginator(games_list, 4)
-    try:
-        products_paginator = paginator.page(page)
-    except PageNotAnInteger:
-        products_paginator = paginator.page(1)
-    except EmptyPage:
-        products_paginator = paginator.page(paginator.num_pages)
-
-    content = {
-        'title': title,
-        'css_file': 'style-gallery.css',
-        'links_menu': links_menu,
-        'object_list': products_paginator,
-        'games_discount': result_list_discount,
-        'hot_product': get_hot_product()
-    }
-    return render(request, 'mainapp/games_list.html', content)
-
-
-# class ByCategoryListView(ListView):
-#     model = Games
-#     template_name = 'mainapp/games_by_category.html'
-#     paginate_by = 4
+#     # links_menu = GameCategories.objects.all()
+#     links_menu = get_links_menu()
 #
-#     def get_queryset(self):
-#         category_pk = self.kwargs.get('pk', None)
-#         games_by_category = Games.objects.filter(game_category=category_pk)
-#         # games_by_category = Games.objects.filter(game_category=category_pk).select_related('game_category')
-#         return games_by_category
+#     hot_product = get_hot_product()
+#     games_list = list(Games.objects.all().exclude(pk=hot_product.pk))
 #
-#     def get_context_data(self, **kwargs):
-#         context_data = super().get_context_data(**kwargs)
-#         context_data['title'] = 'категории'
-#         context_data['css_file'] = 'style-gallery.css'
-#         category_pk = self.kwargs.get('pk', None)
-#         if category_pk == 0:
-#             context_data['category'] = {'name': 'все', 'pk': category_pk}
-#         else:
-#             # context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
-#             # context_data['category'] = get_category(category_pk)
-#             if settings.LOW_CACHE:
-#                 key = f'category_{category_pk}'
-#                 category = cache.get(key)
-#                 if category is None:
-#                     context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
-#                     cache.set(key, category)
-#             else:
-#                 context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
-#         if settings.LOW_CACHE:
-#             key = 'links_menu'
-#             links_menu = cache.get(key)
-#             if links_menu is None:
-#                 context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
-#         else:
-#             context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
-#         # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
-#         # context_data['links_menu'] = get_links_menu()
-#         context_data['hot_product'] = get_hot_product()
-#         context_data['games_discount'] = DiscountGames.objects.filter(is_active=True)
-#         return context_data
+#     game_discount = list(DiscountGames.objects.all())
+#     result_list_discount = get_required_obj(game_discount, 2)
+#
+#     paginator = Paginator(games_list, 4)
+#     try:
+#         products_paginator = paginator.page(page)
+#     except PageNotAnInteger:
+#         products_paginator = paginator.page(1)
+#     except EmptyPage:
+#         products_paginator = paginator.page(paginator.num_pages)
+#
+#     content = {
+#         'title': title,
+#         'css_file': 'style-gallery.css',
+#         'links_menu': links_menu,
+#         'object_list': products_paginator,
+#         'games_discount': result_list_discount,
+#         'hot_product': get_hot_product()
+#     }
+#     return render(request, 'mainapp/games_list.html', content)
 
 
-def by_category(request, pk, page=1):
+class ByCategoryListView(ListView):
+    model = Games
+    template_name = 'mainapp/games_by_category.html'
+    paginate_by = 4
 
-    title = 'категории'
+    def get_queryset(self):
+        category_pk = self.kwargs.get('pk', None)
+        games_by_category = Games.objects.filter(game_category=category_pk)
+        # games_by_category = Games.objects.filter(game_category=category_pk).select_related('game_category')
+        return games_by_category
 
-    # links_menu = GameCategories.objects.all()
-    links_menu = get_links_menu()
-    if pk == 0:
-        games_list = Games.objects.all()
-        category = {'name': 'все', 'pk': pk}
-    else:
-        # category = get_object_or_404(GameCategories, pk=pk)
-        category = get_category(pk)
-        games_list = Games.objects.filter(game_category=category).order_by('name')
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'категории'
+        context_data['css_file'] = 'style-gallery.css'
+        category_pk = self.kwargs.get('pk', None)
+        if category_pk == 0:
+            context_data['category'] = {'name': 'все', 'pk': category_pk}
+        else:
+            # context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
+            context_data['category'] = get_category(category_pk)
+            # if settings.LOW_CACHE:
+            #     key = f'category_{category_pk}'
+            #     category = cache.get(key)
+            #     if category is None:
+            #         context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
+            #         cache.set(key, category)
+            # else:
+            #     context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
+        # if settings.LOW_CACHE:
+        #     key = 'links_menu'
+        #     links_menu = cache.get(key)
+        #     if links_menu is None:
+        #         context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        # else:
+        #     context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        context_data['links_menu'] = get_links_menu()
+        context_data['hot_product'] = get_hot_product()
+        context_data['games_discount'] = DiscountGames.objects.filter(is_active=True)
+        return context_data
 
-    paginator = Paginator(games_list, 4)
-    try:
-        products_paginator = paginator.page(page)
-    except PageNotAnInteger:
-        products_paginator = paginator.page(1)
-    except EmptyPage:
-        products_paginator = paginator.page(paginator.num_pages)
-    game_discount = list(DiscountGames.objects.all())
-    result_list_discount = get_required_obj(game_discount, 2)
-    content = {'title': title,
-               'css_file': 'style-gallery.css',
-               'links_menu': links_menu,
-               'object_list': products_paginator,
-               'hot_product': get_hot_product(),
-               'games_discount': result_list_discount,
-               'category': category,
-               }
 
-    return render(request, 'mainapp/games_by_category.html', content)
+# def by_category(request, pk, page=1):
+#
+#     title = 'категории'
+#
+#     # links_menu = GameCategories.objects.all()
+#     links_menu = get_links_menu()
+#     if pk == 0:
+#         games_list = Games.objects.all()
+#         category = {'name': 'все', 'pk': pk}
+#     else:
+#         # category = get_object_or_404(GameCategories, pk=pk)
+#         category = get_category(pk)
+#         games_list = Games.objects.filter(game_category=category).order_by('name')
+#
+#     paginator = Paginator(games_list, 4)
+#     try:
+#         products_paginator = paginator.page(page)
+#     except PageNotAnInteger:
+#         products_paginator = paginator.page(1)
+#     except EmptyPage:
+#         products_paginator = paginator.page(paginator.num_pages)
+#     game_discount = list(DiscountGames.objects.all())
+#     result_list_discount = get_required_obj(game_discount, 2)
+#     content = {'title': title,
+#                'css_file': 'style-gallery.css',
+#                'links_menu': links_menu,
+#                'object_list': products_paginator,
+#                'hot_product': get_hot_product(),
+#                'games_discount': result_list_discount,
+#                'category': category,
+#                }
+#
+#     return render(request, 'mainapp/games_by_category.html', content)
 
 
 class NewsTemplateView(TemplateView):
