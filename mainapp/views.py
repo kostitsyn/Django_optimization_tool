@@ -77,23 +77,23 @@ def get_product(pk):
         return Games.objects.get(pk=pk)
 
 
-# def get_hot_product():
-#     games_list = Games.objects.all().exclude(quantity=0)
-#     return random.sample(list(games_list), 1)[0]
-
 def get_hot_product():
-    if settings.LOW_CACHE:
-        key = 'hot_product'
-        hot_product = cache.get(key)
-        if hot_product is None:
-            games_list = Games.objects.all().exclude(quantity=0)
-            hot_product = random.sample(list(games_list), 1)[0]
-            cache.set(key, hot_product)
-        return hot_product
-    else:
-        games_list = Games.objects.all().exclude(quantity=0)
-        hot_product = random.sample(list(games_list), 1)[0]
-        return hot_product
+    games_list = Games.objects.all().exclude(quantity=0)
+    return random.sample(list(games_list), 1)[0]
+
+# def get_hot_product():
+#     if settings.LOW_CACHE:
+#         key = 'hot_product'
+#         hot_product = cache.get(key)
+#         if hot_product is None:
+#             games_list = Games.objects.all().exclude(quantity=0)
+#             hot_product = random.sample(list(games_list), 1)[0]
+#             cache.set(key, hot_product)
+#         return hot_product
+#     else:
+#         games_list = Games.objects.all().exclude(quantity=0)
+#         hot_product = random.sample(list(games_list), 1)[0]
+#         return hot_product
 
 
 def get_required_obj(lst, num, max_num=0):
