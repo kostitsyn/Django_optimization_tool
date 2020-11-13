@@ -258,8 +258,8 @@ class ByCategoryListView(ListView):
 
     def get_queryset(self):
         category_pk = self.kwargs.get('pk', None)
-        # games_by_category = Games.objects.filter(game_category=category_pk)
-        games_by_category = get_products_by_category(category_pk)
+        games_by_category = Games.objects.filter(game_category=category_pk)
+        # games_by_category = get_products_by_category(category_pk)
         return games_by_category
 
     def get_context_data(self, **kwargs):
