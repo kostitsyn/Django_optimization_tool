@@ -63,6 +63,18 @@ def get_products_by_category(pk):
     else:
         return Games.objects.filter(game_category=pk)
 
+def get_product(pk):
+    if settings.LOW_CACHE:
+        key = f'product_{pk}'
+        product = cache.get(key)
+        if product is None:
+            product = Games.objects.get(pk=pk)
+            cache.set(key, product)
+        return product
+    else:
+        return Games.objects.get(pk=pk)
+
+
 def get_hot_product():
     games_list = Games.objects.all().exclude(quantity=0)
     return random.sample(list(games_list), 1)[0]
@@ -346,6 +358,12 @@ class ContactsListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Games
+
+    def get_object(self, queryset=None):
+        self.object = super().get_object()
+        item_pk = self.object.pk
+        self.object = get_product(item_pk)
+        return self.object
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
