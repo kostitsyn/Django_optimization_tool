@@ -20,9 +20,7 @@ def get_links_menu():
     if settings.LOW_CACHE:
         key = 'links_menu'
         links_menu = cache.get(key)
-        print('Hello!!!!!!!')
         if links_menu is None:
-            print('Cache is None!!!!!!!!!!')
             links_menu = GameCategories.objects.filter(is_active=True)
             cache.set(key, links_menu)
         return links_menu
@@ -168,8 +166,8 @@ def gallery(request, page=1):
 
     title = 'галлерея'
 
-    # links_menu = GameCategories.objects.all()
-    links_menu = get_links_menu()
+    links_menu = GameCategories.objects.all()
+    # links_menu = get_links_menu()
 
     hot_product = get_hot_product()
     games_list = list(Games.objects.all().exclude(pk=hot_product.pk))
@@ -243,14 +241,14 @@ def by_category(request, pk, page=1):
 
     title = 'категории'
 
-    # links_menu = GameCategories.objects.all()
-    links_menu = get_links_menu()
+    links_menu = GameCategories.objects.all()
+    # links_menu = get_links_menu()
     if pk == 0:
         games_list = Games.objects.all()
         category = {'name': 'все', 'pk': pk}
     else:
-        # category = get_object_or_404(GameCategories, pk=pk)
-        category = get_category(pk)
+        category = get_object_or_404(GameCategories, pk=pk)
+        # category = get_category(pk)
         games_list = Games.objects.filter(game_category=category).order_by('name')
 
     paginator = Paginator(games_list, 4)
