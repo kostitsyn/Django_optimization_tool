@@ -21,11 +21,11 @@ def get_links_menu():
         key = 'links_menu'
         links_menu = cache.get(key)
         if links_menu is None:
-            links_menu = GameCategories.objects.filter(is_active=True)
+            links_menu = GameCategories.objects.filter(is_active=True).select_related()
             cache.set(key, links_menu)
         return links_menu
     else:
-        return GameCategories.objects.filter(is_active=True)
+        return GameCategories.objects.filter(is_active=True).select_related()
 
 
 def get_category(pk):
@@ -45,11 +45,11 @@ def get_products():
         key = 'products'
         products = cache.get(key)
         if products is None:
-            products = Games.objects.all()
+            products = Games.objects.all().select_related()
             cache.set(key, products)
         return products
     else:
-        return Games.objects.all()
+        return Games.objects.all().select_related()
 
 
 def get_products_by_category(pk):
@@ -57,11 +57,12 @@ def get_products_by_category(pk):
         key = f'products_by_category_{pk}'
         products_by_category = cache.get(key)
         if products_by_category is None:
-            products_by_category = Games.objects.filter(game_category=pk)
+            products_by_category = Games.objects.filter(game_category=pk).select_related()
             cache.set(key, products_by_category)
         return products_by_category
     else:
-        return Games.objects.filter(game_category=pk)
+        return Games.objects.filter(game_category=pk).select_related()
+
 
 def get_product(pk):
     if settings.LOW_CACHE:
