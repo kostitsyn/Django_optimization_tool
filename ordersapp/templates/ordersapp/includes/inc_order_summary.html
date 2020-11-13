@@ -1,5 +1,5 @@
 {% if object %}
-   <div class="h2">Заказ №{{ object.pk }} от {{ object.created|date:"Y-m-d H:i:s" }}</div>
+   <a href="{% url 'order:order_update' object.pk %}"><div class="h2">Заказ №{{ object.pk }} от {{ object.created|date:"Y-m-d H:i:s" }}</div></a>
    <hr>
    <div class="h4">заказчик: {{ user.last_name }} {{ user.first_name }} </div>
    <div class="h4">обновлен: {{ object.updated|date:"Y-m-d H:i:s" }}</div>
