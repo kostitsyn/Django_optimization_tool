@@ -204,8 +204,8 @@ class GalleryListView(ListView):
     def get_queryset(self):
         global hot_product
         hot_product = get_hot_product()
-        # rest_games = Games.objects.all().exclude(pk=hot_product.pk)
-        rest_games = get_products()
+        rest_games = Games.objects.all().exclude(pk=hot_product.pk)
+        # rest_games = get_products()
         return rest_games
 
     def get_context_data(self, **kwargs):
