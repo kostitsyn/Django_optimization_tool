@@ -27,6 +27,7 @@ def get_links_menu():
     else:
         return GameCategories.objects.filter(is_active=True)
 
+
 def get_category(pk):
     if settings.LOW_CACHE:
         key = f'category_{pk}'
@@ -38,6 +39,29 @@ def get_category(pk):
     else:
         return get_object_or_404(GameCategories, pk=pk)
 
+
+def get_products():
+    if settings.LOW_CACHE:
+        key = 'products'
+        products = cache.get(key)
+        if products is None:
+            products = Games.objects.all()
+            cache.set(key, products)
+        return products
+    else:
+        return Games.objects.all()
+
+
+def get_products_by_category(pk):
+    if settings.LOW_CACHE:
+        key = f'products_by_category_{pk}'
+        products_by_category = cache.get(key)
+        if products_by_category is None:
+            products_by_category = Games.objects.filter(game_category=pk)
+            cache.set(key, products_by_category)
+        return products_by_category
+    else:
+        return Games.objects.filter(game_category=pk)
 
 def get_hot_product():
     games_list = Games.objects.all().exclude(quantity=0)
@@ -141,7 +165,8 @@ class GalleryListView(ListView):
     def get_queryset(self):
         global hot_product
         hot_product = get_hot_product()
-        rest_games = Games.objects.all().exclude(pk=hot_product.pk)
+        # rest_games = Games.objects.all().exclude(pk=hot_product.pk)
+        rest_games = get_products()
         return rest_games
 
     def get_context_data(self, **kwargs):
@@ -149,13 +174,6 @@ class GalleryListView(ListView):
         context_data['title'] = 'галлерея'
         context_data['css_file'] = 'style-gallery.css'
         context_data['hot_product'] = hot_product
-        # if settings.LOW_CACHE:
-        #     key = 'links_menu'
-        #     links_menu = cache.get(key)
-        #     if links_menu is None:
-        #         context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
-        # else:
-        #     context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
         # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
         context_data['links_menu'] = get_links_menu()
         context_data['games_discount'] = DiscountGames.objects.filter(is_active=True)
@@ -201,8 +219,8 @@ class ByCategoryListView(ListView):
 
     def get_queryset(self):
         category_pk = self.kwargs.get('pk', None)
-        games_by_category = Games.objects.filter(game_category=category_pk)
-        # games_by_category = Games.objects.filter(game_category=category_pk).select_related('game_category')
+        # games_by_category = Games.objects.filter(game_category=category_pk)
+        games_by_category = get_products_by_category(category_pk)
         return games_by_category
 
     def get_context_data(self, **kwargs):
@@ -215,21 +233,6 @@ class ByCategoryListView(ListView):
         else:
             # context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
             context_data['category'] = get_category(category_pk)
-            # if settings.LOW_CACHE:
-            #     key = f'category_{category_pk}'
-            #     category = cache.get(key)
-            #     if category is None:
-            #         context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
-            #         cache.set(key, category)
-            # else:
-            #     context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
-        # if settings.LOW_CACHE:
-        #     key = 'links_menu'
-        #     links_menu = cache.get(key)
-        #     if links_menu is None:
-        #         context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
-        # else:
-        #     context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
         # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
         context_data['links_menu'] = get_links_menu()
         context_data['hot_product'] = get_hot_product()
