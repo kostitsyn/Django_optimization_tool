@@ -21,11 +21,11 @@ def get_links_menu():
         key = 'links_menu'
         links_menu = cache.get(key)
         if links_menu is None:
-            links_menu = GameCategories.objects.filter(is_active=True).select_related()
+            links_menu = GameCategories.objects.filter(is_active=True)
             cache.set(key, links_menu)
         return links_menu
     else:
-        return GameCategories.objects.filter(is_active=True).select_related()
+        return GameCategories.objects.filter(is_active=True)
 
 
 def get_category(pk):
@@ -45,11 +45,11 @@ def get_products():
         key = 'products'
         products = cache.get(key)
         if products is None:
-            products = Games.objects.all().select_related()
+            products = Games.objects.all()
             cache.set(key, products)
         return products
     else:
-        return Games.objects.all().select_related()
+        return Games.objects.all()
 
 
 def get_products_by_category(pk):
@@ -57,11 +57,11 @@ def get_products_by_category(pk):
         key = f'products_by_category_{pk}'
         products_by_category = cache.get(key)
         if products_by_category is None:
-            products_by_category = Games.objects.filter(game_category=pk).select_related()
+            products_by_category = Games.objects.filter(game_category=pk)
             cache.set(key, products_by_category)
         return products_by_category
     else:
-        return Games.objects.filter(game_category=pk).select_related()
+        return Games.objects.filter(game_category=pk)
 
 
 def get_product(pk):
@@ -76,9 +76,23 @@ def get_product(pk):
         return Games.objects.get(pk=pk)
 
 
+# def get_hot_product():
+#     games_list = Games.objects.all().exclude(quantity=0)
+#     return random.sample(list(games_list), 1)[0]
+
 def get_hot_product():
-    games_list = Games.objects.all().exclude(quantity=0)
-    return random.sample(list(games_list), 1)[0]
+    if settings.LOW_CACHE:
+        key = 'hot_product'
+        hot_product = cache.get(key)
+        if hot_product is None:
+            games_list = Games.objects.all().exclude(quantity=0)
+            hot_product = random.sample(list(games_list), 1)[0]
+            cache.set(key, hot_product)
+        return hot_product
+    else:
+        games_list = Games.objects.all().exclude(quantity=0)
+        hot_product = random.sample(list(games_list), 1)[0]
+        return hot_product
 
 
 def get_required_obj(lst, num, max_num=0):
