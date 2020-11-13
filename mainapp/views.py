@@ -8,6 +8,7 @@ from django.core.cache import cache
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import View, ContextMixin, TemplateView
 
@@ -110,6 +111,10 @@ def get_required_obj(lst, num, max_num=0):
 class MainListView(ListView):
     model = Games
     template_name = 'mainapp/index.html'
+
+    @method_decorator(cache_page(3600))
+    def dispatch(self, request, *args, **kwargs):
+        return super(MainListView, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
         game_list = list(Games.objects.all().select_related())
