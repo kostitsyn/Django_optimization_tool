@@ -108,48 +108,52 @@ def get_required_obj(lst, num, max_num=0):
     return my_list
 
 
-# class MainListView(ListView):
-#     model = Games
-#     template_name = 'mainapp/index.html'
-#
-#     @method_decorator(cache_page(3600))
-#     def dispatch(self, *args, **kwargs):
-#         return super(MainListView, self).dispatch(*args, **kwargs)
-#
-#     def get_queryset(self):
-#         # game_list = list(Games.objects.all().select_related())
-#         result_list = list(Games.objects.all().select_related())[:3]
-#         # result_list = get_required_obj(game_list, 4)
-#
-#         return result_list
-#
-#     def get_context_data(self, **kwargs):
-#         context_data = super().get_context_data(**kwargs)
-#         context_data['title'] = 'главная'
-#         context_data['css_file'] = 'style-index.css'
-#         context_data['contact_data'] = Contacts.objects.get(pk=1)
-#         return context_data
+class MainListView(ListView):
+    model = Games
+    template_name = 'mainapp/index.html'
 
-@cache_page(3600)
-def main(request, pk=None):
+    @method_decorator(cache_page(3600))
+    def dispatch(self, *args, **kwargs):
+        return super(MainListView, self).dispatch(*args, **kwargs)
 
-    title = 'главная'
+    def get_queryset(self):
+        game_list = list(Games.objects.all().select_related())
+        # result_list = list(Games.objects.all().select_related())[:3]
+        result_list = get_required_obj(game_list, 4)
 
-    contact_data = Contacts.objects.get(pk=1)
-    game_list = list(Games.objects.all())
-    # result_list = get_required_obj(game_list, 4)
-    result_list = list(Games.objects.all().select_related())[:3]
-    content = {
-        'title': title,
-        'css_file': 'style-index.css',
-        'object_list': result_list,
-        'contact_data': contact_data,
-    }
-    return render(request, 'mainapp/index.html', content)
+        return result_list
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        context_data['title'] = 'главная'
+        context_data['css_file'] = 'style-index.css'
+        context_data['contact_data'] = Contacts.objects.get(pk=1)
+        return context_data
+
+# @cache_page(3600)
+# def main(request, pk=None):
+#
+#     title = 'главная'
+#
+#     contact_data = Contacts.objects.get(pk=1)
+#     game_list = list(Games.objects.all())
+#     # result_list = get_required_obj(game_list, 4)
+#     result_list = list(Games.objects.all().select_related())[:3]
+#     content = {
+#         'title': title,
+#         'css_file': 'style-index.css',
+#         'object_list': result_list,
+#         'contact_data': contact_data,
+#     }
+#     return render(request, 'mainapp/index.html', content)
 
 
 class AboutTemplateView(TemplateView):
     template_name = 'mainapp/about.html'
+
+    @method_decorator(cache_page(3600))
+    def dispatch(self, *args, **kwargs):
+        return super(AboutTemplateView, self).dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)

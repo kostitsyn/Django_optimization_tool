@@ -21,8 +21,8 @@ from django.urls import path, include, re_path
 import mainapp.views as mainapp
 
 urlpatterns = [
-    path('', mainapp.main, name='main'),
-    # path('', mainapp.MainListView.as_view(), name='main'),
+    # path('', mainapp.main, name='main'),
+    path('', mainapp.MainListView.as_view(), name='main'),
 
     # path('about/', mainapp.about, name='about'),
     path('about/', mainapp.AboutTemplateView.as_view(), name='about'),
