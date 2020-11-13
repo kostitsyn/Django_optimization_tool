@@ -81,7 +81,7 @@ class OrderItemsCreateView(CreateView):
                 orderitems.save()
 
         # if self.object.get_total_cost == 0:
-        if self.object.get_summary.total_cost == 0:
+        if self.object.get_summary['total_cost'] == 0:
             self.object.delete()
 
         return super(OrderItemsCreateView, self).form_valid(form)
