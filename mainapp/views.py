@@ -117,9 +117,9 @@ class MainListView(ListView):
         return super(MainListView, self).dispatch(*args, **kwargs)
 
     def get_queryset(self):
-        game_list = list(Games.objects.all().select_related())
-        # result_list = list(Games.objects.all().select_related())[:3]
-        result_list = get_required_obj(game_list, 4)
+        result_list = list(Games.objects.all().select_related())[:4]
+        # game_list = list(Games.objects.all().select_related())
+        # result_list = get_required_obj(game_list, 4)
 
         return result_list
 

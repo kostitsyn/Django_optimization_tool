@@ -31,5 +31,6 @@ urlpatterns = [
     path('category/<int:pk>/<page>/', mainapp.ByCategoryListView.as_view(), name='category'),
 
     # path('product/<str:pk>', mainapp.product, name='game'),
-    path('product/<pk>/', cache_page(3600)(mainapp.ProductDetailView.as_view()), name='game'),
+    path('product/<pk>/', mainapp.ProductDetailView.as_view(), name='game'),
+    # path('product/<pk>/', cache_page(3600)(mainapp.ProductDetailView.as_view()), name='game'),
 ]
