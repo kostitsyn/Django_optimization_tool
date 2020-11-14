@@ -35,8 +35,8 @@
     {% endfor %}
     {% if object_list %}
         <div class = "basket_summary">
-            В корзине {{ object_list.0.get_total_quantity }} товаров общей стоимостью {{ object_list.0.get_total_cost }}&#36;
-<!--            В корзине {{ object_list.0.get_total_quantity_cached }} товаров общей стоимостью {{ object_list.0.get_total_cost_cached }}&#36;-->
+<!--            В корзине {{ object_list.0.get_total_quantity }} товаров общей стоимостью {{ object_list.0.get_total_cost }}&#36;-->
+            В корзине {{ object_list.0.get_total_quantity_cached }} товаров общей стоимостью {{ object_list.0.get_total_cost_cached }}&#36;
         </div>
     {% else %}
         <div class = "basket_summary">
