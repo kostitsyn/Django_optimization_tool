@@ -205,8 +205,8 @@ class GalleryListView(ListView):
     def get_queryset(self):
         global hot_product
         hot_product = get_hot_product()
-        rest_games = Games.objects.all().exclude(pk=hot_product.pk)
-        # rest_games = get_products()
+        # rest_games = Games.objects.all().exclude(pk=hot_product.pk)
+        rest_games = get_products()
         return rest_games
 
     def get_context_data(self, **kwargs):
@@ -214,8 +214,8 @@ class GalleryListView(ListView):
         context_data['title'] = 'галлерея'
         context_data['css_file'] = 'style-gallery.css'
         context_data['hot_product'] = hot_product
-        context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
-        # context_data['links_menu'] = get_links_menu()
+        # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        context_data['links_menu'] = get_links_menu()
         context_data['games_discount'] = DiscountGames.objects.filter(is_active=True)
         return context_data
 
@@ -259,8 +259,8 @@ class ByCategoryListView(ListView):
 
     def get_queryset(self):
         category_pk = self.kwargs.get('pk', None)
-        games_by_category = Games.objects.filter(game_category=category_pk)
-        # games_by_category = get_products_by_category(category_pk)
+        # games_by_category = Games.objects.filter(game_category=category_pk)
+        games_by_category = get_products_by_category(category_pk)
         return games_by_category
 
     def get_context_data(self, **kwargs):
@@ -271,10 +271,10 @@ class ByCategoryListView(ListView):
         if category_pk == 0:
             context_data['category'] = {'name': 'все', 'pk': category_pk}
         else:
-            context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
-            # context_data['category'] = get_category(category_pk)
-        context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
-        # context_data['links_menu'] = get_links_menu()
+            # context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
+            context_data['category'] = get_category(category_pk)
+        # context_data['links_menu'] = GameCategories.objects.filter(is_active=True)
+        context_data['links_menu'] = get_links_menu()
         context_data['hot_product'] = get_hot_product()
         context_data['games_discount'] = DiscountGames.objects.filter(is_active=True)
         return context_data
@@ -419,11 +419,11 @@ class ContactsListView(ListView):
 class ProductDetailView(DetailView):
     model = Games
 
-    # def get_object(self, queryset=None):
-    #     self.object = super().get_object()
-    #     item_pk = self.object.pk
-    #     self.object = get_product(item_pk)
-    #     return self.object
+    def get_object(self, queryset=None):
+        self.object = super().get_object()
+        item_pk = self.object.pk
+        self.object = get_product(item_pk)
+        return self.object
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
