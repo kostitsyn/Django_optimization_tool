@@ -1,8 +1,6 @@
 {% extends 'mainapp/base.html' %}
 {% load static %}
 
-
-
 {% block menu %}
 	<div class="header">
 		{% include 'mainapp/includes/inc_headerline.html' %}
@@ -11,7 +9,7 @@
 	</div>
 {% endblock %}
 {% block content %}
-    {% include 'mainapp/includes/inc_categories_game.html' %}
+<!--    {% include 'mainapp/includes/inc_categories_game.html' %}-->
 	<div class="gallery clearfix">
 		<h3 class="gallery-header">Категория: "{{ category.name|title }}"</h3>
         <div class="gallery clearfix">
@@ -25,6 +23,7 @@
             <a href="{% url 'gallery:category' category.pk page_obj.next_page_number %}">></a>
           {% endif %}
         </div>
+        {% include 'mainapp/includes/inc_product_list_content.html' %}
 <!--        <div class="paginator">-->
 <!--          {% if object_list.has_previous %}-->
 <!--            <a href="{% url 'gallery:category' category.pk object_list.previous_page_number %}"><</a>-->
@@ -35,7 +34,7 @@
 <!--          {% endif %}-->
 <!--        </div>-->
 
-		{% include 'mainapp/includes/inc_name_game.html' %}
+<!--		{% include 'mainapp/includes/inc_name_game.html' %}-->
 		<a href="#"><p class="button-more"><span>Show more games</span></p></a>
 		<div class="clearfix"></div>
         {% for game_disc in games_discount %}
