@@ -11,14 +11,6 @@
    <div class="h3">
        общая стоимость: <span class="order_total_cost">{{ object.get_total_cost }}</span> &#36;
    </div>
-<!--   {% with object_summary=object.get_summary %}-->
-<!--       <div class="h4">-->
-<!--           общее количество товаров: <span class="order_total_quantity">{{ object_summary.total_quantity }}</span>-->
-<!--       </div>-->
-<!--       <div class="h3">-->
-<!--           общая стоимость: <span class="order_total_cost">{{ object_summary.total_cost }}</span> &#36;-->
-<!--       </div>-->
-<!--   {% endwith %}-->
 {% else %}
    <div class="h2">Новый заказ</div>
    <hr>
