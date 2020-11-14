@@ -23,7 +23,9 @@
             <a href="{% url 'gallery:category' category.pk page_obj.next_page_number %}">></a>
           {% endif %}
         </div>
-        {% include 'mainapp/includes/inc_product_list_content.html' %}
+        <div class="details">
+            {% include 'mainapp/includes/inc_products_list_content.html' %}
+        </div>
 <!--        <div class="paginator">-->
 <!--          {% if object_list.has_previous %}-->
 <!--            <a href="{% url 'gallery:category' category.pk object_list.previous_page_number %}"><</a>-->
