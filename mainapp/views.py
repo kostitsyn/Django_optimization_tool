@@ -305,7 +305,7 @@ def product_ajax(request, pk=None, page=1):
         }
 
         result = render_to_string(
-            'mainapp/includes/inc_product_list_content.html',
+            'mainapp/includes/inc_products_list_content.html',
             content,
             request
         )
