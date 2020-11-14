@@ -280,37 +280,37 @@ class ByCategoryListView(ListView):
         return context_data
 
 
-def product_ajax(request, pk=None, page=1):
-    if request.is_ajax():
-        links_menu = get_links_menu()
-
-        if pk == 0:
-            category = {'name': 'все', 'pk': pk}
-            products = get_products()
-        else:
-            category = get_category(pk)
-            products = get_products_by_category(pk)
-        paginator = Paginator(products, 4)
-        try:
-            products_paginator = paginator.page(page)
-        except PageNotAnInteger:
-            products_paginator = paginator.page(1)
-        except EmptyPage:
-            products_paginator = paginator.page(paginator.num_pages)
-
-        content = {
-            'links_menu': links_menu,
-            'category': category,
-            'products': products_paginator,
-        }
-
-        result = render_to_string(
-            'mainapp/includes/inc_products_list_content.html',
-            content,
-            request
-        )
-
-        return JsonResponse({'result': result})
+# def product_ajax(request, pk=None, page=1):
+#     if request.is_ajax():
+#         links_menu = get_links_menu()
+#
+#         if pk == 0:
+#             category = {'name': 'все', 'pk': pk}
+#             products = get_products()
+#         else:
+#             category = get_category(pk)
+#             products = get_products_by_category(pk)
+#         paginator = Paginator(products, 4)
+#         try:
+#             products_paginator = paginator.page(page)
+#         except PageNotAnInteger:
+#             products_paginator = paginator.page(1)
+#         except EmptyPage:
+#             products_paginator = paginator.page(paginator.num_pages)
+#
+#         content = {
+#             'links_menu': links_menu,
+#             'category': category,
+#             'products': products_paginator,
+#         }
+#
+#         result = render_to_string(
+#             'mainapp/includes/inc_products_list_content.html',
+#             content,
+#             request
+#         )
+#
+#         return JsonResponse({'result': result})
 
 # def by_category(request, pk, page=1):
 #
