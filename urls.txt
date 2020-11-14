@@ -1,15 +1,8 @@
-http://185.20.227.181/gallery/1/
-http://185.20.227.181/gallery/category/0/1/
-http://185.20.227.181/gallery/category/1/1/
-http://185.20.227.181/gallery/category/2/1/
-http://185.20.227.181/gallery/category/3/1/
-http://185.20.227.181/gallery/category/4/1/
-http://185.20.227.181/gallery/category/5/1/
-http://185.20.227.181/gallery/product/1/
-http://185.20.227.181/gallery/product/2/
-http://185.20.227.181/gallery/product/3/
-http://185.20.227.181/gallery/product/4/
-http://185.20.227.181/gallery/product/5/
+http://185.20.227.181/order/update/2/
+http://185.20.227.181/order/update/4/
+http://185.20.227.181/order/update/14/
+http://185.20.227.181/order/update/15/
+http://185.20.227.181/order/update/16/
 
 
 
