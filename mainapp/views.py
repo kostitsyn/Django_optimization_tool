@@ -6,12 +6,13 @@ from django.contrib.auth.decorators import user_passes_test
 from django.core.cache import cache
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
+from django.http import JsonResponse
 from django.shortcuts import render, get_object_or_404
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
 from django.views.generic import DetailView, ListView
 from django.views.generic.base import View, ContextMixin, TemplateView
-
+from django.template.loader import render_to_string
 from basketapp.models import Basket
 from geekshop import settings
 from mainapp.models import Games, Contacts, DiscountGames, GameCategories
@@ -278,6 +279,38 @@ class ByCategoryListView(ListView):
         context_data['games_discount'] = DiscountGames.objects.filter(is_active=True)
         return context_data
 
+
+def product_ajax(request, pk=None, page=1):
+    if request.is_ajax():
+        links_menu = get_links_menu()
+
+        if pk == 0:
+            category = {'name': 'все', 'pk': pk}
+            products = get_products()
+        else:
+            category = get_category(pk)
+            products = get_products_by_category(pk)
+        paginator = Paginator(products, 4)
+        try:
+            products_paginator = paginator.page(page)
+        except PageNotAnInteger:
+            products_paginator = paginator.page(1)
+        except EmptyPage:
+            products_paginator = paginator.page(paginator.num_pages)
+
+        content = {
+            'links_menu': links_menu,
+            'category': category,
+            'products': products_paginator,
+        }
+
+        result = render_to_string(
+            'mainapp/includes/inc_product_list_content.html',
+            content,
+            request
+        )
+
+        return JsonResponse({'result': result})
 
 # def by_category(request, pk, page=1):
 #
