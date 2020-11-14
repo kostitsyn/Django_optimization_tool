@@ -1,0 +1,14 @@
+{% extends 'authapp/base.html' %}
+{% block content %}
+{% load my_tags %}
+
+    <form class="form-horizontal" action="{% url 'auth:edit' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+        <img src="{{ avatar|media_folder_users }}" alt="avatar">
+    {{ edit_form.as_table }}
+    {{ profile_form.as_table }}
+    <br>
+    <input class="form-control" type="submit" value="Сохранить">
+    </form>
+    <a class="btn btn-link" href="{% url 'main' %}">На главную</a>
+{% endblock %}

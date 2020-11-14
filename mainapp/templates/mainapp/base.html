@@ -1,0 +1,47 @@
+{% load static %}
+<html lang="ru">
+	<head>
+		<meta charset="UTF-8">
+		<title>
+            {% block title %}
+                {{ title|title }}
+            {% endblock %}
+        </title>
+        <link rel="shortcut icon" href="">
+        {% block css %}
+            <link rel="stylesheet" type="text/css" href="{% static 'style/'|add:css_file %}">
+            <link rel="stylesheet" type="text/css" href="{% static 'style/css/bootstrap.min.css' %}">
+            <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+	    {% endblock %}
+        {% block js %}
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+<!--            <script src ="{% static 'js/main_scripts.js' %}"></script>-->
+        {% endblock %}
+    </head>
+	<body>
+        {% block container %}
+            <div class="container">
+                {% block menu %}
+                {% endblock %}
+
+                {% block content %}
+                {% endblock %}
+                    <div class="map">
+                        <h3 class="map-header">Route Map</h3>
+                        <div class="map-box"><iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2242.763121008914!2d37.5358139890497!3d55.797351034545684!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46b54995cd1b0adf%3A0xfb771c396ac2a119!2zU2t5bGlnaHQsINCR0LjQt9C90LXRgS3RhtC10L3RgtGA!5e0!3m2!1sru!2sru!4v1594385910795!5m2!1sru!2sru" width="600" height="450" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+                        </div>
+                    </div>
+            </div>
+        {% endblock %}
+        {% block footer %}
+            <div class="footer">
+                <div class="arrow">
+                    <a href="#"><img src="{% static 'img/arrow.png' %}" alt="arrow"></a>
+                </div>
+                <p>&copy; {% now "Y" %} Историческе Игры. Все права защищены</p>
+            </div>
+        {% endblock %}
+	</body>
+</html>

@@ -1,0 +1,40 @@
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>
+        {% block title %}
+            {{ title|title }}
+        {% endblock %}
+    </title>
+    <link rel="shortcut icon" href="">
+    {% block css %}
+        <link rel="stylesheet" type="text/css" href="{% static 'style/style-admin.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'style/css/bootstrap.min.css' %}">
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&family=Roboto+Condensed:wght@300;400&display=swap" rel="stylesheet">
+    {% endblock %}
+
+    {% block js %}
+            <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+            <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+            <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+{#            <script src = "{% static 'js/jquery-3.2.1.min.js' %}"></script>#}
+{#            <script src = "{% static 'js/admin_order_scripts.js' %}"></script>#}
+    {% endblock %}
+</head>
+<body>
+  <div class="{% if request.resolver_match.url_name == 'orders' %} order_container {% else %} admin_container {% endif %} ">
+    <div class="h2 text-center head">
+      Админка
+    </div>
+    {% block menu %}
+      <div class="admin_menu">
+        {% include 'adminapp/includes/inc_menu.html' %}
+      </div>
+    {% endblock %}
+
+    {% block content %}
+    {% endblock %}
+  </div>
+</body>
+</html>

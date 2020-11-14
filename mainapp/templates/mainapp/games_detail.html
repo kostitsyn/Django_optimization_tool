@@ -1,0 +1,39 @@
+{% extends 'mainapp/base.html' %}
+{% load static %}
+{% block menu %}
+{% load my_tags %}
+
+	<div class="header">
+		{% include 'mainapp/includes/inc_headerline.html' %}
+		{% include 'mainapp/includes/inc_main_menu.html' %}
+		<p class="slider-line"></p>
+	</div>
+{% endblock %}
+{% block content %}
+		<div class="game">
+			<div class="images">
+				<a href="{% url 'gallery:game' object.pk %}"><img class="main-img" src="{{ object.image|media_folder_users }}" alt="{{ game.image }}"></a>
+				<div class="more-img">
+					<img class="second-img" src="{% static 'img/product_page/assasin-1.jpg' %}" alt="img1">
+					<img class="other-img" src="{% static 'img/product_page/assasin-2.jpg' %}" alt="img2">
+					<img class="other-img" src="{% static 'img/product_page/assasin-3.jpg' %}" alt="img3">
+					<img class="other-img" src="{% static 'img/product_page/assasin-4.jpg' %}" alt="img4">
+				</div>
+			</div>
+			<div class="game-price">
+				<p class="name-game">{{ object.game_category.name|upper }}</p>
+				<p class="name-game">{{ object.name }}</p>
+				<p class="price">${{ object.price }}</p>
+				<a href="{% url 'basket:add' object.pk %}"><input class="buy" type="button" value="Buy"></a>
+			</div>
+			
+			<div class="game-description">
+				<p>{{ object.description }}</p>
+			</div>
+		</div>
+		<div class="similar">
+			<h3 class="similar-header">Similar games</h3>
+			{% include 'mainapp/includes/inc_name_game.html' %}
+		</div>
+		{% include 'mainapp/includes/inc_contacts.html' %}
+{% endblock %}
