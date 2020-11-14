@@ -9,6 +9,7 @@ $(document).on('click', '.details a', function(event) {
                 url: link,
                 success: function(data) {
                     $('.details').html(data.result);
+                    console.log('ajax done');
                 },
             });
 
