@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.db.models import F
 from django.db.models.signals import pre_save, pre_delete
 from django.dispatch import receiver
 from django.http import HttpResponseRedirect, JsonResponse, request
@@ -69,8 +70,11 @@ def basket_add(request, pk):
     if not basket_item:
         basket_item = Basket.objects.create(product=product_item, user=request.user)
 
-    basket_item.quantity += 1
+    # basket_item.quantity += 1
+    basket_item.quanitiy = F('quantity') + 1
     basket_item.save()
+
+    db_profile_by_type(sender, 'UPDATE', connection.queries)
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
@@ -149,5 +153,8 @@ class BasketUpdateView(UpdateView):
 #
 #         return JsonResponse({'result': result})
 
-
+def db_profile_by_type(prefix, type, queries):
+    update_queries = list(filter(lambda x: type in x['sql'], queries))
+    print(f'db_profile {type} for {prefix}:')
+    [print(query['sql']) for query in update_queries]
 

@@ -1,4 +1,7 @@
 from django.contrib.auth.decorators import user_passes_test
+from django.db import connection
+from django.db.models.signals import pre_save
+from django.dispatch import receiver
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import render, get_object_or_404
 
@@ -290,16 +293,16 @@ class ProductCategoryDeleteView(DeleteView):
         if request.method == 'POST' and self.object.is_active:
             self.object.is_active = False
             self.object.save()
-            for item in products_of_category:
-                item.is_active = False
-                item.save()
+            # for item in products_of_category:
+            #     item.is_active = False
+            #     item.save()
         else:
             if self.object.is_active == False:
                 self.object.is_active = True
                 self.object.save()
-                for item in products_of_category:
-                    item.is_active = True
-                    item.save()
+                # for item in products_of_category:
+                #     item.is_active = True
+                #     item.save()
         return HttpResponseRedirect(self.get_success_url())
 
     def get_context_data(self, **kwargs):
@@ -626,5 +629,21 @@ class OrderEditStatusView(UpdateView):
 #         return JsonResponse({'result': result})
 #     else:
 #         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def db_profile_by_type(prefix, type, queries):
+    update_queries = list(filter(lambda x: type in x['sql'], queries))
+    print(f'db_profile {type} for {prefix}:')
+    [print(query['sql']) for query in update_queries]
+
+
+
+@receiver(pre_save, sender=GameCategories)
+def game_is_active_update_gamecategory_save(sender, instance, **kwargs):
+    if instance.pk:
+        if instance.is_active:
+            instance.games_set.update(is_active=True)
+        else:
+            instance.games_set.update(is_active=False)
+        db_profile_by_type(sender, 'UPDATE', connection.queries)
 
 
