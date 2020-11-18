@@ -1,5 +1,6 @@
 from django.contrib.auth.decorators import user_passes_test
 from django.db import connection
+from django.db.models import F
 from django.db.models.signals import pre_save
 from django.dispatch import receiver
 from django.http import HttpResponseRedirect, JsonResponse
@@ -253,6 +254,15 @@ class ProductCategoryUpdateView(UpdateView):
         context_data = super().get_context_data(**kwargs)
         context_data['title'] = 'категории/редактирование'
         return context_data
+
+    def form_valid(self, form):
+        if 'discount' in form.cleaned_data:
+            discount = form.cleaned_data['discount']
+            if discount:
+                print(f'применяется скидка {discount}% к товарам категории {self.object.name}')
+                self.object.games_set.update(price=F('price') * (1-discount/100))
+                db_profile_by_type(self.__class__, 'UPDATE', connection.queries)
+        return super().form_valid(form)
 
 
 # @user_passes_test(lambda u: u.is_superuser)
@@ -634,7 +644,6 @@ def db_profile_by_type(prefix, type, queries):
     update_queries = list(filter(lambda x: type in x['sql'], queries))
     print(f'db_profile {type} for {prefix}:')
     [print(query['sql']) for query in update_queries]
-
 
 
 @receiver(pre_save, sender=GameCategories)

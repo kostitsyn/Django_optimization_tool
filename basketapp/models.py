@@ -24,6 +24,10 @@ class Basket(models.Model):
         ordering = ['-add_datetime']
 
     @staticmethod
+    def get_product(user, product):
+        return Basket.objects.filter(user=user, product=product).select_related()
+
+    @staticmethod
     def get_item(pk):
         return Basket.objects.get(pk=pk)
 

@@ -1,4 +1,5 @@
 from django.contrib.auth.decorators import login_required, user_passes_test
+from django.db import connection
 from django.db.models import F
 from django.db.models.signals import pre_save, pre_delete
 from django.dispatch import receiver
@@ -67,16 +68,40 @@ def basket_add(request, pk):
 
     basket_item = Basket.objects.filter(product=product_item, user=request.user).first()
 
-    if not basket_item:
-        basket_item = Basket.objects.create(product=product_item, user=request.user)
 
-    # basket_item.quantity += 1
-    basket_item.quanitiy = F('quantity') + 1
-    basket_item.save()
+    # if not basket_item:
+    #     basket_item = Basket.objects.create(product=product_item, user=request.user)
+    # print('hello')
+    # print(basket_item)
+    # # basket_item.quantity += 1
+    # basket_item.quantity = F('quantity') + 1
+    # basket_item.save()
 
-    db_profile_by_type(sender, 'UPDATE', connection.queries)
+    old_basket_item = Basket.get_product(user=request.user, product=product_item)
+    old_basket_item = Basket.objects.filter(product=product_item, user=request.user)
+    print('hello')
+
+    if old_basket_item:
+        # old_basket_item[0].quantity += 1
+        old_basket_item[0].quantity = F('quantity') + 1
+        print(old_basket_item[0])
+        old_basket_item[0].save()
+    else:
+        new_basket_item = Basket(user=request.user, product=product_item)
+        # new_basket_item = Basket.objects.create(product=product_item, user=request.user)
+        print(new_basket_item)
+        new_basket_item.quantity += 1
+        new_basket_item.save()
+
+
+    db_profile_by_type(Basket, 'UPDATE', connection.queries)
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def db_profile_by_type(prefix, type, queries):
+    update_queries = list(filter(lambda x: type in x['sql'], queries))
+    print(f'db_profile {type} for {prefix}:')
+    [print(query['sql']) for query in update_queries]
 
 
 class BasketDeleteView(DeleteView):
@@ -153,8 +178,5 @@ class BasketUpdateView(UpdateView):
 #
 #         return JsonResponse({'result': result})
 
-def db_profile_by_type(prefix, type, queries):
-    update_queries = list(filter(lambda x: type in x['sql'], queries))
-    print(f'db_profile {type} for {prefix}:')
-    [print(query['sql']) for query in update_queries]
+
 
