@@ -173,7 +173,10 @@ class ByCategoryListView(ListView):
 
     def get_queryset(self):
         category_pk = self.kwargs.get('pk', None)
-        games_by_category = Games.objects.filter(game_category=category_pk)
+        if category_pk:
+            games_by_category = Games.objects.filter(game_category=category_pk)
+        else:
+            games_by_category = Games.objects.all()
         # games_by_category = Games.objects.filter(game_category=category_pk).select_related('game_category')
         return games_by_category
 
