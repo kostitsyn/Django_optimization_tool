@@ -31,9 +31,9 @@ else:
     SECRET_KEY = '123'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
+DEBUG = True
 
-DEBUG = False
+# DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -53,8 +53,8 @@ INSTALLED_APPS = [
     'adminapp',
     'social_django',
     'ordersapp',
-    'debug_toolbar',
-    'template_profiler_panel',
+    # 'debug_toolbar',
+    # 'template_profiler_panel',
 ]
 
 MIDDLEWARE = [
@@ -65,8 +65,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'social_django.middleware.SocialAuthExceptionMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
+    # 'social_django.middleware.SocialAuthExceptionMiddleware',
+    # 'debug_toolbar.middleware.DebugToolbarMiddleware'
 ]
 
 if DEBUG:
@@ -125,16 +125,16 @@ AUTH_USER_MODEL = 'authapp.ShopUser'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # }
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'geekshop',
-        'USER': 'postgres',
-        # 'PASSWORD': 'geekbranis',
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'geekshop',
+    #     'USER': 'postgres',
+    #     # 'PASSWORD': 'geekbranis',
+    # }
 }
 
 
