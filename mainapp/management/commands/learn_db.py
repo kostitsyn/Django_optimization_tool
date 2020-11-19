@@ -1,6 +1,7 @@
 from datetime import timedelta
 
 from django.db.models import Q, F, When, Case, IntegerField, DecimalField
+from pip._internal.utils.misc import tabulate
 
 from ordersapp.models import OrderItem
 from django.core.management import BaseCommand
@@ -51,3 +52,9 @@ class Command(BaseCommand):
             {orderitem.product.name:30}: скидка\
             {abs(orderitem.total_price):6.2f} $ |\
             {orderitem.order.updated - orderitem.order.created}')
+        # data = []
+        # for orderitem in test_orderss:
+        #     item_data = (orderitem.action_order, ': заказ №', orderitem.pk, ':', orderitem.product.name, ': скидка', abs(orderitem.total_price), '$', (orderitem.order.updated - orderitem.order.created))
+        #     data.append(item_data)
+        #
+        # print(tabulate(data))
