@@ -15,7 +15,9 @@
 	<div class="gallery clearfix">
 		<h3 class="gallery-header">Категория: "{{ category.name|title }}"</h3>
         <div class="gallery clearfix">
+        {% if hot_product %}
         {% include 'mainapp/includes/inc_hot_offer.html' %}
+        {% endif %}
         <div class="paginator">
           {% if page_obj.has_previous %}
             <a href="{% url 'gallery:category' category.pk page_obj.previous_page_number %}"><</a>

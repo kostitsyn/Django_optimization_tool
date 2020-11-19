@@ -15,7 +15,10 @@ from mainapp.models import Games, Contacts, DiscountGames, GameCategories
 
 def get_hot_product():
     games_list = Games.objects.all().exclude(quantity=0)
-    return random.sample(list(games_list), 1)[0]
+    if games_list:
+        return random.sample(list(games_list), 1)[0]
+    else:
+        return None
 
 
 def get_required_obj(lst, num, max_num=0):
@@ -115,14 +118,18 @@ class GalleryListView(ListView):
     def get_queryset(self):
         global hot_product
         hot_product = get_hot_product()
-        rest_games = Games.objects.all().exclude(pk=hot_product.pk)
-        return rest_games
+        if hot_product:
+            rest_games = Games.objects.all().exclude(pk=hot_product.pk)
+            return rest_games
+        else:
+            return Games.objects.all()
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
         context_data['title'] = 'галлерея'
         context_data['css_file'] = 'style-gallery.css'
-        context_data['hot_product'] = hot_product
+        if hot_product:
+            context_data['hot_product'] = hot_product
         context_data['links_menu'] = GameCategories.objects.all()
         context_data['games_discount'] = DiscountGames.objects.all()
         return context_data
@@ -181,7 +188,9 @@ class ByCategoryListView(ListView):
             context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
         context_data['links_menu'] = GameCategories.objects.all()
         # context_data['links_menu'] = GameCategories.objects.all().select_related()
-        context_data['hot_product'] = get_hot_product()
+        hot_product = get_hot_product()
+        if hot_product:
+            context_data['hot_product'] = hot_product
         context_data['games_discount'] = DiscountGames.objects.all()
         # context_data['games_discount'] = DiscountGames.objects.all().select_related()
         return context_data

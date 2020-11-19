@@ -14,7 +14,9 @@
    {% include 'mainapp/includes/inc_categories_game.html' %}
 	<div class="gallery clearfix">
 		<h3 class="gallery-header">Our Gallery</h3>
+        {% if hot_product %}
         {% include 'mainapp/includes/inc_hot_offer.html' %}
+        {% endif %}
         <div class="paginator">
           {% if page_obj.has_previous %}
             <a href="{% url 'gallery:gallery_main' page_obj.previous_page_number %}"><</a>
