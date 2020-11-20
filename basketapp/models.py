@@ -46,35 +46,35 @@ class Basket(models.Model):
     def get_product_cost(self):
         return self.product.price * self.quantity
 
-    @cached_property
-    def get_total_quantity_cached(self):
-        # _items = Basket.objects.filter(user=self.user)
-        # _items = Basket.objects.filter(user=self.user).select_related()
-        _items = self.get_items_cached
-        _total_quantity = sum(list(map(lambda x: x.quantity, _items)))
-        return _total_quantity
-
-    # @property
-    # def get_total_quantity(self):
+    # @cached_property
+    # def get_total_quantity_cached(self):
     #     # _items = Basket.objects.filter(user=self.user)
-    #     _items = Basket.objects.filter(user=self.user).select_related()
+    #     # _items = Basket.objects.filter(user=self.user).select_related()
+    #     _items = self.get_items_cached
     #     _total_quantity = sum(list(map(lambda x: x.quantity, _items)))
     #     return _total_quantity
 
-    @cached_property
-    def get_total_cost_cached(self):
+    @property
+    def get_total_quantity(self):
         # _items = Basket.objects.filter(user=self.user)
-        # _items = Basket.objects.filter(user=self.user).select_related()
-        _items = self.get_items_cached
-        _total_cost = sum(list(map(lambda x: x.get_product_cost, _items)))
-        return _total_cost
+        _items = Basket.objects.filter(user=self.user).select_related()
+        _total_quantity = sum(list(map(lambda x: x.quantity, _items)))
+        return _total_quantity
 
-    # @property
-    # def get_total_cost(self):
+    # @cached_property
+    # def get_total_cost_cached(self):
     #     # _items = Basket.objects.filter(user=self.user)
-    #     _items = Basket.objects.filter(user=self.user).select_related()
+    #     # _items = Basket.objects.filter(user=self.user).select_related()
+    #     _items = self.get_items_cached
     #     _total_cost = sum(list(map(lambda x: x.get_product_cost, _items)))
     #     return _total_cost
+
+    @property
+    def get_total_cost(self):
+        # _items = Basket.objects.filter(user=self.user)
+        _items = Basket.objects.filter(user=self.user).select_related()
+        _total_cost = sum(list(map(lambda x: x.get_product_cost, _items)))
+        return _total_cost
 
     # def save(self, *args, **kwargs):
     #     if self.pk:
