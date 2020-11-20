@@ -25,6 +25,7 @@ class Basket(models.Model):
         ordering = ['-add_datetime']
 
 
+
     @staticmethod
     def get_item(pk):
         return Basket.objects.get(pk=pk)
