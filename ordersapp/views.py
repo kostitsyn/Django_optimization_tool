@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.db import transaction
 from django.db.models import F
 from django.db.models.signals import pre_save, pre_delete
@@ -6,6 +7,7 @@ from django.forms import inlineformset_factory
 from django.http import HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.urls import reverse_lazy, reverse
+from django.utils.decorators import method_decorator
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
 
 from basketapp.models import Basket
@@ -20,6 +22,10 @@ from django.http import HttpResponseRedirect, JsonResponse, request
 class OrderListView(ListView):
     model = Order
 
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
     def get_queryset(self):
         return Order.objects.filter(user=self.request.user, is_active=True)
 
@@ -29,11 +35,14 @@ class OrderListView(ListView):
         return context_data
 
 
-
 class OrderItemsCreateView(CreateView):
     model = Order
     fields = []
     success_url = reverse_lazy('order:orders_list')
+
+    @method_decorator(login_required())
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
 
     def get_context_data(self, **kwargs):
         context_data = super(OrderItemsCreateView, self).get_context_data(**kwargs)
@@ -72,7 +81,8 @@ class OrderItemsCreateView(CreateView):
                 orderitems.instance = self.object
                 orderitems.save()
 
-        if self.object.get_total_cost == 0:
+        # if self.object.get_total_cost == 0:
+        if self.object.get_summary['total_cost'] == 0:
             self.object.delete()
 
         return super(OrderItemsCreateView, self).form_valid(form)
@@ -107,7 +117,8 @@ class OrderItemsUpdateView(UpdateView):
             orderitems.instance = self.object
             orderitems.save()
 
-        if self.object.get_total_cost == 0:
+        # if self.object.get_total_cost == 0:
+        if self.object.get_summary['total_cost'] == 0:
             self.object.delete()
 
         return super(OrderItemsUpdateView, self).form_valid(form)

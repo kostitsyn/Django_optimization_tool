@@ -12,7 +12,7 @@
 {% block content %}
 		<div class="game">
 			<div class="images">
-				<img class="main-img" src="{{ object.image|media_folder_users }}" alt="{{ game.image }}">
+				<a href="{% url 'gallery:game' object.pk %}"><img class="main-img" src="{{ object.image|media_folder_users }}" alt="{{ game.image }}"></a>
 				<div class="more-img">
 					<img class="second-img" src="{% static 'img/product_page/assasin-1.jpg' %}" alt="img1">
 					<img class="other-img" src="{% static 'img/product_page/assasin-2.jpg' %}" alt="img2">

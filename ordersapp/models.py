@@ -27,7 +27,7 @@ class Order(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated = models.DateTimeField(auto_now=True, verbose_name='Дата изменения')
     status = models.CharField(max_length=3, choices=ORDER_STATUSES,  verbose_name='Статус заказа', default=FORMING)
-    is_active = models.BooleanField(default=True, verbose_name='Активен')
+    is_active = models.BooleanField(default=True, verbose_name='Активен', db_index=True)
 
     class Meta:
         ordering = ('-created',)
@@ -37,20 +37,30 @@ class Order(models.Model):
     def __str__(self):
         return f'Заказ №{self.id}'
 
-    @property
-    def get_total_quantity(self):
-        items = self.orderitems.select_related()
-        return sum(list(map(lambda x: x.quantity, items)))
+    # @property
+    # def get_total_quantity(self):
+    #     items = self.orderitems.select_related()
+    #     return sum(list(map(lambda x: x.quantity, items)))
 
     @property
     def get_product_type_quantity(self):
         items = self.orderitems.select_related()
         return len(items)
 
+    # @property
+    # def get_total_cost(self):
+    #     items = self.orderitems.select_related()
+    #     return sum(list(map(lambda x: x.quantity * x.product.price, items)))
+
     @property
-    def get_total_cost(self):
+    def get_summary(self):
         items = self.orderitems.select_related()
-        return sum(list(map(lambda x: x.quantity * x.product.price, items)))
+        total_quantity = sum(list(map(lambda x: x.quantity, items)))
+        total_cost = sum(list(map(lambda x: x.quantity * x.product.price, items)))
+        return {
+            'total_quantity': total_quantity,
+            'total_cost': total_cost
+        }
 
     def delete(self):
         for item in self.orderitems.select_related():

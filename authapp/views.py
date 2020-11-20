@@ -2,7 +2,7 @@ from typing import re
 
 from django.conf import settings
 from django.contrib import auth
-from django.contrib.auth.decorators import user_passes_test
+from django.contrib.auth.decorators import user_passes_test, login_required
 from django.core.mail import send_mail
 from django.db import transaction
 from django.http import HttpResponseRedirect
@@ -121,6 +121,8 @@ def register(request):
 #         context_data['title'] = 'редактирование'
 #         return context_data
 
+
+@login_required
 @transaction.atomic()
 def edit(request):
 

@@ -54,9 +54,11 @@ INSTALLED_APPS = [
     'ordersapp',
     'debug_toolbar',
     'template_profiler_panel',
+    'django_extensions'
 ]
 
 MIDDLEWARE = [
+    # 'django.middleware.cache.UpdateCacheMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -65,7 +67,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
-    'debug_toolbar.middleware.DebugToolbarMiddleware'
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
+    # 'django.middleware.cache.FetchFromCacheMiddleware',
 ]
 
 if DEBUG:
@@ -124,16 +127,16 @@ AUTH_USER_MODEL = 'authapp.ShopUser'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    # 'default': {
-    #     'ENGINE': 'django.db.backends.sqlite3',
-    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    # },
     'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'geekshop',
-        'USER': 'postgres',
-        # 'PASSWORD': 'geekbranis',
-    }
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    },
+    # 'default': {
+    #     'ENGINE': 'django.db.backends.postgresql',
+    #     'NAME': 'geekshop',
+    #     'USER': 'postgres',
+    #     # 'PASSWORD': 'geekbranis',
+    # }
 }
 
 
@@ -197,6 +200,8 @@ SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 
 DOMAIN_NAME = 'http:/localhost:8000'
 
+
+
 EMAIL_HOST = 'localhost'
 EMAIL_PORT = '25'
 EMAIL_HOST_USER = 'django@geekshop.local'
@@ -238,3 +243,15 @@ with open('geekshop/vk.json') as f:
 
 SOCIAL_AUTH_VK_OAUTH2_KEY = VK['SOCIAL_AUTH_VK_OAUTH2_KEY']
 SOCIAL_AUTH_VK_OAUTH2_SECRET = VK['SOCIAL_AUTH_VK_OAUTH2_SECRET']
+
+CACHE_MIDDLEWARE_ALIAS = 'default'
+CACHE_MIDDLEWARE_SECONDS = 120
+CACHE_MIDDLEWARE_PREFIX = 'geekshop'
+
+CACHES = {
+    'default': {
+        'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+        'LOCATION': '127.0.0.1.11211'
+    }
+}
+LOW_CACHE = True
