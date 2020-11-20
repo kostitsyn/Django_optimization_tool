@@ -18,86 +18,88 @@ from geekshop import settings
 from mainapp.models import Games, Contacts, DiscountGames, GameCategories
 
 
-def get_links_menu():
-    if settings.LOW_CACHE:
-        key = 'links_menu'
-        links_menu = cache.get(key)
-        if links_menu is None:
-            links_menu = GameCategories.objects.filter(is_active=True)
-            cache.set(key, links_menu)
-        return links_menu
-    else:
-        return GameCategories.objects.filter(is_active=True)
-
-
-def get_category(pk):
-    if settings.LOW_CACHE:
-        key = f'category_{pk}'
-        category = cache.get(key)
-        if category is None:
-            category = get_object_or_404(GameCategories, pk=pk)
-            cache.set(key, category)
-        return category
-    else:
-        return get_object_or_404(GameCategories, pk=pk)
-
-
-def get_products():
-    if settings.LOW_CACHE:
-        key = 'products'
-        products = cache.get(key)
-        if products is None:
-            products = Games.objects.all()
-            cache.set(key, products)
-        return products
-    else:
-        return Games.objects.all()
-
-
-def get_products_by_category(pk):
-    if settings.LOW_CACHE:
-        key = f'products_by_category_{pk}'
-        products_by_category = cache.get(key)
-        if products_by_category is None:
-            products_by_category = Games.objects.filter(game_category=pk)
-            cache.set(key, products_by_category)
-        return products_by_category
-    else:
-        return Games.objects.filter(game_category=pk)
-
-
-def get_product(pk):
-    if settings.LOW_CACHE:
-        key = f'product_{pk}'
-        product = cache.get(key)
-        if product is None:
-            product = Games.objects.get(pk=pk)
-            cache.set(key, product)
-        return product
-    else:
-        return Games.objects.get(pk=pk)
-
-
-# def get_hot_product():
-#     games_list = Games.objects.all().exclude(quantity=0)
-#     if games_list:
-#         return random.sample(list(games_list), 1)[0]
+# def get_links_menu():
+#     if settings.LOW_CACHE:
+#         key = 'links_menu'
+#         links_menu = cache.get(key)
+#         if links_menu is None:
+#             links_menu = GameCategories.objects.filter(is_active=True)
+#             cache.set(key, links_menu)
+#         return links_menu
 #     else:
-#         return None
+#         return GameCategories.objects.filter(is_active=True)
+#
+#
+# def get_category(pk):
+#     if settings.LOW_CACHE:
+#         key = f'category_{pk}'
+#         category = cache.get(key)
+#         if category is None:
+#             category = get_object_or_404(GameCategories, pk=pk)
+#             cache.set(key, category)
+#         return category
+#     else:
+#         return get_object_or_404(GameCategories, pk=pk)
+#
+#
+# def get_products():
+#     if settings.LOW_CACHE:
+#         key = 'products'
+#         products = cache.get(key)
+#         if products is None:
+#             products = Games.objects.all()
+#             cache.set(key, products)
+#         return products
+#     else:
+#         return Games.objects.all()
+#
+#
+# def get_products_by_category(pk):
+#     if settings.LOW_CACHE:
+#         key = f'products_by_category_{pk}'
+#         products_by_category = cache.get(key)
+#         if products_by_category is None:
+#             products_by_category = Games.objects.filter(game_category=pk)
+#             cache.set(key, products_by_category)
+#         return products_by_category
+#     else:
+#         return Games.objects.filter(game_category=pk)
+#
+#
+# def get_product(pk):
+#     if settings.LOW_CACHE:
+#         key = f'product_{pk}'
+#         product = cache.get(key)
+#         if product is None:
+#             product = Games.objects.get(pk=pk)
+#             cache.set(key, product)
+#         return product
+#     else:
+#         return Games.objects.get(pk=pk)
+#
+#
+# def get_hot_product():
+#     if settings.LOW_CACHE:
+#         key = 'hot_product'
+#         hot_product = cache.get(key)
+#         if hot_product is None:
+#             games_list = Games.objects.all().exclude(quantity=0)
+#             hot_product = random.sample(list(games_list), 1)[0]
+#             cache.set(key, hot_product)
+#         return hot_product
+#     else:
+#         games_list = Games.objects.all().exclude(quantity=0)
+#         hot_product = random.sample(list(games_list), 1)[0]
+#         return hot_product
 
 def get_hot_product():
-    if settings.LOW_CACHE:
-        key = 'hot_product'
-        hot_product = cache.get(key)
-        if hot_product is None:
-            games_list = Games.objects.all().exclude(quantity=0)
-            hot_product = random.sample(list(games_list), 1)[0]
-            cache.set(key, hot_product)
-        return hot_product
+    games_list = Games.objects.all().exclude(quantity=0)
+    if games_list:
+        return random.sample(list(games_list), 1)[0]
     else:
-        games_list = Games.objects.all().exclude(quantity=0)
-        hot_product = random.sample(list(games_list), 1)[0]
-        return hot_product
+        return None
+
+
 
 
 def get_required_obj(lst, num, max_num=0):
@@ -221,8 +223,8 @@ class GalleryListView(ListView):
         context_data['css_file'] = 'style-gallery.css'
         if hot_product:
             context_data['hot_product'] = hot_product
-        # context_data['links_menu'] = GameCategories.objects.all()
-        context_data['links_menu'] = get_links_menu()
+        context_data['links_menu'] = GameCategories.objects.all()
+        # context_data['links_menu'] = get_links_menu()
         context_data['games_discount'] = DiscountGames.objects.all()
         return context_data
 
@@ -282,7 +284,7 @@ class ByCategoryListView(ListView):
         else:
             context_data['category'] = get_object_or_404(GameCategories, pk=category_pk)
         context_data['links_menu'] = GameCategories.objects.all()
-        context_data['links_menu'] = get_links_menu()
+        # context_data['links_menu'] = get_links_menu()
         hot_product = get_hot_product()
         if hot_product:
             context_data['hot_product'] = hot_product
@@ -429,11 +431,11 @@ class ContactsListView(ListView):
 class ProductDetailView(DetailView):
     model = Games
 
-    def get_object(self, queryset=None):
-        self.object = super().get_object()
-        item_pk = self.object.pk
-        self.object = get_product(item_pk)
-        return self.object
+    # def get_object(self, queryset=None):
+    #     self.object = super().get_object()
+    #     item_pk = self.object.pk
+    #     self.object = get_product(item_pk)
+    #     return self.object
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
