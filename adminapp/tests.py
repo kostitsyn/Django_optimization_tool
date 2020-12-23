@@ -2,6 +2,7 @@ from django.core.management import call_command
 from django.test import TestCase
 from django.test.client import Client
 
+
 from authapp.models import ShopUser
 from geekshop import settings
 from mainapp.models import GameCategories, Games
