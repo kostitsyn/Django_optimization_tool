@@ -17,7 +17,11 @@
     <button class="'btn btn-outline-dark form-control">
         <a class="btn" href="{% url 'auth:register' %}">регистрация</a>
     </button>
-    <button class="'btn btn-outline-dark form-control">
-        <a class="btn" href="{% url 'social:begin' 'vk-oauth2' %}?next=/">Войти через VK</a>
-    </button>
+{#    <button class="'btn btn-outline-dark form-control">#}
+        <a class="btn btn-block btn-social btn-vk" href="{% url 'social:begin' 'vk-oauth2' %}?next=/"><span class="fa fa-vk"></span>Войти через VK</a>
+{#    </button>#}
+{#    <button class="'btn btn-outline-dark form-control">#}
+        <a class="btn btn-block btn-social btn-google"><span class="fa fa-google"></span> Войти через Google</a>
+{#    </button>#}
+
 {% endblock %}
