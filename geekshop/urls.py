@@ -27,6 +27,8 @@ urlpatterns = [
     # path('about/', mainapp.about, name='about'),
     path('about/', mainapp.AboutTemplateView.as_view(), name='about'),
 
+    path('google7802449c7f174ab1.html/', mainapp.GoogleTemplateView.as_view(), name='google'),
+
     # path('service/', mainapp.service, name='service'),
     path('service/', mainapp.ServiceTemplateView.as_view(), name='service'),
 
