@@ -1,0 +1,51 @@
+{% load static %}
+<div class="team">
+		<h3 class="team-header">Our team</h3>
+		<ul class="team-people">
+			<li>
+				<div class="person"><img src="/static/img/Our_team/4.jpg" alt="person"><p class="name-person">Mary Jane</p><p class="position-person">Vestibulum</p>
+					<div class="person-links">
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/facebook.png' %}" alt="facebook"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/twitter.png' %}" alt="twitter"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/rss.png' %}" alt="rss"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/vk.png' %}" alt="vk"></a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="person"><img src="/static/img/Our_team/3.jpg" alt="person"><p class="name-person">Peter Parker</p><p class="position-person">Vestibulum</p>
+					<div class="person-links">
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/facebook.png' %}" alt="facebook"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/twitter.png' %}" alt="twitter"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/rss.png' %}" alt="rss"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/vk.png' %}" alt="vk"></a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="person"><img src="/static/img/Our_team/2.jpg" alt="person"><p class="name-person">John Watson</p><p class="position-person">Ves tibulum</p>
+					<div class="person-links">
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/facebook.png' %}" alt="facebook"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/twitter.png' %}" alt="twitter"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/rss.png' %}" alt="rss"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/vk.png' %}" alt="vk"></a>
+					</div>
+				</div>
+			</li>
+			<li>
+				<div class="person"><img src="/static/img/Our_team/1.jpg" alt="person"><p class="name-person">Steven Wilson</p><p class="position-person">Ves tibulum</p>
+					<div class="person-links">
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/facebook.png' %}" alt="facebook"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/twitter.png' %}" alt="twitter"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/rss.png' %}" alt="rss"></a>
+						<a href="#" class="square"><img class="square-image" src="{% static 'img/Our_team/vk.png' %}" alt="vk"></a>
+					</div>
+				</div>
+			</li>
+		</ul>
+        {% if request.resolver_match.url_name != 'team' %}
+            <div class="arrow">
+                <a href="#"><img src="{% static 'img/arrow.png' %}" alt="arrow"></a>
+            </div>
+        {% endif %}
+	</div>

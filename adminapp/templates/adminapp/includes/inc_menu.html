@@ -1,0 +1,30 @@
+<ul class="menu">
+  <li>
+    <a href="{% url 'main' %}">
+      на сайт
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'admin:users' 1 %}"
+       class="{% if request.resolver_match.url_name == 'users' %}
+                active
+              {% endif %}">
+      пользователи
+    </a>
+  </li>
+  <li>
+    <a href="{% url 'admin:categories' 1 %}"
+       class="{% if request.resolver_match.url_name == 'categories' or category.name %} active {% endif %}">
+      {% if request.resolver_match.url_name == 'categories' or request.resolver_match.url_name == 'users' %} категории {% else %} категория {% endif %}
+      {% if category %}
+        :<span>{{ category.name }}</span>
+      {% endif %}
+    </a>
+  </li>
+    <li>
+    <a href="{% url 'admin:orders' 1 %}"
+       class="{% if request.resolver_match.url_name == 'orders' or category.name %} active {% endif %}">
+       заказы
+    </a>
+  </li>
+</ul>
