@@ -20,8 +20,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-#SECRET_KEY = '6fbcal(sbj_a@lgw$v7jjnpr5cg&9d9sn_1z#faqy_^e@(s#a5'
-
 
 file_path = "path/to/password.txt"
 if os.path.exists(file_path):
@@ -31,8 +29,8 @@ else:
     SECRET_KEY = '123'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
-DEBUG = False
+DEBUG = True
+# DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -47,13 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.sites',
-    # 'oauth_app',
     'template_profiler_panel',
     'django_extensions',
-    # 'allauth',
-    # 'allauth.account',
-    # 'allauth.socialaccount',
-    # 'allauth.socialaccount.providers.google',
     'mainapp',
     'authapp',
     'basketapp',
@@ -62,7 +55,6 @@ INSTALLED_APPS = [
     'ordersapp',
     'debug_toolbar',
 ]
-SITE_ID = 1
 
 MIDDLEWARE = [
     # 'django.middleware.cache.UpdateCacheMiddleware',
@@ -134,16 +126,16 @@ AUTH_USER_MODEL = 'authapp.ShopUser'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
     # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'geekshop',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'geekbranis',
-    # }
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # },
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'geekshop',
+        'USER': 'postgres',
+        'PASSWORD': 'geekbranis',
+    }
 }
 
 
@@ -184,7 +176,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
