@@ -27,7 +27,7 @@ urlpatterns = [
     # path('about/', mainapp.about, name='about'),
     path('about/', mainapp.AboutTemplateView.as_view(), name='about'),
 
-    path('google7802449c7f174ab1.html/', mainapp.GoogleTemplateView.as_view(), name='google'),
+    # path('google7802449c7f174ab1.html/', mainapp.GoogleTemplateView.as_view(), name='google'),
 
     # path('service/', mainapp.service, name='service'),
     path('service/', mainapp.ServiceTemplateView.as_view(), name='service'),
@@ -46,13 +46,12 @@ urlpatterns = [
     path('basket/', include('basketapp.urls', namespace='basket')),
     path('auth/', include('authapp.urls', namespace='auth')),
 
-    path('', include('social_django.urls', namespace='social')),
+    path('oauth/', include('social_django.urls', namespace='social')),
 
     path('order/', include('ordersapp.urls', namespace='order')),
 
     path('admin/', include('adminapp.urls', namespace='admin')),
-    # path('admin/', admin.site.urls),
-
+    # path('admin/', admin.site.urls, name='admin'),
 ]
 
 if settings.DEBUG:

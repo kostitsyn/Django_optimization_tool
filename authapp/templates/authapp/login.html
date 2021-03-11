@@ -21,7 +21,10 @@
         <a class="btn btn-block btn-social btn-vk" href="{% url 'social:begin' 'vk-oauth2' %}?next=/"><span class="fa fa-vk"></span>Войти через VK</a>
 {#    </button>#}
 {#    <button class="'btn btn-outline-dark form-control">#}
-        <a class="btn btn-block btn-social btn-google" href="{% url 'social:begin' 'google' %}?next=/"><span class="fa fa-google"></span> Войти через Google</a>
+        <a class="btn btn-block btn-social btn-google" href="{% url 'social:begin' 'google-oauth2' %}?next=/"><span class="fa fa-google"></span> Войти через Google</a>
+{#    </button>#}
+{#    <button class="'btn btn-outline-dark form-control">#}
+        <a class="btn btn-block btn-social btn-github" href="{% url 'social:begin' 'github' %}?next=/"><span class="fa fa-github"></span> Войти через Github</a>
 {#    </button>#}
 
 {% endblock %}

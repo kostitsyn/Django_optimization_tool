@@ -168,18 +168,18 @@ class AboutTemplateView(TemplateView):
         return context_data
 
 
-class GoogleTemplateView(TemplateView):
-    template_name = 'mainapp/google7802449c7f174ab1.html'
-
-    @method_decorator(cache_page(3600))
-    def dispatch(self, *args, **kwargs):
-        return super(GoogleTemplateView, self).dispatch(*args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context_data = super().get_context_data(**kwargs)
-        context_data['title'] = 'google'
-        context_data['css_file'] = 'style-gallery.css'
-        return context_data
+# class GoogleTemplateView(TemplateView):
+#     template_name = 'mainapp/google7802449c7f174ab1.html'
+#
+#     @method_decorator(cache_page(3600))
+#     def dispatch(self, *args, **kwargs):
+#         return super(GoogleTemplateView, self).dispatch(*args, **kwargs)
+#
+#     def get_context_data(self, **kwargs):
+#         context_data = super().get_context_data(**kwargs)
+#         context_data['title'] = 'google'
+#         context_data['css_file'] = 'style-gallery.css'
+#         return context_data
 
 # def about(request):
 #
