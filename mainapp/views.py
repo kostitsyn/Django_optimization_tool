@@ -167,7 +167,7 @@ class ContactsListView(ListView):
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
-        context_data['contact_data'] = Contacts.objects.get(pk=1)
+        context_data['contact_data'] = Contacts.objects.all()[0]
         context_data['title'] = 'контакты'
         context_data['css_file'] = 'style-gallery.css'
         return context_data
