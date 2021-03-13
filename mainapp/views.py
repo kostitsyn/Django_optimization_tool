@@ -55,7 +55,7 @@ class MainListView(ListView):
         context_data = super().get_context_data(**kwargs)
         context_data['title'] = 'главная'
         context_data['css_file'] = 'style-index.css'
-        context_data['contact_data'] = Contacts.objects.get(pk=1)
+        context_data['contact_data'] = Contacts.objects.all()[0]
         return context_data
 
 
