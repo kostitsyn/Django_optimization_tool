@@ -14,10 +14,6 @@ env
 ./.env
 
 geekshop/env.json
-geekshop/vk.json
-geekshop/google.json
-geekshop/github.json
-geekshop/github_prod.json
 
 
 static/admin/
