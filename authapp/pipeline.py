@@ -61,7 +61,6 @@ def save_user_profile(backend, user, response, *args, **kwargs):
             #     f.write(avatar.content)
             urllib.request.urlretrieve(data['photo_100'], f'{settings.MEDIA_ROOT}/users_avatars/{user.pk}.jpg')
             user.avatar = f'users_avatars/{user.pk}.jpg'
-
         user.save()
     elif backend.name == 'github':
 
