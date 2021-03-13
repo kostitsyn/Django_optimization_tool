@@ -21,10 +21,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-file_path = "path/to/password.txt"
+file_path = "'geekshop/env.json'"
 if os.path.exists(file_path):
-    with open('password.txt') as f_obj:
-        SECRET_KEY = f_obj.read()
+    with open('env.json') as f_obj:
+        data = json.load(f_obj)
+        SECRET_KEY = data["SECRET_KEY"]
 else:
     SECRET_KEY = '123'
 
@@ -176,11 +177,11 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
 
 STATIC_URL = '/static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
-# STATICFILES_DIRS = (
-#     os.path.join(BASE_DIR, 'static'),
-# )
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -197,11 +198,11 @@ SOCIAL_AUTH_VK_OAUTH2_IGNORE_DEFAULT_SCOPE = True
 SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 
 
-SOCIAL_AUTH_GITHUB_OAUTH2_IGNORE_DEFAULT_SCOPE = True
-SOCIAL_AUTH_GITHUB_OAUTH2_SCOPE = ['email']
+# SOCIAL_AUTH_GITHUB_OAUTH2_IGNORE_DEFAULT_SCOPE = True
+# SOCIAL_AUTH_GITHUB_OAUTH2_SCOPE = ['email']
 
-SOCIAL_AUTH_GOOGLE_OAUTH2_IGNORE_DEFAULT_SCOPE = True
-SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
+# SOCIAL_AUTH_GOOGLE_OAUTH2_IGNORE_DEFAULT_SCOPE = True
+# SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
 
 
 DOMAIN_NAME = 'http:/localhost:8000'
@@ -256,9 +257,12 @@ with open('geekshop/vk.json') as f:
 SOCIAL_AUTH_VK_OAUTH2_KEY = VK['SOCIAL_AUTH_VK_OAUTH2_KEY']
 SOCIAL_AUTH_VK_OAUTH2_SECRET = VK['SOCIAL_AUTH_VK_OAUTH2_SECRET']
 
-
-with open('geekshop/github.json') as f:
-    GITHUB = json.load(f)
+if DEBUG:
+    with open('geekshop/github.json') as f:
+        GITHUB = json.load(f)
+else:
+    with open('geekshop/github_prod.json') as f:
+        GITHUB = json.load(f)
 
 SOCIAL_AUTH_GITHUB_KEY = GITHUB['SOCIAL_AUTH_GITHUB_KEY']
 SOCIAL_AUTH_GITHUB_SECRET = GITHUB['SOCIAL_AUTH_GITHUB_SECRET']
