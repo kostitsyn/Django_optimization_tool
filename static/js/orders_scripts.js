@@ -102,14 +102,15 @@ window.onload = function() {
 
     $('.order_form').on('click keyup', 'input[type="number"]', function (event) {
         let target_href = event.target;
-
+        console.log('test');
+        let game_target = $('input[type="number"]').parent().parent().find('option:selected')[0];
         if (target_href) {
             $.ajax({
-                url: "/basket/edit/" + target_href.name + "/" + target_href.value + "/",
+                url: "/order/create/edit/" + game_target.value + "/" + target_href.value + "/",
 
                 success: function (data) {
                     $('.basket_list').html(data.result);
-                    console.log('ajax done');
+                    console.log('ajax done123');
                 },
             });
 

@@ -151,8 +151,8 @@ def order_forming_complete(request, pk):
 @receiver(pre_save, sender=OrderItem)
 @receiver(pre_save, sender=Basket)
 def product_quantity_update_save(sender, update_fields, instance, **kwargs):
+    print('*'*100)
     if update_fields is 'quantity' or 'product':
-
         if instance.pk:
             # instance.product.quantity -= instance.quantity - sender.get_item(instance.pk).quantity
             instance.product.quantity = F('quantity') - (instance.quantity - sender.get_item(instance.pk).quantity)
@@ -188,16 +188,16 @@ class OrderUpdateView(UpdateView):
         return super(OrderUpdateView, self).dispatch(*args, **kwargs)
 
     def get(self, request, *args, **kwargs):
-        print('1'*100)
         if request.is_ajax():
             quantity = int(self.kwargs.get('quantity', None))
-            order_item_pk = self.kwargs.get('pk', None)
-            new_order_item = Basket.get_item(order_item_pk)
+            game_item_pk = self.kwargs.get('pk', None)
+            print(f'Quantity: {quantity}\nGame_item_pk: {game_item_pk}')
+            new_game_item = Games.get_item(game_item_pk)
             if quantity > 0:
-                new_order_item.quantity = quantity
-                new_order_item.save()
+                new_game_item.quantity = quantity
+                new_game_item.save()
             else:
-                new_order_item.delete()
+                new_game_item.delete()
             order_items = Order.objects.filter(user=request.user)
             content = {
                 'object_list': order_items,

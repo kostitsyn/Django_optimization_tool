@@ -95,6 +95,7 @@ def basket_add(request, pk):
 
     return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+
 def db_profile_by_type(prefix, type, queries):
     update_queries = list(filter(lambda x: type in x['sql'], queries))
     print(f'db_profile {type} for {prefix}:')
