@@ -142,11 +142,10 @@ class BasketUpdateView(UpdateView):
                 new_basket_item.save()
             else:
                 new_basket_item.delete()
-
             basket_items = Basket.objects.filter(user=request.user)
             content = {
                 'object_list': basket_items,
-                'user': request.user.first_name,
+                'user': request.user,
             }
 
             result = render_to_string('basketapp/basket.html', content)

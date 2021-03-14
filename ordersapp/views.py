@@ -53,7 +53,7 @@ class OrderItemsCreateView(CreateView):
             formset = OrderFormSet(self.request.POST)
         else:
             basket_item = Basket.get_items(self.request.user)
-
+            print(f'REQUEST: {self.request}')
             if len(basket_item):
                 OrderFormSet = inlineformset_factory(Order, OrderItem, form=OrderItemForm, extra=len(basket_item))
                 formset = OrderFormSet()
@@ -81,7 +81,6 @@ class OrderItemsCreateView(CreateView):
                 orderitems.instance = self.object
                 orderitems.save()
 
-        # if self.object.get_total_cost == 0:
         if self.object.get_summary['total_cost'] == 0:
             self.object.delete()
 
@@ -117,7 +116,6 @@ class OrderItemsUpdateView(UpdateView):
             orderitems.instance = self.object
             orderitems.save()
 
-        # if self.object.get_total_cost == 0:
         if self.object.get_summary['total_cost'] == 0:
             self.object.delete()
 
@@ -179,5 +177,35 @@ def get_product_price_quantity(request, pk):
             return JsonResponse({'price': product.price, 'quantity_storage': product.quantity})
         else:
             return JsonResponse({'price': 0, 'quantity_storage': 0})
+
+
+class OrderUpdateView(UpdateView):
+    model = Order
+    template_name = 'ordersapp/order_form.html'
+
+    @method_decorator(login_required)
+    def dispatch(self, *args, **kwargs):
+        return super(OrderUpdateView, self).dispatch(*args, **kwargs)
+
+    def get(self, request, *args, **kwargs):
+        print('1'*100)
+        if request.is_ajax():
+            quantity = int(self.kwargs.get('quantity', None))
+            order_item_pk = self.kwargs.get('pk', None)
+            new_order_item = Basket.get_item(order_item_pk)
+            if quantity > 0:
+                new_order_item.quantity = quantity
+                new_order_item.save()
+            else:
+                new_order_item.delete()
+            order_items = Order.objects.filter(user=request.user)
+            content = {
+                'object_list': order_items,
+                'user': request.user,
+            }
+
+            result = render_to_string('ordersapp/order_form.html', content)
+
+            return JsonResponse({'result': result})
 
 

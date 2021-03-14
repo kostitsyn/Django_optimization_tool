@@ -100,6 +100,23 @@ window.onload = function() {
         }
     });
 
+    $('.order_form').on('click keyup', 'input[type="number"]', function (event) {
+        let target_href = event.target;
+
+        if (target_href) {
+            $.ajax({
+                url: "/basket/edit/" + target_href.name + "/" + target_href.value + "/",
+
+                success: function (data) {
+                    $('.basket_list').html(data.result);
+                    console.log('ajax done');
+                },
+            });
+
+        }
+        event.preventDefault();
+    });
+
     function orderSummaryRecalc() {
         order_total_quantity = 0;
         order_total_cost = 0;

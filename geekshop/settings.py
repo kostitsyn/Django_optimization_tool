@@ -201,6 +201,10 @@ SOCIAL_AUTH_VK_OAUTH2_SCOPE = ['email']
 SOCIAL_AUTH_GITHUB_OAUTH2_IGNORE_DEFAULT_SCOPE = True
 SOCIAL_AUTH_GITHUB_OAUTH2_SCOPE = ['email']
 
+
+# http://127.0.0.1:8000/oauth/complete/google-oauth2/
+# http://185.20.227.181.xip.io:80/oauth/complete/google-oauth2/
+
 # SOCIAL_AUTH_GOOGLE_OAUTH2_IGNORE_DEFAULT_SCOPE = True
 # SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
 
