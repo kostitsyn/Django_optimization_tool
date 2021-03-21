@@ -10,7 +10,6 @@ urlpatterns = [
     path('login/', authapp.login, name='login'),
     path('logout/', authapp.logout, name='logout'),
     path('register/', authapp.register, name='register'),
-    # path('accounts/', include('allauth.urls')),
 
     path('edit/', authapp.edit, name='edit'),
     # path('edit/', authapp.UserEditUpdateView.as_view(), name='edit'),
