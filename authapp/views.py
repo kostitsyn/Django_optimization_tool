@@ -17,11 +17,12 @@ from authapp.models import ShopUser
 
 def verify(request, email, activation_key):
     try:
-        user = ShopUser.objects.get(email=email)
-        if user.activation_key == activation_key and not user.is_activation_key_expired():
+        user = ShopUser.objects.get(activation_key=activation_key)
+        # if user.activation_key == activation_key and not user.is_activation_key_expired():
+        if not user.is_activation_key_expired():
             user.is_active = True
             user.save()
-            auth.login(request, user)
+            auth.login(request, user, backend='django.contrib.auth.backends.ModelBackend')
             print('активация прошла успешно')
         else:
             print(f'Ошибка активации пользователя: {email}')

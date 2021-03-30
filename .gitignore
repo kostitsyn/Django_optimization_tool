@@ -13,5 +13,8 @@ project/settings.py
 env
 ./.env
 
+geekshop/env.json
+
+
 static/admin/
 static/debug_toolbar/

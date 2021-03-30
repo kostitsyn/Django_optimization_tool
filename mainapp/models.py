@@ -36,6 +36,10 @@ class Games(models.Model):
         # return Games.objects.filter(is_active=True).order_by('game_category', 'name')
         return Games.objects.filter(is_active=True).select_related().order_by('game_category', 'name')
 
+    @staticmethod
+    def get_item(pk):
+        return Games.objects.get(pk=pk)
+
 
 class DiscountGames(models.Model):
     game_category = models.ForeignKey(GameCategories, on_delete=models.CASCADE)
