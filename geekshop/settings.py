@@ -55,6 +55,7 @@ INSTALLED_APPS = [
     'social_django',
     'ordersapp',
     'debug_toolbar',
+    'calendar_sms',
 ]
 
 MIDDLEWARE = [

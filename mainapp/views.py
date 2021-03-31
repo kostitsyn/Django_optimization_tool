@@ -15,6 +15,8 @@ from basketapp.models import Basket
 from geekshop import settings
 from mainapp.models import Games, Contacts, DiscountGames, GameCategories
 
+from smssend import main as send_alert
+
 
 def get_hot_product():
     games_list = Games.objects.all().exclude(quantity=0)
@@ -48,7 +50,7 @@ class MainListView(ListView):
         result_list = list(Games.objects.all().select_related())[:4]
         # game_list = list(Games.objects.all().select_related())
         # result_list = get_required_obj(game_list, 4)
-
+        # send_alert()
         return result_list
 
     def get_context_data(self, **kwargs):
