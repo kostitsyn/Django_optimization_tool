@@ -22,6 +22,8 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 
 file_path = "'geekshop/env.json'"
+
+
 if os.path.exists(file_path):
     with open('env.json') as f_obj:
         data = json.load(f_obj)
@@ -30,8 +32,8 @@ else:
     SECRET_KEY = '123'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-# DEBUG = False
+# DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -127,16 +129,16 @@ AUTH_USER_MODEL = 'authapp.ShopUser'
 # https://docs.djangoproject.com/en/2.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    },
     # 'default': {
-    #     'ENGINE': 'django.db.backends.postgresql',
-    #     'NAME': 'geekshop',
-    #     'USER': 'postgres',
-    #     'PASSWORD': 'geekbranis',
-    # }
+    #     'ENGINE': 'django.db.backends.sqlite3',
+    #     'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    # },
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'geekshop',
+        'USER': 'postgres',
+        'PASSWORD': 'geekbranis',
+    }
 }
 
 
@@ -204,27 +206,30 @@ SOCIAL_AUTH_GITHUB_OAUTH2_SCOPE = ['email']
 # SOCIAL_AUTH_GOOGLE_OAUTH2_IGNORE_DEFAULT_SCOPE = True
 # SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = ['email']
 
+if DEBUG:
+    DOMAIN_NAME = 'http:/localhost:8000'
+else:
+    DOMAIN_NAME = 'https:/geek-shop.xyz'
 
-DOMAIN_NAME = 'http:/localhost:8000'
 
 
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = '25'
+# EMAIL_HOST_USER = 'django@geekshop.local'
+# EMAIL_HOST_PASSWORD = 'geekshop'
+# EMAIL_USE_SSL = False
 
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = '25'
-EMAIL_HOST_USER = 'django@geekshop.local'
-EMAIL_HOST_PASSWORD = 'geekshop'
-EMAIL_USE_SSL = False
-
-# EMAIL_HOST = 'smtp.yandex.ru'
-# EMAIL_PORT = '465'
-# EMAIL_HOST_USER = 'kostitsin.a@yandex.ru'
-# EMAIL_HOST_PASSWORD = 'password'
-# EMAIL_USE_SSL = True
+# DEFAULT_FROM_EMAIL = 'kostitsin.a@yandex.ru'
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = data['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = data['EMAIL_HOST_PASSWORD']
+EMAIL_USE_SSL = True
 
 # EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = 'tmp/email-messages/'
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = 'tmp/email-messages/'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',

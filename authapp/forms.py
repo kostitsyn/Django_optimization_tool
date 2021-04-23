@@ -75,7 +75,6 @@ class ShopUserEditForm(UserChangeForm):
     def __str__(self):
         return self.fields['avatar']
 
-
     def clean_age(self):
         data = self.cleaned_data['age']
         if data < 18:
