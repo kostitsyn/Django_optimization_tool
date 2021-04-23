@@ -220,12 +220,13 @@ else:
 # EMAIL_HOST_PASSWORD = 'geekshop'
 # EMAIL_USE_SSL = False
 
-DEFAULT_FROM_EMAIL = "kostitsin.a@yandex.ru"
+
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 if os.path.exists(file_path):
     with open(file_path) as f_obj:
         data = json.load(f_obj)
+        DEFAULT_FROM_EMAIL = data['EMAIL_HOST_USER']
         EMAIL_HOST_USER = data['EMAIL_HOST_USER']
         EMAIL_HOST_PASSWORD = data['EMAIL_HOST_PASSWORD']
 EMAIL_USE_SSL = True
