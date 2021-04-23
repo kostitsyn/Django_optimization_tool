@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'social_django',
     'ordersapp',
     'debug_toolbar',
+    # 'calendar_sms',
 ]
 
 MIDDLEWARE = [
@@ -222,8 +223,11 @@ else:
 # DEFAULT_FROM_EMAIL = 'kostitsin.a@yandex.ru'
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
-EMAIL_HOST_USER = data['EMAIL_HOST_USER']
-EMAIL_HOST_PASSWORD = data['EMAIL_HOST_PASSWORD']
+if os.path.exists(file_path):
+    with open('env.json') as f_obj:
+        data = json.load(f_obj)
+        EMAIL_HOST_USER = data['EMAIL_HOST_USER']
+        EMAIL_HOST_PASSWORD = data['EMAIL_HOST_PASSWORD']
 EMAIL_USE_SSL = True
 
 # EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
