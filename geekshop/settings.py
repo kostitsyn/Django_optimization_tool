@@ -21,11 +21,11 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 
-file_path = "'geekshop/env.json'"
+file_path = "geekshop/env.json"
 
 
 if os.path.exists(file_path):
-    with open('env.json') as f_obj:
+    with open(file_path) as f_obj:
         data = json.load(f_obj)
         SECRET_KEY = data["SECRET_KEY"]
 else:
@@ -220,11 +220,11 @@ else:
 # EMAIL_HOST_PASSWORD = 'geekshop'
 # EMAIL_USE_SSL = False
 
-# DEFAULT_FROM_EMAIL = 'kostitsin.a@yandex.ru'
+DEFAULT_FROM_EMAIL = "kostitsin.a@yandex.ru"
 EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 if os.path.exists(file_path):
-    with open('env.json') as f_obj:
+    with open(file_path) as f_obj:
         data = json.load(f_obj)
         EMAIL_HOST_USER = data['EMAIL_HOST_USER']
         EMAIL_HOST_PASSWORD = data['EMAIL_HOST_PASSWORD']
