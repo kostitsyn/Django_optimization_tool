@@ -13,30 +13,19 @@ from authapp.models import ShopUserProfile
 from django.conf import settings
 
 
-from geekshop.settings import BASE_DIR
-
-
 def save_user_profile(backend, user, response, *args, **kwargs):
-    # print(backend.name)
-    # print(f'BACKEND: {backend.__dict__}')
-    # print(f'BACKEND strategy: {backend.strategy.__dict__}')
-    # print(f'USER: {user.__dict__}')
-    # print(f'USER_state: {user._state.__dict__}')
-    # print(f'RESPONSE: {response}')
     if backend.name == 'vk-oauth2':
         api_url = urlunparse(('https',
                               'api.vk.com',
                               '/method/users.get',
                               None,
-                              urlencode(OrderedDict(fields=','.join(('bdate', 'sex', 'about', 'photo_100')),
+                              urlencode(dict(fields=','.join(('bdate', 'sex', 'about', 'photo_100')),
                                                     access_token=response['access_token'],
                                                     v='5.92')),
                               None
                               ))
-        # print(f'API_URL: {api_url}')
-
+        print(api_url)
         resp = requests.get(api_url)
-        print(f'resp: {resp.__dict__}')
         if resp.status_code != 200:
             return
 
@@ -45,7 +34,7 @@ def save_user_profile(backend, user, response, *args, **kwargs):
             user.shopuserprofile.gender = ShopUserProfile.MALE if data['sex'] == 2 else ShopUserProfile.FEMALE
 
         if data['about']:
-            user.shopuserprofile.aboutMe = data['about']
+            user.shopuserprofile.about_me = data['about']
 
         if data['bdate']:
             bdate = datetime.strptime(data['bdate'], '%d.%m.%Y').date()

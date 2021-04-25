@@ -93,7 +93,7 @@ def register(request):
             user = register_form.save()
             if send_verify_email(user):
                 print('сообщение подтверждения отправлено')
-                request.session['register'] =True
+                request.session['register'] = True
                 user_name = request.POST['username']
                 conf_code, email = [ShopUser.objects.get(username=user_name).activation_key, ShopUser.objects.get(username=user_name).email]
                 request.session['conf_code'] = conf_code

@@ -57,10 +57,6 @@ urlpatterns = [
 
     path('admin/', include('adminapp.urls', namespace='admin')),
     # path('admin/', admin.site.urls, name='admin'),
-
-    url(r'^media/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
-    url(r'^static/(?P<path>.*)$', serve, {'document_root': settings.STATIC_ROOT}),
-
 ]
 
 if settings.DEBUG:
