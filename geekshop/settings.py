@@ -208,21 +208,21 @@ if DEBUG:
 else:
     DOMAIN_NAME = 'https:/geek-shop.xyz'
 
-EMAIL_HOST = 'localhost'
-EMAIL_PORT = '25'
-EMAIL_HOST_USER = None
-EMAIL_HOST_PASSWORD = None
-EMAIL_USE_SSL = False
+# EMAIL_HOST = 'localhost'
+# EMAIL_PORT = '25'
+# EMAIL_HOST_USER = None
+# EMAIL_HOST_PASSWORD = None
+# EMAIL_USE_SSL = False
+#
+# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+# EMAIL_FILE_PATH = 'tmp/email-messages/'
 
-EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-EMAIL_FILE_PATH = 'tmp/email-messages/'
-
-# DEFAULT_FROM_EMAIL = secret_value["EMAIL_HOST_USER"]
-# EMAIL_HOST = 'smtp.yandex.ru'
-# EMAIL_PORT = 465
-# EMAIL_HOST_USER = data['EMAIL_HOST_USER']
-# EMAIL_HOST_PASSWORD = data['EMAIL_HOST_PASSWORD']
-# EMAIL_USE_SSL = True
+DEFAULT_FROM_EMAIL = data["EMAIL_HOST_USER"]
+EMAIL_HOST = 'smtp.yandex.ru'
+EMAIL_PORT = 465
+EMAIL_HOST_USER = data['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = data['EMAIL_HOST_PASSWORD']
+EMAIL_USE_SSL = True
 
 
 
