@@ -24,7 +24,6 @@ def save_user_profile(backend, user, response, *args, **kwargs):
                                                     v='5.92')),
                               None
                               ))
-        print(api_url)
         resp = requests.get(api_url)
         if resp.status_code != 200:
             return

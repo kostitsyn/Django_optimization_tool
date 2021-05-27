@@ -18,3 +18,7 @@ geekshop/env.json
 
 static/admin/
 static/debug_toolbar/
+tmp
+migrations
+db.json
+test_db.json

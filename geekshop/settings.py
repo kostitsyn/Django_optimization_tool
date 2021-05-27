@@ -208,29 +208,23 @@ if DEBUG:
 else:
     DOMAIN_NAME = 'https:/geek-shop.xyz'
 
+EMAIL_HOST = 'localhost'
+EMAIL_PORT = '25'
+EMAIL_HOST_USER = None
+EMAIL_HOST_PASSWORD = None
+EMAIL_USE_SSL = False
+
+EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+EMAIL_FILE_PATH = 'tmp/email-messages/'
+
+# DEFAULT_FROM_EMAIL = secret_value["EMAIL_HOST_USER"]
+# EMAIL_HOST = 'smtp.yandex.ru'
+# EMAIL_PORT = 465
+# EMAIL_HOST_USER = data['EMAIL_HOST_USER']
+# EMAIL_HOST_PASSWORD = data['EMAIL_HOST_PASSWORD']
+# EMAIL_USE_SSL = True
 
 
-# EMAIL_HOST = 'localhost'
-# EMAIL_PORT = '25'
-# EMAIL_HOST_USER = 'django@geekshop.local'
-# EMAIL_HOST_PASSWORD = 'geekshop'
-# EMAIL_USE_SSL = False
-
-
-EMAIL_HOST = 'smtp.yandex.ru'
-EMAIL_PORT = 465
-if os.path.exists(file_path):
-    with open(file_path) as f_obj:
-        data = json.load(f_obj)
-        DEFAULT_FROM_EMAIL = data['EMAIL_HOST_USER']
-        EMAIL_HOST_USER = data['EMAIL_HOST_USER']
-        EMAIL_HOST_PASSWORD = data['EMAIL_HOST_PASSWORD']
-EMAIL_USE_SSL = True
-
-# EMAIL_HOST_USER, EMAIL_HOST_PASSWORD = None, None
-
-# EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
-# EMAIL_FILE_PATH = 'tmp/email-messages/'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
@@ -246,12 +240,12 @@ SOCIAL_AUTH_PIPELINE = (
     'social_core.pipeline.social_auth.social_uid',
     'social_core.pipeline.social_auth.auth_allowed',
     'social_core.pipeline.social_auth.social_user',
+    'social_core.pipeline.social_auth.associate_by_email',
     'social_core.pipeline.user.create_user',
     'authapp.pipeline.save_user_profile',
     'social_core.pipeline.social_auth.associate_user',
     'social_core.pipeline.social_auth.load_extra_data',
     'social_core.pipeline.user.user_details',
-    'social_core.pipeline.social_auth.associate_by_email',
 )
 
 with open('geekshop/vk.json') as f:
