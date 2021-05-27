@@ -51,7 +51,7 @@ urlpatterns = [
     path('basket/', include('basketapp.urls', namespace='basket')),
     path('auth/', include('authapp.urls', namespace='auth')),
 
-    path('oauth/', include('social_django.urls', namespace='social')),
+    path('', include('social_django.urls', namespace='social')),
 
     path('order/', include('ordersapp.urls', namespace='order')),
 
