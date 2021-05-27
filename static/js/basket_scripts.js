@@ -34,7 +34,6 @@ window.onload = function () {
 
                 success: function (data) {
                     $('.basket_list').html(data.result);
-                    console.log('ajax done');
                 },
             });
 
