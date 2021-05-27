@@ -1,3 +1,4 @@
+from smtplib import SMTPDataError
 from typing import re
 
 from django.conf import settings
@@ -35,7 +36,10 @@ def send_verify_email(user):
     verify_link = reverse('auth:verify', args=[user.email, user.activation_key])
     subject = f'активация пользователя {user.username}'
     message = f'для подтверждения перейдите по ссылке: {settings.DOMAIN_NAME}{verify_link}'
-    return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
+    try:
+        return send_mail(subject, message, settings.EMAIL_HOST_USER, [user.email], fail_silently=False)
+    except SMTPDataError:
+        pass
 
 
 def login(request):
