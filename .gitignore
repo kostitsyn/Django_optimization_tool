@@ -12,6 +12,7 @@ project/settings.py
 .DS_Store
 env
 ./.env
+.logs
 
 geekshop/env.json
 
