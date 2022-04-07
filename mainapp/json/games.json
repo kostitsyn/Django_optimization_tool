@@ -1,0 +1,122 @@
+[
+  {
+    "game_category": "action",
+    "name": "HITMAN",
+    "image": "game_images/hitman.jpg",
+    "description": "Hitman is an action-adventure stealth video game in which players control a genetically enhanced assassin called Agent 47 from a third-person perspective as he travels to various locations and carries out contracted assassinations of criminal targets across the globe. As in other games in the Hitman series, players have a large amount of freedom in their approach to their assassinations. Players may use weapons including explosives, pistols, assault rifles, and long-range sniper rifles; they may also assassinate the target at close range using bladed weapons or throwable items.",
+    "price": "35.56",
+    "quantity": "4"
+  },
+  {
+    "game_category": "action",
+    "name": "THIEF",
+    "image": "game_images/thief.jpg",
+    "description": "Player controls Garrett, a master thief, as he goes about a series of missions, most of which are focused around stealing from the rich. As with the previous games in the series, players must use stealth in order to overcome challenges, while violence is left as a minimally effective last resort.\nThere are a variety of routes through each level and player is able to utilize a variety of playing styles to traverse them. The game contains a variety of ways to distract or kill guards, such as barrels of oil which can be set alight. Levels also contain money and valuable objects which Garrett can steal; these are immediately converted into money which can be spent on equipment and upgrades. Garrett is also able to pickpocket guards and other characters. The player may evade guards by hiding in shadows or around corners and is able to peek around edges and through keyholes in order to track the movements of enemies. Once Garrett has been spotted, guards and other non-player characters will attempt to hunt him down.",
+    "price": "33.22",
+    "quantity": "55"
+  },
+  {
+    "game_category": "action",
+    "name": "DISHONORED 2",
+    "image": "game_images/dishonored.jpg",
+    "description": "Dishonored 2 is an action-adventure game with stealth elements played from a first-person perspective. After playing as Empress Emily Kaldwin during the prologue, players may decide to play either as Emily or as Corvo Attano, the protagonist from Dishonored, the previous game. Side missions unlock alternate methods of assassination, non-lethal approaches and paths to navigate the main mission. Both characters wield a pistol, crossbow, a retractable blade, grenades and mines—all of which are upgradable Upgrades may be purchased at black market shops found throughout levels, and blueprints scattered throughout the environment unlock new upgrades. Coin is required to buy these upgrades, which can be found throughout levels or gained from other collectibles, like stealing paintings. Players can choose whether to play stealthily or not and can finish the game without taking a life. Health elixirs and food consumables will restore health, while mana elixirs replenish mana.",
+    "price": "20.61",
+    "quantity": "1"
+  },
+  {
+    "game_category": "RPG",
+    "name": "MIDDLE-EARTH: Shadow Of War",
+    "image": "game_images/middle-earth.jpg",
+    "description": "Middle-earth: Shadow of War is an action role-playing game set in an open world environment and played from a third-person perspective, like its predecessor. The player controls the game's protagonist Talion, who has several natural athletic and combat abilities as a ranger of Gondor, but also has unique abilities provided by the spirit of the elf lord Celebrimbor, with whom he shares his body. The player uses their combined abilities to complete various missions, typically aimed to disrupt the armies of Sauron. The game includes main quests that drive the game's narrative, and numerous optional quests that can help the player boost Talion's abilities and Followers via the game's 'Nemesis System'. In contrast to the previous game, which was more of a hack and slash, the game has an action role-playing approach, creating a more personalized experience for each player. It features a dynamic weather system as well as day-night cycle which affects the gameplay and enemy behavior.",
+    "price": "34.45",
+    "quantity": "2"
+  },
+  {
+    "game_category": "shooter",
+    "name": "CALL OF DUTY: Infinite Warface",
+    "image": "game_images/call-of-duty.jpg",
+    "description": "Similar to the previous games in the series, Infinite Warfare is a first-person shooter. As the game introduces a new setting, outer space, new gameplay mechanics, such as zero-gravity environments, are included. Players are equipped with a boost pack, and a grappling hook, which allow players to move in these zero-gravity environments easily. As the game is set in space, players can visit different planets, satellites and asteroids in the solar system.\n\nAssuming control of Captain Nick Reyes, a Tier 1 Special Operations pilot, players engage in aerial combat with enemies using his transforming fighter, the Jackal. Aerial combat is not on-rail, as players can freely control the Jackal with few limitations. According to Infinity Ward, both space combat, and the franchise's signature \"boots-on-the-ground\" gameplay are the game's key focuses, Transition between space combat and boots-on-the-ground combat is seamless with no loading screen.",
+    "price": "25.99",
+    "quantity": "0"
+  },
+  {
+    "game_category": "simulator",
+    "name": "WORLD OF WARSHIPS",
+    "image": "game_images/warships.jpg",
+    "description": "World of Warships is a tactical, slow-paced shooter with two basic types of armament: ship guns and torpedoes. The gameplay is team-based, and allows players to work as a team. Within a team divisions can be established to allow a group of up to three players to join and fight battles together. The player's team can fight against other players (PvP) or against the AI (PvE) in three battle modes: Standard, Domination, and Epicenter. Each mode is scored on a points system.\n\nThe warships presented in the game cover periods from the early 20th century, at the dawn of dreadnought battleships, up to warships from the 1950s, including ships that were planned but never put into production. The game has four different types of ships: destroyers, cruisers, battleships, and aircraft carriers. Submarines have been added to the game as part of testing as of update 0.9.4",
+    "price": "21.99",
+    "quantity": "7"
+  },
+  {
+    "game_category": "fighting",
+    "name": "FOR HONOR",
+    "image": "game_images/honor.jpg",
+    "description": "For Honor is an action fighting game set during a medieval, fantasy setting. Players can play as a character from three different factions, namely the Iron Legion (Knights), the Warborn (Vikings), and the Dawn Empire (Samurai). A fourth faction, the Wu Lin, was added in the Marching Fire expansion in October 2018. The four factions represent knights, vikings, samurai, and Chinese warriors respectively. Each hero also has quotes in their own languages that will trigger when certain actions are performed. The Knights speak in Latin, the Vikings speak Icelandic, the Samurai speak Japanese, and the Wu Lin speak Mandarin. Each faction had four classes at launch, with two more being added at the beginning of every season of the Faction War. The Vanguard class is described as \"well-balanced\" and has excellent offense and defense.",
+    "price": "31.49",
+    "quantity": "1"
+  },
+  {
+    "game_category": "action",
+    "name": "АSASSIN’S CREED: Rogue",
+    "image": "game_images/assasin.jpg",
+    "description": "The plot is set in a fictional history of real world events and follows the centuries-old struggle between the Assassins, who fight for peace with free will, and the Templars, who desire peace through control. The story is set in the mid-18th century during the Seven Years' War, and follows Shay Patrick Cormac, an Assassin-turned-Templar who hunts down former members of his Brotherhood after being betrayed by them. Gameplay in Rogue is very similar to that of Black Flag with a mixture of ship-based naval exploration and third-person land-based exploration with some new features.",
+    "price": "29.99",
+    "quantity": "3"
+  },
+  {
+    "game_category": "simulator",
+    "name": "WORLD OF TANKS",
+    "image": "game_images/tanks.jpg",
+    "description": "The player takes control of a single armored tank of their choice, and is placed into a battle on a random map. The player has control over the vehicle's movement, firing, and can communicate with allied players and all the other players through typed or voice chat. A simple random match is won either by destroying all vehicles on the opposing team or capturing the opposing team's base by staying in it for long enough without being hurt. There are other game modes that change the rules of the battle, but gameplay mechanics remain the same. World of Tanks contains multiple game mechanics such as camouflage, shell ricochets, and module damage.",
+    "price": "14.99",
+    "quantity": "11"
+  },
+  {
+    "game_category": "shooter",
+    "name": "BATTLEFIELD 4",
+    "image": "game_images/battlefield_4.jpg",
+    "description": "The game's heads-up display (HUD) is composed of two compact rectangles. The lower left-hand corner features a mini-map and compass for navigation, and a simplified objective notice above it; the lower right includes a compact ammo counter and health meter. The top right displays kill notifications of all players in-game. On the Windows version of the game, the top left features a chat window when in multiplayer. The mini-map, as well as the main game screen, shows symbols denoting three kinds of entities: blue for allies, green for squadmates, and orange for enemies, this applies to all interactivity on the battlefield. Battlefield 4 options also allow colour-blind players to change the on-screen colour indicators to: tritanomaly, deuteranomaly and protanomaly.",
+    "price": "25.99",
+    "quantity": "47"
+  },
+  {
+    "game_category": "shooter",
+    "name": "STAR WARS: Battlefront II",
+    "image": "game_images/battlefront_1.jpg",
+    "description": "Star Wars Battlefront II is a third and first-person shooter, featuring both single-player and multiplayer game modes. Gameplay is split in two main categories: ground battles and space battles. Both occur across three eras: the Clone Wars, with battles taking place between the Galactic Republic and the Confederacy of Independent Systems; the Galactic Civil War, where battles between the Rebel Alliance and Galactic Empire take place; and the war between the Resistance and the First Order. Each faction has its own unique type of soldiers that players control, such as clone troopers for the Republic, battle droids for the CIS, and stormtroopers for the Empire and the First Order; however, they all control identically. Every faction also has specific starfighters, which, unlike soldiers, play differently from one another.",
+    "price": "20.99",
+    "quantity": "6"
+  },
+  {
+    "game_category": "RPG",
+    "name": "WORLD OF WARCRAFT: Wrath of the Linch King",
+    "image": "game_images/warcraft.jpg",
+    "description": "The death knight is the first \"hero class\" introduced in World of Warcraft, and would be the only one available until the introduction of the demon hunter in Legion. Hero classes are those that start the game at a higher level than the regular level 1. Originally, a death knight could only be created if the player previously had a level 55 on that realm but that requirement was removed in late 2014.\n\nDeath knights are fallen heroes of the Alliance and the Horde, raised by the Lich King to serve as champions of the undead Scourge. They are able to fill the tank and damage dealer roles. The three death knight specializations are blood, frost and unholy. The blood specialization focuses on the manipulation of blood, using an enemy's blood against them while using the death knights' blood to benefit themselves. Frost specializes in control, counters and combination strikes using frost related abilities. Unholy specialization focuses on poisoning your opponent and sending the player's permanent, controllable pet ghoul to attack the enemy. Death knights wear plate armor and wield weapons with rune engravings (permanent weapon enhancements), which are achieved through the death knight profession called runeforging by utilizing the runeforge in Acherus.",
+    "price": "16.49",
+    "quantity": "5"
+  },
+  {
+    "game_category": "action",
+    "name": "RYSE: Son Of Rome",
+    "image": "game_images/ryse.jpg",
+    "description": "Ryse: Son of Rome is an action-adventure hack and slash game played in a third-person perspective. Players assume control of Marius Titus, a Roman general who is on a quest to avenge his murdered family. Throughout the game, players gain access to weapons that can be used to assault enemies or defend themselves. For instance, players are equipped with a sword that can be used to strike and kill enemies, and a shield that can be used to deflect enemies' attack and break their defense. The strength of each attack can be decided by players. In addition to melee-based combat, the game features spears and javelins, which serve as ranged weapons.",
+    "price": "15.49",
+    "quantity": "2"
+  },
+  {
+    "game_category": "action",
+    "name": "TOMB RAIDER",
+    "image": "game_images/tomb.jpg",
+    "description": "Tomb Raider is presented in third-person perspective. Players take control of the series lead character Lara Croft. The game uses an interconnected hub-and-spoke model that combines action-adventure, exploration, and survival mechanics. Players can traverse between the camps and across the island using footpaths, improvised or already-available ziplines and climbable tracks. Many of the players moves are carried over from the previous games created by Crystal Dynamics, with some tweaks added, such as incorporating elements of stealth gameplay. Quick time events are scattered at regular intervals throughout the game, often appearing at crucial or fast-moving points in the game's plot, such as extracting a shard of metal, and escaping a collapsing cave.",
+    "price": "13.99",
+    "quantity": "12"
+  },
+  {
+    "game_category": "shooter",
+    "name": "BATTLEFIELD 1",
+    "image": "game_images/battlefield_1.jpg",
+    "description": "Similar to its predecessors, Battlefield 1 is a first-person shooter game that emphasizes teamwork. It is set in the period of World War I, and is inspired by historical events. Players can make use of World War I weapons, including bolt-action rifles, submachine guns, automatic and semi-automatic rifles, artillery, flamethrowers, and poison gas to combat opponents. Melee combat was reworked, with DICE introducing new melee weapons such as sabres, trench clubs, and shovels into the game. These melee weapons were divided into three groups: heavy, medium and light. Players can also take control of various armored vehicles, including light and heavy tanks, armored trucks, cars, torpedo boats, bi- and tri-plane aircraft, an armored train, reconnaissance vehicles, a dreadnought and an M-class zeppelin, as well as ride horses into battle. Destructible environments and weapon customization, features present in the previous games, returned in Battlefield 1 and are more dynamic.",
+    "price": "17.49",
+    "quantity": "10"
+  }
+]

@@ -1,0 +1,29 @@
+{% extends 'authapp/base.html' %}
+{% block content %}
+    {% if from_register %}
+        Сообщение подтверждения отправлено.<br>
+        Код подтверждения: {{ confirmation }}<br>
+<!--        Ссылка для перехода: <a href="{% url 'authapp:verify' email  confirmation %}">{{ pth }}</a>-->
+    {% endif %}
+    <form class="form-horizontal" action="{% url 'auth:login' %}" method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {% if next %}
+        <input name="next" type="hidden" value="{{ next }}" />
+    {% endif %}
+    {{ login_form.as_p }}
+    <br>
+    <input class="form-control" type="submit" value="Вход">
+    </form>
+    <button class="'btn btn-outline-dark form-control">
+        <a class="btn" href="{% url 'auth:register' %}">регистрация</a>
+    </button>
+    <a class="btn btn-block btn-social btn-vk" href="{% url 'social:begin' 'vk-oauth2' %}?next=/">
+        <span class="fa fa-vk"></span>Войти через VK
+    </a>
+    <a class="btn btn-block btn-social btn-google" href="{% url 'social:begin' 'google-oauth2' %}?next=/">
+        <span class="fa fa-google"></span> Войти через Google
+    </a>
+    <a class="btn btn-block btn-social btn-github" href="{% url 'social:begin' 'github' %}?next=/">
+        <span class="fa fa-github"></span> Войти через Github
+    </a>
+{% endblock %}
